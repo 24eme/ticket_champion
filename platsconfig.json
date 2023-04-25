@@ -1,0 +1,33 @@
+{
+  "nomRestaurant" : "Champion",
+  "plats principaux" : [
+    {
+      "id" : 1,
+      "nom" : "plat 1",
+      "prix" : 0,
+      "img" : "path/to/img",
+      "ingredients" : "liste ingredients"
+    },
+    {
+      "id" : 2,
+      "nom" : "plat 2",
+      "prix" : 0,
+      "img" : "path/to/img",
+      "ingredients" : "liste ingredients"
+    },
+    {
+      "id" : 3,
+      "nom" : "plat 3",
+      "prix" : 0,
+      "img" : "path/to/img",
+      "ingredients" : "liste ingredients"
+    },
+    {
+      "id" : 4,
+      "nom" : "plat 4",
+      "prix" : 0,
+      "img" : "path/to/img",
+      "ingredients" : "liste ingredients"
+    }
+  ],
+}

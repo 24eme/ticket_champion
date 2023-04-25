@@ -1,0 +1,55 @@
+{
+    "nomEntreprise" : "24EME",
+    "employes" : [
+        {
+            "id" : 1,
+            "name": "Amal"
+        },
+
+        {
+            "id" : 2,
+            "name": "Charlène"
+        },
+
+        {
+            "id" : 3,
+            "name": "Fatoumata"
+        },
+
+        {
+            "id" : 4,
+            "name": "Gabriel"
+        },
+
+        {
+            "id" : 5,
+            "name": "Honorine"
+        },
+
+        {
+            "id" : 6,
+            "name": "Jean-Baptiste"
+        },
+
+        {
+            "id" : 7,
+            "name": "Nicolas"
+        },
+
+        {
+            "id" : 8,
+            "name": "Tangui"
+        },
+
+        {
+            "id" : 9,
+            "name": "Tanguy"
+        },
+        
+        {
+            "id" : 6,
+            "name": "Vincent"
+        }
+        
+    ]
+}

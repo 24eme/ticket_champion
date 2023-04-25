@@ -8,4 +8,4 @@ mysql-server
 
 run : npm install
 
-Created using [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Created using [Nest](https://github.com/nestjs/nest)

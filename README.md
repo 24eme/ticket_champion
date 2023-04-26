@@ -17,7 +17,7 @@ choose your db password
 
 choose the name of your db
 
-remote the '_example' from 'ormconfig_example.json'
+remove the '_example' from 'ormconfig_example.json'
 
 
 Created using [Nest](https://github.com/nestjs/nest)

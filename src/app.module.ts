@@ -4,11 +4,12 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(
-      require('../ormconfig.json')
-    ),
-  ],
+  //imports: [
+    //TypeOrmModule.forRoot(
+      //require('../ormconfig.json')
+    //),
+  //],
+  imports: [],
   controllers: [AppController],
   providers: [AppService],
 })

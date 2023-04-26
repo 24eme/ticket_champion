@@ -9,7 +9,7 @@ mysql-server
 run : npm install
 
 
-Creer un fichier de configuration avec ormconfig_example.json
+Create a config file using ormconfig_example.json
 
 choose your db username
 

@@ -1,12 +1,11 @@
-import { Controller, Get, Render } from '@nestjs/common';
-import { AppService } from './app.service';
-
+import { Controller, Get, Render, Res } from '@nestjs/common';
+import { Response } from 'express';
+import { join } from 'path';
 
 @Controller()
 export class AppController {
   @Get()
-  @Render('index')
-  root() {
-    return { message: 'Ticket champion app' };
+  root(@Res() res: Response) {
+  res.sendFile(join(process.cwd(),'views', 'index.html'))
   }
 }

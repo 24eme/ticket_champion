@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6">
+              <div>
+                  <h1>Liste des supplements du restaurant Champion:</h1>
+                  <li>
+                  <div class="separator_left"></div>
+                  {{#each data.data.supplements}}
+                      <ul><button type="button" class="btn btn-primary">{{this.nom}}</button></ul>
+                  {{/each}}
+                  </li>
+              </div>
+          </div>
+      </div>
+  </div>
+  </body>
+</html>

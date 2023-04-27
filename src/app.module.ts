@@ -9,9 +9,9 @@ import { HomePageController } from './home-page/home-page.controller';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(
-      require('../ormconfig.json')
-    ),
+     TypeOrmModule.forRoot(
+       require('../ormconfig.json')
+     ),
     PlatsPageModule,
   ],
   controllers: [AppController, PlatsPageController, HomePageController],

@@ -7,9 +7,22 @@
                 <div>
                     <h1>Liste des plats du restaurant Champion:</h1>
                     <div class="separator_left"></div>
-                    {{#each data.data.plats_principaux}}
-                    <button type="button" class="btn btn-primary">{{this.nom}}</button>
+
+<ul class="list-group list-group-flush">
+  <li class="list-group-item"> {{#each data.data.plats_principaux}}
+    <ul> <button type="button" class="btn btn-primary btn-lg btn-block B1">{{this.nom}} </button></ul>
+    
+
                     {{/each}}
+
+  </li>
+  
+</ul>
+
+                    
+                    
+                    
+                      
                 </div>
             </div>
         </div>

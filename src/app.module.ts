@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PlatsPageModule } from './platsPage/platsPage.module';
 import { PlatsPageController } from './platsPage/platsPage.controller';
+import { HomePageController } from './home-page/home-page.controller';
 
 
 @Module({
@@ -13,7 +14,7 @@ import { PlatsPageController } from './platsPage/platsPage.controller';
     ),
     PlatsPageModule,
   ],
-  controllers: [AppController, PlatsPageController],
+  controllers: [AppController, PlatsPageController, HomePageController],
   providers: [AppService],
 })
 export class AppModule {}

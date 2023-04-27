@@ -7,17 +7,18 @@ import { PlatsPageController } from './platsPage/platsPage.controller';
 import { supplementsController } from './supplements/supplements.controller';
 import { SupplementsService } from './supplements/supplements.service';
 import { supplementsModule } from './supplements/supplements.module';
+import { HomePageController } from './home-page/home-page.controller';
 
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(
-      require('../ormconfig.json')
-    ),
+     TypeOrmModule.forRoot(
+       require('../ormconfig.json')
+     ),
     PlatsPageModule,
     supplementsModule,
   ],
-  controllers: [AppController, PlatsPageController, supplementsController ],
-  providers: [AppService, SupplementsService],
+  controllers: [AppController, PlatsPageController, HomePageController, supplementsController],
+  providers: [AppService],
 })
 export class AppModule {}

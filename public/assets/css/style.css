@@ -13,9 +13,6 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
-/*------------------------------------------------------------------*/
-/*   IE10 in Windows 8 and Windows Phone 8 Bug fix
-/*-----------------------------------------------------------------*/
 
 @-webkit-viewport { width: device-width; }
 @-moz-viewport { width: device-width; }
@@ -23,19 +20,6 @@ body {
 @-o-viewport { width: device-width; }
 @viewport { width: device-width; }
 
-/*
-    Page Content
-------------------------------------------*/
-/*
-.page-content, 
-section { overflow: hidden; }*/
-
-/*
-    On Scroll Animations 
-------------------------------------------*/
-
-/*.animated { visibility: hidden; }
-.visible { visibility: visible; }*/
 
 /*
     Spacing & Alignment 
@@ -76,9 +60,9 @@ section { overflow: hidden; }*/
 
 .text-muted{}
 
-.text-primary{color: #ff6863 !important;;}
+.text-primary{color: #d46864 !important;;}
 .text-finence{color:#13A0B2 !important;;}
-.text-mega{color:#ff6863 !important;;}
+.text-mega{color:#d46864 !important;;}
 .text-white{color:#fff !important;;}
 .text-black{color:#000 !important;}
 
@@ -234,7 +218,7 @@ h3 span,
 h4 span,
 h5 span,
 p span{
-    color:#ff6863;
+    color:#d46864;
 }
 
 p {
@@ -329,19 +313,19 @@ Separator
     width:85px;
     height:2px;
     margin:20px 0px;
-    background: #ff6863;
+    background: #d46864;
 }
 .separator_auto{
     width:85px;
     height:2px;
     margin:20px auto;
-    background: #ff6863;
+    background: #d46864;
 }
 .separator_small{
     width:30px;
     height:2px;
     margin:20px 0px;
-    background: #ff6863;
+    background: #d46864;
 }
 
 /*
@@ -371,21 +355,21 @@ Button
     border-radius: 0;
 }
 .btn-default:hover{
-    border-color:#ff6863;
-    background-color: #ff6863;
+    border-color:#d46864;
+    background-color: #d46864;
 }
 
 .btn-primary{
     color: #fff;
-    background-color: #ff6863;
+    background-color: #d46864;
     border:1px solid;
-    border-color: #ff6863;
+    border-color: #d46864;
     padding: 1rem 2rem;
 }
 .btn-primary:hover{
     background-color: #eee;
     border-color: #eee;
-    color:#ff6863;
+    color:#d46864;
 }
 
 .btn-success{}
@@ -393,17 +377,6 @@ Button
 .btn-warning{}
 .btn-danger{}
 .btn-link{}
-
-
-
-/*
-socail icon
---------------------------------*/
-/*a i.share{
-    color:#1E8BC3;
-    -webkit-transition: all .6s;
-    transition: all .6s;
-}*/
 
 
 /*
@@ -689,17 +662,6 @@ textarea::-ms-input-placeholder{
     padding: 5px;
 }
 
-/*for image bg*/
-/*.img-bg{
-  background: url(../images/home-msg.jpg) no-repeat center top fixed;
-  background-size
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  width: 100%;
-  overflow: hidden;
-}*/
 
 
 .transform_scal_rotate:hover img{ 
@@ -972,7 +934,7 @@ Nav Menu style
     color:#000;
 }
 .btn-cart{
-    background-color: #ff6863;
+    background-color: #d46864;
     padding: 2px 10px;
     color:#fff !important;
     border:0px solid;
@@ -987,11 +949,28 @@ Nav Menu style
 /*
 Home Section style
 ==================*/
+.head{
+    background: url(../images/background/hd.jpg) no-repeat bottom center;
+    background-position: top;
+    background-size: 100%;
+    position: relative;
+}
+
+.main_head{
+    overflow: hidden;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
 .home{
     background: url(../images/background/bg.jpg) no-repeat bottom center;
     background-size: cover;
     position: relative;
 }
+
+
 .main_home{
     overflow: hidden;
     padding-top: 300px;
@@ -1032,7 +1011,7 @@ About section style
     height: 60px;
     line-height: 60px;
     font-size:1.5rem;
-    background-color: #ff6863;
+    background-color: #d46864;
     color:#fff;
     display: inline-block;
     text-align: center;
@@ -1173,7 +1152,7 @@ Maps Section style
     height: 20px;
     line-height: 20px;
     border-radius: 50%;
-    background-color: #ff6863;
+    background-color: #d46864;
     font-size: 1rem;
     display: inline-block;
     top: -5px;
@@ -1210,7 +1189,7 @@ Contact Section style
     transition: all 0.4s;
 }
 .widget_socail ul li a:hover i{
-    background-color: #ff6863;
+    background-color: #d46864;
 }
 
 
@@ -1276,7 +1255,7 @@ Footer Section style
 }
 
 .scrollup:hover {
-    background: #ff6863;
+    background: #d46864;
     opacity: 1;
 }
 

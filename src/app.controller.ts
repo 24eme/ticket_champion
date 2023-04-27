@@ -5,7 +5,6 @@ import { join } from 'path';
 @Controller()
 export class AppController {
   @Get()
-  root(@Res() res: Response) {
-  res.sendFile(join(process.cwd(),'views', 'index.html'))
-  }
+  @Render('index')
+  root() {}
 }

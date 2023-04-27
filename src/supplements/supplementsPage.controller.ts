@@ -4,7 +4,7 @@ import { join } from 'path';
 import * as fs from 'fs';
 
 @Controller('/supplements')
-export class supplementsController {
+export class supplementsPageController {
   @Get()
   @Render('supplements')
   async root() {

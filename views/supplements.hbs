@@ -1,24 +1,24 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+
+{{> header}}
+
+<section>
   <div class="container">
       <div class="row">
           <div class="col-md-6">
               <div>
                   <h1>Liste des supplements du restaurant Champion:</h1>
-                  <li>
-                  <div class="separator_left"></div>
+                  <div class="separator_left B1"></div>
+
+                  <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
                   {{#each data.data.supplements}}
-                      <ul><button type="button" class="btn btn-primary">{{this.nom}}</button></ul>
+                      <ul><button type="button" class="btn btn-primary btn-lg btn-block B1">{{this.nom}}</button></ul>
                   {{/each}}
                   </li>
+                  </ul>
               </div>
           </div>
       </div>
   </div>
-  </body>
-</html>
+</section>
+{{> footer}}

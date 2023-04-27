@@ -20,6 +20,11 @@ body {
 @-o-viewport { width: device-width; }
 @viewport { width: device-width; }
 
+.B1 {
+
+    margin-bottom: 200px;
+}
+
 
 /*
     Spacing & Alignment 

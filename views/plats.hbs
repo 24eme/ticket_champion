@@ -1,14 +1,19 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Liste des plats</title>
-  </head>
-  <body>
-    <h1>Liste des plats du restaurant Champion:</h1>
-    <ul>
-      {{#each data.data.plats_principaux}}
-     <li>{{this.nom}}</li>
-     {{/each}}
-    </ul>
-  </body>
-</html>
+{{> header}} 
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <h1>Liste des plats du restaurant Champion:</h1>
+                    <div class="separator_left"></div>
+                    {{#each data.data.plats_principaux}}
+                    <button type="button" class="btn btn-primary">{{this.nom}}</button>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{> footer}}

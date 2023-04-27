@@ -1,6 +1,6 @@
 {
   "nomRestaurant" : "Champion",
-  "plats principaux" : [
+  "plats_principaux" : [
     {
       "id" : 1,
       "nom" : "plat²",

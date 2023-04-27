@@ -961,11 +961,28 @@ Nav Menu style
 /*
 Home Section style
 ==================*/
+.head{
+    background: url(../images/background/hd.jpg) no-repeat bottom center;
+    background-position: top;
+    background-size: 100%;
+    position: relative;
+}
+
+.main_head{
+    overflow: hidden;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
 .home{
     background: url(../images/background/bg.jpg) no-repeat bottom center;
     background-size: cover;
     position: relative;
 }
+
+
 .main_home{
     overflow: hidden;
     padding-top: 300px;

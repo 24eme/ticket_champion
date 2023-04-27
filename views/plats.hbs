@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Liste des plats</title>
+  </head>
+  <body>
+    <h1>Liste des plats du restaurant Champion:</h1>
+    <ul>
+      {{#each data.data.plats_principaux}}
+     <li>{{this.nom}}</li>
+     {{/each}}
+    </ul>
+  </body>
+</html>

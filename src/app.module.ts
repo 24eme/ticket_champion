@@ -4,21 +4,22 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PlatsPageModule } from './platsPage/platsPage.module';
 import { PlatsPageController } from './platsPage/platsPage.controller';
-import { supplementsController } from './supplements/supplements.controller';
-import { SupplementsService } from './supplements/supplements.service';
-import { supplementsModule } from './supplements/supplements.module';
-import { HomePageController } from './home-page/home-page.controller';
+import { PlatsPageService } from './platsPage/platsPage.service';
+import { supplementsController } from './supplementsPage/supplementsPage.controller';
+import { supplementsModule } from './supplementsPage/supplementsPage.module';
+import { SupplementsService } from './supplementsPage/supplementsPage.service';
+import { HomePageController } from './homePage/home-page.controller';
 
 
 @Module({
   imports: [
      TypeOrmModule.forRoot(
-       require('../ormconfig.json')
+       require('../config/ormconfig.json')
      ),
     PlatsPageModule,
     supplementsModule,
   ],
-  controllers: [AppController, PlatsPageController, HomePageController, supplementsController],
-  providers: [AppService],
+  controllers: [AppController, HomePageController, PlatsPageController, supplementsController],
+  providers: [AppService, PlatsPageService, SupplementsService],
 })
 export class AppModule {}

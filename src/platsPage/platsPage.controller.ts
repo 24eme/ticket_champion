@@ -1,22 +1,17 @@
 import { Controller, Get, Render, Res } from '@nestjs/common';
-import { Response } from 'express';
-import { join } from 'path';
-import * as fs from 'fs';
+import {PlatsPageService} from './platsPage.service'
 
 @Controller('/plats')
 export class PlatsPageController {
+
+  constructor(private readonly platsPageService: PlatsPageService) {}
   @Get()  
-  @Render('plats')
+  @Render('platsPage')
   async root() {
-    const data = await this.getPlatPage();
+    const data = await this.platsPageService.getPlatFromjson();
     //creer un nouveau objet 
-    return { data : data}; 
+    return { data : data }; 
   }
-  
-  async getPlatPage() {
-  const data = JSON.parse(fs.readFileSync('platsconfig.json', 'utf8'));
-  //console.log(data) 
-  return { data };
-  }
+ 
 
 }

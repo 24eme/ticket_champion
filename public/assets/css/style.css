@@ -25,6 +25,16 @@ body {
     margin-bottom: 200px;
 }
 
+.dropdown-menu {
+    /* font-size: 18px; */
+    padding: 10px;
+  }
+
+.btn-droulant {
+
+    margin-bottom: 20px;
+}
+
 
 .plats-principaux {
     position: absolute;
@@ -337,6 +347,12 @@ Separator
     margin:20px 0px;
     background: #d46864;
 }
+.separator_milieu{
+    width:150px;
+    height:2px;
+    margin:20px 0px;
+    background: #d46864;
+}
 .separator_auto{
     width:85px;
     height:2px;
@@ -423,8 +439,20 @@ Extra height css
 .m-r-15{
     margin-right: 15px;
 }
+
+.m-r-50{
+    margin-right: 50px;
+}
+
+.m-l-50{
+    margin-left: 50px; 
+}
+
 .m-l-15{
     margin-left: 15px; 
+}
+.m-l-12{
+    margin-left: 12px; 
 }
 .m-top-10 {
     margin-top: 10px;
@@ -715,7 +743,14 @@ textarea::-ms-input-placeholder{
 
 /*End off pridifain css*/
 
+.btn-font {
+    font-size: 30px;
+  }
 
+  .btn-font-20 {
+    font-size: 20px;
+  }
+  
 /*Preloader css*/
 
 #loading{

@@ -30,12 +30,6 @@ body {
     padding: 10px;
   }
 
-
-.color_white {
-
-    color : RGB(255, 255, 255);
-}
-
 .btn-droulant {
 
     margin-bottom: 20px;
@@ -447,7 +441,11 @@ Extra height css
 }
 
 .m-r-50{
-    margin-right: 15px;
+    margin-right: 50px;
+}
+
+.m-l-50{
+    margin-left: 50px; 
 }
 
 .m-l-15{

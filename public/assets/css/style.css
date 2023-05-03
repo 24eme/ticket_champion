@@ -1358,3 +1358,16 @@ Footer Section style
     height: 400px;
     width: 400px;
 }
+
+.btn-previous {
+    margin-left: 40px;
+    margin-bottom: 40px;
+    width: 140px;
+}
+
+.btn-next {
+    float: right;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    width: 140px;
+}

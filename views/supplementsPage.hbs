@@ -2,7 +2,6 @@
 
 <section>
     <h2 class="text-center texte-intro">Un (ou plusieurs..) petit supplément ?</h2>
-    <button onclick="window.location.href = 'http://localhost:3000/plats';">vers plats</button>
     <div class="container plat-parent">
             <div class="plat-enfant">
                 <ul> {{#each data.data.restaurants.[0].supplements}}
@@ -14,6 +13,8 @@
                 </ul>
             </div>
     </div>
+    <button class="btn btn-primary btn-previous" onclick="window.location.href = 'http://localhost:3000/plats';">Précédent</button>
+    <button class="btn btn-primary btn-next" <!--onclick="window.location.href = 'http://localhost:3000/supplements';"-->Suivant</button>
 </section>
 
 {{> footer}}

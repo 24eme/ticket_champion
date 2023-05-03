@@ -1328,3 +1328,46 @@ Footer Section style
     text-decoration: none;
 
 }
+
+.texte-intro {
+    padding-top: 40px;
+}
+
+.nom-du-plat {
+    padding-top: 10px;
+}
+
+.plat-parent {
+    border: none;
+}
+
+.plat-enfant {
+    padding-top: 60px;
+    text-align: center;
+}
+
+.liste-ingredients {
+    padding-bottom: 10px;
+}
+
+.bouton-ajout {
+    margin-top: 20px;
+}
+
+.image-de-plat {
+    height: 400px;
+    width: 400px;
+}
+
+.btn-previous {
+    margin-left: 40px;
+    margin-bottom: 40px;
+    width: 140px;
+}
+
+.btn-next {
+    float: right;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    width: 140px;
+}

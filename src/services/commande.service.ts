@@ -32,7 +32,7 @@ export class CommandeService {
   }
 
   async getClientsFromJson() {
-    const data = JSON.parse(fs.readFileSync('config/restaurantsconfig.json', 'utf8'));
+    const data = JSON.parse(fs.readFileSync('config/clientsconfig.json', 'utf8'));
     return {data};
   }
 

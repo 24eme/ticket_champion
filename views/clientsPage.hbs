@@ -5,18 +5,47 @@
           <div class="row">
               <div class="col-md-6">
                   <div>
-                      <h1>Liste des plats du restaurant Champion:</h1>
-                      <div class="separator_left"></div>
-                      <ul class="list-group list-group-flush">
-                            <li class="list-group-item"> {{#each data.data.restaurants.[0].plats}}
-                                <ul> <button type="button" class="btn btn-primary btn-lg btn-block B1">{{this.nom}} </button></ul>
+                    <h1 class="client-h1">Bienvenue 24ème ! </h1>
+                    <div class="separator_left"></div>
+                    <h2>Aujourd'hui, je veux commander pour : </h2>
+                                    
+                    <div class="dropdown home_btns">
+                        <button type="button" id="dropdownMenu2" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choix clients 
+                            <div class="caret">
+                            </div>
+                        </button>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"> {{#each data.data.entreprises.[0].employes}}
+                        <ul>
+                            <button type="button"class="btn btn-primary btn-lg btn-block">{{this.name}} 
+                            </button>
+                        </ul>
                                 {{/each}}
                             </li>
-                     </ul>
+                        </ul>
+                    </div>
+                    </div>
+
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor deserunt, nobis quaerat ullam numquam pariatur, facere laboriosam, debitis magnam fuga culpa quos impedit omnis veniam odit magni mollitia? Deleniti, illo dolorum beatae corrupti et quibusdam asperiores voluptas aliquam maxime labore ea dolor incidunt maiores est similique delectus ducimus? Nam soluta inventore laboriosam, quidem ut ullam nemo voluptatibus totam, aperiam hic accusantium sit et velit? Quasi neque necessitatibus ex assumenda quod exercitationem quisquam? Voluptatibus perspiciatis adipisci minima mollitia, quaerat numquam quo aspernatur sequi inventore quam impedit atque hic consequuntur fugiat amet unde voluptate dolor itaque. Aliquam incidunt distinctio magnam accusantium, culpa illo officiis pariatur quasi fuga ea, animi, assumenda quisquam architecto in natus vel aperiam beatae nostrum quo? Quaerat porro a delectus dolorum eius similique maxime voluptatibus nobis nam hic, optio explicabo dolores. Odio nobis debitis cumque consectetur eius repellat quo corporis consequatur sit, quaerat, at perspiciatis. Aliquam doloremque, dolorem aut eius voluptas optio animi? Natus nemo ad, iure sed totam obcaecati reprehenderit quae quia officia quasi quas odio praesentium eligendi saepe commodi eveniet atque iste voluptatum fuga recusandae perspiciatis! Enim, minus commodi sunt quasi voluptatum exercitationem consequuntur obcaecati maiores rerum dolores nesciunt numquam quae porro illo quo officiis minima voluptas? Perspiciatis quasi voluptas quam tempora! Maxime accusamus dolorem laudantium nobis modi quisquam assumenda laboriosam, provident fuga aspernatur optio molestiae amet libero itaque officia illo quasi neque? Perferendis quos facilis corrupti est tempore autem deserunt corporis, qui sunt excepturi sit? Quo natus ipsum officia debitis a. Quo corporis magni aliquid illo tempora aut, itaque sunt officiis eligendi soluta laboriosam mollitia autem molestias officia voluptates fuga eos nisi perferendis quam dicta libero blanditiis. Soluta optio consectetur quibusdam ipsum rerum? Deleniti excepturi molestias itaque assumenda beatae, voluptate, libero voluptates fugiat, hic saepe qui laboriosam. Nulla provident dolor recusandae quam dolore? Amet ex excepturi numquam sunt similique voluptate error vel laboriosam iste eveniet cupiditate ipsum tempora expedita, facere voluptas aliquam. Voluptates, amet ratione iusto blanditiis, tempore assumenda nulla natus error maiores at earum, nisi quas asperiores? Reprehenderit ipsam, obcaecati sed cum voluptatem quos, nemo accusantium, cumque numquam minus ducimus facilis mollitia aspernatur impedit eaque. Doloribus temporibus pariatur excepturi dignissimos ipsum? At labore dolorem, a exercitationem itaque sit neque illum dicta voluptate. Unde facere repudiandae officia, aliquid non harum, a repellendus tenetur exercitationem rerum tempore quod ipsum, quasi voluptatum laboriosam nisi vitae accusantium at nulla odio fugit? Corporis ratione praesentium laboriosam alias, hic in labore quas rem consequatur voluptatibus amet deserunt repellendus cum, quos placeat enim officia soluta expedita, maiores optio! Qui, ipsam modi ipsum quibusdam nisi ex totam quo quae, culpa iure beatae, corrupti nesciunt quia tempora voluptatibus? Pariatur libero labore commodi eius nemo exercitationem voluptate temporibus quibusdam praesentium placeat autem assumenda ducimus, perferendis enim saepe deleniti veniam aut. Dolores, aperiam sequi optio ad, harum eligendi, atque delectus sunt ipsum deleniti consequatur? Magni perspiciatis molestiae quidem eum fugiat, aspernatur sequi doloremque, magnam eligendi consequatur harum consequuntur! Velit dicta minus facere expedita perferendis aut, impedit ipsam, neque nam, maiores doloremque tempora maxime aliquam dolores consectetur?</p>
+                                    
+                
                   </div>
               </div>
           </div>
       </div>
 </section>
 
+
 {{> footer}}
+
+
+<style>
+    .clients-h1 {
+        text-align: center;
+    }
+</style>
+
+
+ 

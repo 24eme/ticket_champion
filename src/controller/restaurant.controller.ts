@@ -1,4 +1,11 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Render } from '@nestjs/common';
 
 @Controller('restaurant')
-export class RestaurantController {}
+export class RestaurantController {
+
+
+    @Get('')
+    @Render('restaurantPage')
+    async restaurant() {}
+
+}

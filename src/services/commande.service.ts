@@ -6,21 +6,6 @@ import * as fs from 'fs';
 @Injectable()
 export class CommandeService {
 
-  
-
-
-  getViewName(page: string): string {
-    switch (page) {
-      case 'plats':
-        return 'platsPage';
-      case 'supplements':
-        return 'produits';
-      default:
-        return 'error';
-    }
-  }
-
-
   async getPlatFromjson() {
     const data = JSON.parse(fs.readFileSync('config/restaurantsconfig.json', 'utf8')); 
     return { data };

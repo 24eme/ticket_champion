@@ -1,6 +1,6 @@
 import { Controller, Get, Render, Res } from '@nestjs/common';
 
-@Controller('home-page')
+@Controller('/')
 export class HomePageController {
 
     @Get()

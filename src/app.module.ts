@@ -2,13 +2,10 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PlatsPageModule } from './platsPage/platsPage.module';
-import { PlatsPageController } from './platsPage/platsPage.controller';
-import { PlatsPageService } from './platsPage/platsPage.service';
-import { supplementsController } from './supplementsPage/supplementsPage.controller';
-import { supplementsModule } from './supplementsPage/supplementsPage.module';
-import { SupplementsService } from './supplementsPage/supplementsPage.service';
-import { HomePageController } from './homePage/home-page.controller';
+import { HomePageController } from './controller/home-page.controller';
+import { CommandeModule } from './modules/commande.module';
+import { CommandeService } from './services/commande.service';
+import { CommandeController } from './controller/commande.controller';
 
 
 @Module({
@@ -16,10 +13,9 @@ import { HomePageController } from './homePage/home-page.controller';
      TypeOrmModule.forRoot(
        require('../config/ormconfig.json')
      ),
-    PlatsPageModule,
-    supplementsModule,
+    CommandeModule,
   ],
-  controllers: [AppController, HomePageController, PlatsPageController, supplementsController],
-  providers: [AppService, PlatsPageService, SupplementsService],
+  controllers: [AppController, HomePageController, CommandeController],
+  providers: [AppService, CommandeService],
 })
 export class AppModule {}

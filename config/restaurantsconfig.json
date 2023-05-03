@@ -20,39 +20,39 @@
                 {
                     "id" : 1,
                     "nom" : "plat²",
-                    "prix" : 0,
-                    "img" : "path/to/img",
-                    "ingredients" : "liste ingredients"
+                    "prix" : 10,
+                    "img" : "/assets/images/plat1.png",
+                    "ingredients" : "oignon, tomate, crème fraîche, curry, piment, poivre, sel, huile d'olive, espadon, pomme"
                   },
                   {
                     "id" : 2,
                     "nom" : "plat carné",
-                    "prix" : 0,
-                    "img" : "path/to/img",
-                    "ingredients" : "liste ingredients"
+                    "prix" : 9,
+                    "img" : "/assets/images/plat2.png",
+                    "ingredients" : "oignon, tomate, crème fraîche, curry, piment, poivre, sel, huile d'olive, espadon, pomme"
                   },
                   {
                     "id" : 3,
                     "nom" : "plat végé",
-                    "prix" : 0,
-                    "img" : "path/to/img",
-                    "ingredients" : "liste ingredients"
+                    "prix" : 8,
+                    "img" : "/assets/images/plat3.png",
+                    "ingredients" : "oignon, tomate, crème fraîche, curry, piment, poivre, sel, huile d'olive, espadon, pomme"
                   }
             ],
             "supplements" : [
                 {
                   "id" : 1,
-                  "nom" : "supplement 1",
-                  "prix" : 0,
-                  "img" : "path/to/img",
-                  "ingredients" : "liste ingredients"
+                  "nom" : "Cookies",
+                  "prix" : 3,
+                  "img" : "/assets/images/supp1.png",
+                  "ingredients" : "oignon, huile d'olive, eau, échalote, ail, herbes de Provence, saucisse fumée, pommes de terre"
                 },
                 {
                   "id" : 2,
-                  "nom" : "supplement 2",
-                  "prix" : 0,
-                  "img" : "path/to/img",
-                  "ingredients" : "liste ingredients"
+                  "nom" : "Cannelés",
+                  "prix" : 4,
+                  "img" : "/assets/images/supp2.png",
+                  "ingredients" : "oignon, huile d'olive, eau, échalote, ail, herbes de Provence, saucisse fumée, pommes de terre"
                 }
                 ]
      

@@ -19,7 +19,6 @@ export class CommandeController {
   @Get('supplements')
   @Render('supplementsPage')
   async supp() {
-    console.log(join(__dirname, '..', 'public'));
     const data = await this.commandeService.getSupplementFromJson();
     //creer un nouveau objet
     return {data: data};

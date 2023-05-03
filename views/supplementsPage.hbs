@@ -1,50 +1,19 @@
 {{> header}}
 
 <section>
-    <div class="container supplement-parent">
-        <ul>
-            <div class="supplement-enfant">
-                <li> {{#each data.data.restaurants.[0].supplements}}
-                    <img class="image-de-supplement" src={{this.img}}>
-                    <h4 class="text-center nom-du-supplement">{{this.nom}} - {{this.prix}}€</h4>
+    <h2 class="text-center texte-intro">Un (ou plusieurs..) petit supplément ?</h2>
+    <button onclick="window.location.href = 'http://localhost:3000/plats';">vers plats</button>
+    <div class="container plat-parent">
+            <div class="plat-enfant">
+                <ul> {{#each data.data.restaurants.[0].supplements}}
+                    <img class="image-de-plat" src={{this.img}} alt="image du supplement">
+                    <h4 class="text-center nom-du-plat">{{this.nom}} - {{this.prix}}€</h4>
                     <span class="liste-ingredients">{{this.ingredients}}</span>
-                    <ul> <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout">Ajouter a la commande</button></ul>
+                    <li> <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout">Ajouter a la commande</button></li>
                 {{/each}}
-                </li>
+                </ul>
             </div>
-        </ul>
     </div>
 </section>
-
-
-<style>
-
-    .nom-du-supplement {
-        padding-top: 10px;
-    }
-
-    .supplement-parent {
-        border: none;
-    }
-
-    .supplement-enfant {
-        padding-top: 60px;
-        text-align: center;
-    }
-
-    .liste-ingredients {
-        padding-bottom: 10px;
-    }
-
-    .bouton-ajout {
-        margin-top: 20px;
-    }
-
-    .image-de-supplement {
-        height: 400px;
-        width: 400px;
-    }
-
-</style>
 
 {{> footer}}

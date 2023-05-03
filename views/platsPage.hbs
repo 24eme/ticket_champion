@@ -1,49 +1,25 @@
 {{> header}}
 
 <section>
+    <h2 class="text-center texte-intro">Bonjour {prénom}, que veux-tu manger ?</h2>
+    <button onclick="window.location.href = 'http://localhost:3000/supplements';">vers supplements</button>
     <div class="container plat-parent">
-    <ul>
         <div class="plat-enfant">
-            <li> {{#each data.data.restaurants.[0].plats}}
-                <img class="image-de-plat" src={{this.img}}>
+            <ul> {{#each data.data.restaurants.[0].plats}}
+                <img class="image-de-plat" src={{this.img}} alt="image du plat">
                 <h4 class="text-center nom-du-plat">{{this.nom}} - {{this.prix}}€</h4>
                 <span class="liste-ingredients">{{this.ingredients}}</span>
-                <ul> <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout">Ajouter a la commande</button></ul>
+                <li> <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout">Ajouter a la commande</button></li>
             {{/each}}
-            </li>
+            </ul>
         </div>
-    </ul>
     </div>
 </section>
 
 
 <style>
 
-    .nom-du-plat {
-        padding-top: 10px;
-    }
 
-    .plat-parent {
-        border: none;
-    }
-
-    .plat-enfant {
-        padding-top: 60px;
-        text-align: center;
-    }
-
-    .liste-ingredients {
-        padding-bottom: 10px;
-    }
-
-    .bouton-ajout {
-        margin-top: 20px;
-    }
-
-    .image-de-plat {
-        height: 400px;
-        width: 400px;
-    }
 
 </style>
 

@@ -1,22 +1,26 @@
-{{> header}} 
+{{> header}}
 
 <section>
-      <div class="container">
-          <div class="row">
-              <div class="col-md-6">
-                  <div>
-                      <h1>Liste des plats du restaurant Champion:</h1>
-                      <div class="separator_left"></div>
-                      <ul class="list-group list-group-flush">
-                            <li class="list-group-item"> {{#each data.data.restaurants.[0].plats}}
-                                <ul> <button type="button" class="btn btn-primary btn-lg btn-block B1">{{this.nom}} </button></ul>
-                                {{/each}}
-                            </li>
-                     </ul>
-                  </div>
-              </div>
-          </div>
-      </div>
+    <h2 class="text-center texte-intro">Bonjour {prénom}, que veux-tu manger ?</h2>
+    <button onclick="window.location.href = 'http://localhost:3000/supplements';">vers supplements</button>
+    <div class="container plat-parent">
+        <div class="plat-enfant">
+            <ul> {{#each data.data.restaurants.[0].plats}}
+                <img class="image-de-plat" src={{this.img}} alt="image du plat">
+                <h4 class="text-center nom-du-plat">{{this.nom}} - {{this.prix}}€</h4>
+                <span class="liste-ingredients">{{this.ingredients}}</span>
+                <li> <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout">Ajouter a la commande</button></li>
+            {{/each}}
+            </ul>
+        </div>
+    </div>
 </section>
+
+
+<style>
+
+
+
+</style>
 
 {{> footer}}

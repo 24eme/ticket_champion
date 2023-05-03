@@ -35,10 +35,10 @@ export class CommandeController {
   }
 
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.commandeService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.commandeService.findOne(+id);
+  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCommandeDto: UpdateCommandeDto) {

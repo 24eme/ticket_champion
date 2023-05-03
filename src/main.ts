@@ -12,13 +12,9 @@ async function bootstrap() {
    AppModule,);
    var path = require('path')
  app.useStaticAssets(join(__dirname, '..', 'public'));
- console.log(join(__dirname, '..', 'public'));
  app.setBaseViewsDir(join(__dirname, '..', 'views'));
- console.log(join(join(__dirname, '..', 'views')));
  hbs.registerPartials(join(__dirname, '..', 'views', 'partials'));
- console.log(join(join(__dirname, '..', 'views', 'partials')));
  //partialsDir: join(__dirname, '..', 'views/partials')
- //app.engine('.hbs', exphbs);
  app.setViewEngine('hbs');
 
  await app.listen(3000);

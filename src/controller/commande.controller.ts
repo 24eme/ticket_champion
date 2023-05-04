@@ -28,7 +28,6 @@ export class CommandeController {
   @Render('clientsPage')
   async employes() {
     const data = await this.commandeService.getClientsFromJson();
-    console.log(data);
     // creer un nouvel objet
     return {data: data};
   }

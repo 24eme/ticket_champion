@@ -28,7 +28,6 @@ async employes() {
 
 @Post('/')
 handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
-  //console.log(`Le texte sur le bouton était: ${texteSurBouton}`);
   this.commandeDto.nom_Client = `${texteSurBouton}`;
   // traitez les données soumises ici
 }
@@ -36,8 +35,6 @@ handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
 @Post('/clients1')
 handlePostRequest2(@Body('buttonText') buttonText: string) {
   this.commandeDto.nom_employee = `${buttonText}`;
-  //console.log(this.commandeDto.nom_Client);
-  //console.log(this.commandeDto.nom_employee);
   
 }
 
@@ -53,14 +50,8 @@ handlePostRequest2(@Body('buttonText') buttonText: string) {
   @Post('/plats')
 handlePostRequest3(@Body('buttonText') buttonText: string) {
   this.commandeDto.nom_plat.push(buttonText);
-  console.log(this.commandeDto.nom_plat);
-  console.log(this.commandeDto.nom_Client);
-  console.log(this.commandeDto.nom_employee);
   
 }
-
-
-
 
   @Get('supplements')
   @Render('supplementsPage')
@@ -68,6 +59,11 @@ handlePostRequest3(@Body('buttonText') buttonText: string) {
     const data = await this.commandeService.getSupplementFromJson();
 
     return {data: data};
+  }
+
+  @Post('/supplements')
+  handlePostRequest4(@Body('buttonText') buttonText: string) {
+    this.commandeDto.nom_Supplement.push(buttonText); 
   }
 
 

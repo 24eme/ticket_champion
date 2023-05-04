@@ -1,12 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Res } from '@nestjs/common';
 import { CommandeService } from '../services/commande.service';
-import { CreateCommandeDto } from '../commande/dto/create-commande.dto';
-import { UpdateCommandeDto } from '../commande/dto/update-commande.dto';
-import { join } from 'path';
+import { CreateCommandeDto } from '../commande/dto/createCommande.dto';
+import { UpdateCommandeDto } from '../commande/dto/updateCommande.dto';
 
 @Controller('/')
 export class CommandeController {
-  constructor(private readonly commandeService: CommandeService) {}
+  constructor(private commandeService: CommandeService) {}
 
   @Get('plats')
   @Render('platsPage')
@@ -23,15 +22,21 @@ export class CommandeController {
     //creer un nouveau objet
     return {data: data};
   }
+  //fill client table
+ /* @Get('seed')
+  async seedClients() {
+    await this.commandeService.seedClients();
+    return { message: 'Clients seeded successfully' };
+  }*/
 
-  @Post()
-  create(@Body() createCommandeDto: CreateCommandeDto) {
-    return this.commandeService.create(createCommandeDto);
+ /* @Post()
+  createCommande(@Body() createCommandeDto: CreateCommandeDto) {
+    return this.commandeService.createCommande(createCommandeDto);
   }
 
   @Get()
-  findAll() {
-    return this.commandeService.findAll();
+  getCommandes() {
+    return this.commandeService.getCommandes();
   }
 
 
@@ -48,5 +53,5 @@ export class CommandeController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.commandeService.remove(+id);
-  }
+  }*/
 }

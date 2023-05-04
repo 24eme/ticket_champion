@@ -1,26 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCommandeDto } from '../commande/dto/create-commande.dto';
-import { UpdateCommandeDto } from '../commande/dto/update-commande.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CommandModel } from '../utils/types';
+import { Commande } from '../typeorm/entities/Commande';
+import { UpdateCommandeDto } from '../commande/dto/updateCommande.dto';
 import * as fs from 'fs';
+import { Repository } from 'typeorm';
+
 
 @Injectable()
 export class CommandeService {
+  constructor(
+    //@InjectRepository(Client) private clientRepository: Repository<Client>,
+    //@InjectRepository(Commande) private commandeRepository: Repository<Commande>,
+    //@InjectRepository(Plat) private platRepository: Repository<Plat>,
+   // @InjectRepository(Supplement) private supplementRepository: Repository<Supplement>,
+  ){}
 
-  
-
-
-  getViewName(page: string): string {
-    switch (page) {
-      case 'plats':
-        return 'platsPage';
-      case 'supplements':
-        return 'produits';
-      default:
-        return 'error';
-    }
-  }
-
-
+  //add params to below fonction
   async getPlatFromjson() {
     const data = JSON.parse(fs.readFileSync('config/restaurantsconfig.json', 'utf8')); 
     return { data };
@@ -31,11 +27,12 @@ export class CommandeService {
     return {data};
   }
 
-  create(createCommandeDto: CreateCommandeDto) {
-    return 'This action adds a new commande';
+  /*createCommande(commandeDetails: CommandModel) {
+    const newCommand = this.commandeRepository.create({...commandeDetails});
+    return this.commandeRepository.save(newCommand);
   }
 
-  findAll() {
+  getCommandes() {
     return `This action returns all commande`;
   }
 
@@ -49,5 +46,5 @@ export class CommandeService {
 
   remove(id: number) {
     return `This action removes a #${id} commande`;
-  }
+  }*/
 }

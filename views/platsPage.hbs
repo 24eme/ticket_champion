@@ -9,7 +9,11 @@
                       <div class="separator_left"></div>
                       <ul class="list-group list-group-flush">
                             <li class="list-group-item"> {{#each data.data.restaurants.[0].plats}}
-                                <ul> <button type="button" class="btn btn-primary btn-lg btn-block B1">{{this.nom}} </button></ul>
+                               <ul> 
+                                    <a href="http://localhost:3000/supplements">
+                                        <button type="button" class="btn btn-primary btn-lg btn-block B1">{{this.nom}} </button>
+                                    </a>
+                                </ul>
                                 {{/each}}
                             </li>
                      </ul>

@@ -1,7 +1,7 @@
 {
     "restaurants": [
         {
-            "nomRestaurant" : "Champion",
+            "nom_restaurant" : "Champion",
             "employes" : ["Katia", "Yann"],
             "adresse" : "55 Rue Championnet, 75018 Paris" ,
             "Horaires" : [

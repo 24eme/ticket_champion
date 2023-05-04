@@ -1,3 +1,7 @@
+//A RESOUDRE
+/*Nest can't resolve dependencies of the CommandeService (?).
+ Please make sure that the argument CommandeRepository at index [0] is available in the AppModule context.*/
+
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';

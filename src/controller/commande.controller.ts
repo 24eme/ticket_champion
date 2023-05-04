@@ -6,31 +6,52 @@ import { join } from 'path';
 
 @Controller('/')
 export class CommandeController {
-  constructor(private readonly commandeService: CommandeService) {}
+
+  private readonly commandeDto = new CreateCommandeDto();
+
+  constructor(private readonly commandeService: CommandeService) {
+    
+  }
+
+
+
+@Get('clients1')
+@Render('clientsPage')
+async employes() {
+  
+  const data = await this.commandeService.getClientsFromJson();
+  this.commandeDto.nom_Client = '24EME';
+  // creer un nouvel objet
+  return {data: data, commandeDto :CreateCommandeDto };
+}
 
   @Get('plats')
   @Render('platsPage')
   async plat() {
     const data = await this.commandeService.getPlatFromjson();
-    //creer un nouveau objet  
-    return { data : data }; 
+    return { data : data };   
   }
+
+
+ 
 
   @Get('supplements')
   @Render('supplementsPage')
   async supp() {
     const data = await this.commandeService.getSupplementFromJson();
+    
+    if (typeof document !== 'undefined') {
+
+
+      this.commandeDto.nom_plat[0] =  await this.commandeService.getInfo();
+      //creer un nouveau objet
+      console.log(this.commandeDto.nom_Client);
+      console.log(this.commandeDto.nom_plat[0]);}
     //creer un nouveau objet
     return {data: data};
   }
 
-  @Get('clients')
-  @Render('clientsPage')
-  async employes() {
-    const data = await this.commandeService.getClientsFromJson();
-    // creer un nouvel objet
-    return {data: data};
-  }
+
 
   @Post()
   create(@Body() createCommandeDto: CreateCommandeDto) {

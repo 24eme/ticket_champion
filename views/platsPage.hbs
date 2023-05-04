@@ -8,7 +8,7 @@
                 <img class="image-de-plat" src={{this.img}} alt="image du plat">
                 <h4 class="text-center nom-du-plat">{{this.nom}} - {{this.prix}}€</h4>
                 <span class="liste-ingredients">{{this.ingredients}}</span>
-                <li> <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout">Ajouter a la commande</button></li>
+                <li> <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout" onclick="getInfo()" data-plat-nom = "{{this.nom}}">Ajouter a la commande</button></li>
             {{/each}}
             </ul>
         </div>
@@ -18,3 +18,4 @@
 </section>
 
 {{> footer}}
+

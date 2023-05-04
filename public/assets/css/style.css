@@ -20,6 +20,38 @@ body {
 @-o-viewport { width: device-width; }
 @viewport { width: device-width; }
 
+.h1-restaurant{
+    font-weight: 800;
+}
+
+.restaurant-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.separator_restaurant {
+    width:200px;
+    height:5px;
+    margin: 0 auto;
+    background: #d46864;
+}
+
+.btn-restaurant {
+    text-transform: uppercase;
+    font-size:14px;
+    font-weight: 600;
+    border-radius: 4px;
+    border:1px solid;
+    color: #fff;
+    background-color: #d46864;
+    border-color: #d46864;
+    padding: 10px 15px;
+    width: 10%;
+    position: fixed;
+    right: 20px;
+    }
+
+
     .clients-container {
         text-align: center;
         margin-top: 50px;
@@ -200,7 +232,7 @@ a {
 .btn:focus,
 .btn:active {
     outline: inherit;
-    background-color: transparent;
+    background-color: #1d4851;
 }
 *,
 *:before,
@@ -500,6 +532,10 @@ Extra height css
 }
 
 .m-l-50{
+    margin-left: 50px; 
+}
+
+.m-l-500{
     margin-left: 50px; 
 }
 

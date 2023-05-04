@@ -23,18 +23,18 @@ export class CommandeService {
   }
 
   
-  async getInfo() {
-    var plat_nom
+  // async getInfo() {
+  //   var plat_nom
 
-    const platBoutons = document.querySelectorAll('.B1');
-    platBoutons.forEach(button => {
-      button.addEventListener('click', (event) => {
-        const target = event.currentTarget as HTMLButtonElement;
-        plat_nom = target.getAttribute('data-plat-nom'); } 
-    )})
+  //   const platBoutons = document.querySelectorAll('.B1');
+  //   platBoutons.forEach(button => {
+  //     button.addEventListener('click', (event) => {
+  //       const target = event.currentTarget as HTMLButtonElement;
+  //       plat_nom = target.getAttribute('data-plat-nom'); } 
+  //   )})
 
-          return plat_nom;
-  }
+  //         return plat_nom;
+  // }
 
   create(createCommandeDto: CreateCommandeDto) {
     return 'This action adds a new commande';

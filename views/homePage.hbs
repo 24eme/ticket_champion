@@ -174,7 +174,7 @@
                                     <ul class="list-group list-group-flush"></ul>
                                         <li class="list-group list-group-flush"> 
                                             <ul class="">
-                                            <a onclick="window.location = '/clients1'" class="dropdown-item btn-droulant btn-font-20"> 24EME </a>
+                                            <a onclick="window.location = '/clients1'" class="dropdown-item btn-droulant btn-font-20" id="monBouton"> 24EME </a>
                                              </ul>
                                             <ul><div class="separator_milieu"></div> </ul> 
                                             <ul> <a href="" class="dropdown-item btn-droulant btn-font-20">MARCOPOLETTE</a></ul>
@@ -183,12 +183,27 @@
                             </div>
 
                             <a onclick="window.location = '/restaurant'" class="btn btn-primary m-top-20 btn-font"> Restaurant </a>
+                            
+                           
+
     
                             </div>
                         </div>
                     </div><!--End off row-->
                 </div><!--End off container -->
             </section> <!--End off Home Sections-->
+
+            <script>
+  const monBouton = document.querySelector('#monBouton');
+  monBouton.addEventListener('click', () => {
+    const texteSurBouton = monBouton.textContent;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/clients1');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ texteSurBouton }));
+  });
+</script>
+
 
 
             <!--About Sections-->

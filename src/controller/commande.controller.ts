@@ -25,6 +25,13 @@ async employes() {
   return {data: data, commandeDto :CreateCommandeDto };
 }
 
+
+@Post('/clients1')
+handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
+  console.log(`Le texte sur le bouton était: ${texteSurBouton}`);
+  // traitez les données soumises ici
+}
+
   @Get('plats')
   @Render('platsPage')
   async plat() {
@@ -40,13 +47,13 @@ async employes() {
   async supp() {
     const data = await this.commandeService.getSupplementFromJson();
     
-    if (typeof document !== 'undefined') {
+    // if (typeof document !== 'undefined') {
 
 
-      this.commandeDto.nom_plat[0] =  await this.commandeService.getInfo();
-      //creer un nouveau objet
-      console.log(this.commandeDto.nom_Client);
-      console.log(this.commandeDto.nom_plat[0]);}
+    //   this.commandeDto.nom_plat[0] =  await this.commandeService.getInfo();
+    //   //creer un nouveau objet
+    //   console.log(this.commandeDto.nom_Client);
+    //   console.log(this.commandeDto.nom_plat[0]);}
     //creer un nouveau objet
     return {data: data};
   }

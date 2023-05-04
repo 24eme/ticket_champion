@@ -16,6 +16,11 @@ export class CommandeService {
     return {data};
   }
 
+  async getClientsFromJson() {
+    const data = JSON.parse(fs.readFileSync('config/clientsconfig.json', 'utf8'));
+    return {data};
+  }
+
   create(createCommandeDto: CreateCommandeDto) {
     return 'This action adds a new commande';
   }

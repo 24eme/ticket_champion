@@ -1,14 +1,14 @@
 {{> header}}
 
 <section>
-    <h2 class="text-center texte-intro">Bonjour {prénom}, que veux-tu manger ?</h2>
+    <h2 class="text-center texte-intro">Bonjour {{employee}}, que veux-tu manger ?</h2>
     <div class="container plat-parent">
         <div class="plat-enfant">
             <ul> {{#each data.data.restaurants.[0].plats}}
                 <img class="image-de-plat" src={{this.img}} alt="image du plat">
                 <h4 class="text-center nom-du-plat">{{this.nom}} - {{this.prix}}€</h4>
                 <span class="liste-ingredients">{{this.ingredients}}</span>
-                <li> <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout">Ajouter a la commande</button></li>
+                <li> <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout" id="{{this.nom}}">Ajouter a la commande</button></li>
             {{/each}}
             </ul>
         </div>
@@ -17,4 +17,22 @@
     <button class="btn btn-primary btn-next" onclick="window.location = '/supplements'">Suivant</button>
 </section>
 
+            <script>
+ 
+  const allButton = document.querySelectorAll('.B1');
+  allButton.forEach(button => {
+  button.addEventListener('click', (event) => {
+  const buttonText = event.target.id;
+  const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/plats');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ buttonText }));
+
+
+});
+    
+  });
+</script>
+
 {{> footer}}
+

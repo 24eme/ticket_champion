@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateCommandeDto } from '../commande/dto/create-commande.dto';
 import { UpdateCommandeDto } from '../commande/dto/update-commande.dto';
 import * as fs from 'fs';
+//import * from event.currentTarget;
 
 @Injectable()
 export class CommandeService {
@@ -20,6 +21,20 @@ export class CommandeService {
     const data = JSON.parse(fs.readFileSync('config/clientsconfig.json', 'utf8'));
     return {data};
   }
+
+  
+  // async getInfo() {
+  //   var plat_nom
+
+  //   const platBoutons = document.querySelectorAll('.B1');
+  //   platBoutons.forEach(button => {
+  //     button.addEventListener('click', (event) => {
+  //       const target = event.currentTarget as HTMLButtonElement;
+  //       plat_nom = target.getAttribute('data-plat-nom'); } 
+  //   )})
+
+  //         return plat_nom;
+  // }
 
   create(createCommandeDto: CreateCommandeDto) {
     return 'This action adds a new commande';

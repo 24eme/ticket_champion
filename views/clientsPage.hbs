@@ -11,7 +11,7 @@
 
                     <div class="list-group border-clients">
                         <li class="list-group-item">{{#each data.data.entreprises.[0].employes}}
-                            <ul class="clients-ul"> <button type="button" class="btn-clients text-white"> {{this.name}}
+                            <ul class="clients-ul"> <button onclick="window.location = '/plats'" type="button" class="btn-clients text-white " id="employeButton{{@index}}"> {{this.name}}
                             </button></ul>
                             {{/each}}                            
                         </li>                   
@@ -24,63 +24,21 @@
       </div>
 </section>
 
+            <script>
+ 
+  const allButton = document.querySelectorAll('[id^="employeButton"]');
+  allButton.forEach(button => {
+  button.addEventListener('click', (event) => {
+  const buttonText = event.target.textContent;
+  const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/clients1');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ buttonText }));
+
+
+});
+    
+  });
+</script>
 
 {{> footer}}
-
-
-<style>
-    .clients-container {
-        text-align: center;
-        margin-top: 50px;
-    }
-
-    .h1-clients {
-        font-weight: 800;
-    }
-
-    .separator_center {
-        width:85px;
-        height:2px;
-        margin: 0 auto;
-        background: #d46864;
-    }
-
-    .h2-clients {
-        margin-top: 30px;
-        margin-bottom: 30px;
-    }
-
-    .border-clients {
-        border: none
-    }
-
-    .clients-ul {
-        margin: 5px auto;
-        width: 50%;
-    }
-    
-    .btn-clients {
-    text-transform: uppercase;
-    font-size:14px;
-    font-weight: 600;
-    border-radius: 4px;
-    border:1px solid;
-    color: #fff;
-    background-color: #d46864;
-    border-color: #d46864;
-    padding: 10px 15px;
-    width: 60%;
-    }
-
-
-    .btn-clients:hover {
-    background-color: #286090;
-    border-color: #204d74;
-    }
-
-
-
-</style>
-
-
- 

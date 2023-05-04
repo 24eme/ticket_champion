@@ -10,25 +10,21 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class CommandeService {
   constructor(
-    //@InjectRepository(Client) private clientRepository: Repository<Client>,
-    //@InjectRepository(Commande) private commandeRepository: Repository<Commande>,
-    //@InjectRepository(Plat) private platRepository: Repository<Plat>,
-   // @InjectRepository(Supplement) private supplementRepository: Repository<Supplement>,
+    // @InjectRepository(Client) private clientRepository: Repository<Client>,
+    @InjectRepository(Commande) private commandeRepository: Repository<Commande>,
+  //   @InjectRepository(Plat) private platRepository: Repository<Plat>,
+  //  @InjectRepository(Supplement) private supplementRepository: Repository<Supplement>,
   ){}
 
   //add params to below fonction
-  async getPlatFromjson() {
-    const data = JSON.parse(fs.readFileSync('config/restaurantsconfig.json', 'utf8')); 
+  async getDataFromjson(cheminFichier: string) {
+    const data = JSON.parse(fs.readFileSync(cheminFichier, 'utf8')); 
     return { data };
   }
 
-  async getSupplementFromJson() {
-    const data = JSON.parse(fs.readFileSync('config/restaurantsconfig.json', 'utf8'));
-    return {data};
-  }
 
-  /*createCommande(commandeDetails: CommandModel) {
-    const newCommand = this.commandeRepository.create({...commandeDetails});
+  createCommande(commandeDetails: CommandModel) {
+    const newCommand = this.commandeRepository.create({...commandeDetails,});
     return this.commandeRepository.save(newCommand);
   }
 
@@ -36,7 +32,7 @@ export class CommandeService {
     return `This action returns all commande`;
   }
 
-  findOne(id: number) {
+  /*findOne(id: number) {
     return `This action returns a #${id} commande`;
   }
 

@@ -12,10 +12,13 @@ export class Commande {
   @Column({ default: () => "CURRENT_TIMESTAMP" })
   date_commande: Date;
 
-  @Column()
+  // NULLABLE TRUE A MODIFIER : METTRE VALEUR PAR DEFAULT (prix_plat ??) 
+  @Column({ nullable:true })
   montant_commande: number;
 
-  @Column()
+    // NULLABLE TRUE A MODIFIER : METTRE VALEUR PAR DEFAULT
+
+  @Column({nullable:true})
   heure_de_livraison: Date;
 
   @ManyToOne(() => Client, (client) => client.commandes)

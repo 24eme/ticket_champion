@@ -1,3 +1,3 @@
-import { CreateCommandeDto } from './createCommande.dto';
+import { CreateCommandeDto } from './CreateCommande.dto';
 
 export class UpdateCommandeDto {}

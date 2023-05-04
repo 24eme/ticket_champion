@@ -32,6 +32,13 @@ export class CommandeService {
     return `This action returns all commande`;
   }
 
+
+  fillPlatsTable() {
+    const jsonData = this.getDataFromjson('config/restaurantsconfig.json');
+    console.log("Hello Fatou");
+    return jsonData;
+  }
+
   /*findOne(id: number) {
     return `This action returns a #${id} commande`;
   }

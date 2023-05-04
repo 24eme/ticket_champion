@@ -11,13 +11,14 @@ export class CommandeController {
   @Render('platsPage')
   async plat() {
     const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
-    //creer un nouveau objet  
+    //creer un nouveau objet 
     return { data : data }; 
   }
+  
 
   @Get('supplements')
   @Render('supplementsPage')
-  async supp() {
+  async supplement() {
     const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
     //creer un nouveau objet
     return {data: data};
@@ -29,6 +30,11 @@ export class CommandeController {
   @Post()
   createCommande(@Body() createCommandeDto: CreateCommandeDto) {
     this.commandeService.createCommande(createCommandeDto);
+  }
+
+  fillTablePlats() {
+    console.log("Hello Charlène");
+    this.commandeService.fillPlatsTable();
   }
 
   //fill client table

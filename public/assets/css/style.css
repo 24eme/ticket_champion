@@ -20,6 +20,61 @@ body {
 @-o-viewport { width: device-width; }
 @viewport { width: device-width; }
 
+    .clients-container {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .h1-clients {
+        font-weight: 800;
+    }
+
+    .separator_center {
+        width:85px;
+        height:2px;
+        margin: 0 auto;
+        background: #d46864;
+    }
+
+    .h2-clients {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .border-clients {
+        border: none
+    }
+
+    .clients-ul {
+        margin: 5px auto;
+        width: 50%;
+    }
+    
+    .btn-clients {
+    text-transform: uppercase;
+    font-size:14px;
+    font-weight: 600;
+    border-radius: 4px;
+    border:1px solid;
+    color: #fff;
+    background-color: #d46864;
+    border-color: #d46864;
+    padding: 10px 15px;
+    width: 60%;
+    }
+
+
+    .btn-clients:hover {
+    background-color: #286090;
+    border-color: #204d74;
+    }
+
+
+
+ 
+
+
+
 .B1 {
 
     margin-bottom: 200px;

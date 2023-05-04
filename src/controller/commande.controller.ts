@@ -10,6 +10,8 @@ export class CommandeController {
   private readonly commandeDto = new CreateCommandeDto();
 
   constructor(private readonly commandeService: CommandeService) {
+    this.commandeDto.nom_plat = [];
+    this.commandeDto.nom_Supplement = [];
     
   }
 
@@ -20,41 +22,51 @@ export class CommandeController {
 async employes() {
   
   const data = await this.commandeService.getClientsFromJson();
-  this.commandeDto.nom_Client = '24EME';
   // creer un nouvel objet
-  return {data: data, commandeDto :CreateCommandeDto };
+  return {data: data};
 }
 
+@Post('/')
+handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
+  //console.log(`Le texte sur le bouton était: ${texteSurBouton}`);
+  this.commandeDto.nom_Client = `${texteSurBouton}`;
+  // traitez les données soumises ici
+}
 
 @Post('/clients1')
-handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
-  console.log(`Le texte sur le bouton était: ${texteSurBouton}`);
-  // traitez les données soumises ici
+handlePostRequest2(@Body('buttonText') buttonText: string) {
+  this.commandeDto.nom_employee = `${buttonText}`;
+  //console.log(this.commandeDto.nom_Client);
+  //console.log(this.commandeDto.nom_employee);
+  
 }
 
   @Get('plats')
   @Render('platsPage')
   async plat() {
     const data = await this.commandeService.getPlatFromjson();
-    return { data : data };   
+    const employee = this.commandeDto.nom_employee;
+    return { data : data, employee  };   
   }
 
 
- 
+  @Post('/plats')
+handlePostRequest3(@Body('buttonText') buttonText: string) {
+  this.commandeDto.nom_plat.push(buttonText);
+  console.log(this.commandeDto.nom_plat);
+  console.log(this.commandeDto.nom_Client);
+  console.log(this.commandeDto.nom_employee);
+  
+}
+
+
+
 
   @Get('supplements')
   @Render('supplementsPage')
   async supp() {
     const data = await this.commandeService.getSupplementFromJson();
-    
-    // if (typeof document !== 'undefined') {
 
-
-    //   this.commandeDto.nom_plat[0] =  await this.commandeService.getInfo();
-    //   //creer un nouveau objet
-    //   console.log(this.commandeDto.nom_Client);
-    //   console.log(this.commandeDto.nom_plat[0]);}
-    //creer un nouveau objet
     return {data: data};
   }
 

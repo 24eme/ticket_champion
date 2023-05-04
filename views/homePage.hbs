@@ -177,7 +177,7 @@
                                             <a onclick="window.location = '/clients1'" class="dropdown-item btn-droulant btn-font-20" id="monBouton"> 24EME </a>
                                              </ul>
                                             <ul><div class="separator_milieu"></div> </ul> 
-                                            <ul> <a href="" class="dropdown-item btn-droulant btn-font-20">MARCOPOLETTE</a></ul>
+                                            <ul> <a href="" class="dropdown-item btn-droulant btn-font-20" id="marcoBouton">MARCOPOLETTE</a></ul>
                                          </li>
                                     </ul>
                             </div>
@@ -198,7 +198,7 @@
   monBouton.addEventListener('click', () => {
     const texteSurBouton = monBouton.textContent;
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/clients1');
+    xhr.open('POST', '/');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({ texteSurBouton }));
   });

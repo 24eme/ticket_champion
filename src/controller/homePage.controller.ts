@@ -8,8 +8,10 @@ export class HomePageController {
 
   @Get()
   @Render('homePage')
-  //the clients table is filled here
-  async root() {
-    await this.commandeService.fillClientsTable();
+  //the clients, plats, supplements tables are filled here
+root() {
+    this.commandeService.fillClientsTable();
+    this.commandeService.fillPlatsTable();
+    this.commandeService.fillSupplementsTable();
   }
 }

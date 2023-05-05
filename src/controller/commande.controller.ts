@@ -62,10 +62,10 @@ handlePostRequest2(@Body('buttonText') buttonText: string) {
 handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
   this.commandeDto.nom_plat.push(buttonText);
   this.commandeDto.montant_Commande += Number(prix);
-  console.log(this.commandeDto.nom_employee);
-  console.log(this.commandeDto.nom_plat);
-  console.log(this.commandeDto.nom_Supplement);
-  console.log(this.commandeDto.montant_Commande);
+  // console.log(this.commandeDto.nom_employee);
+  // console.log(this.commandeDto.nom_plat);
+  // console.log(this.commandeDto.nom_Supplement);
+  // console.log(this.commandeDto.montant_Commande);
   
 }
 
@@ -79,11 +79,13 @@ handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: s
   }
 
   @Post('/supplements')
-  handlePostRequest4(@Body('buttonText') buttonText: string) {
+  handlePostRequest4(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
     this.commandeDto.nom_Supplement.push(buttonText); 
-    console.log(this.commandeDto.nom_plat)
-    console.log(this.commandeDto.nom_Supplement)
-    console.log(this.commandeDto.montant_Commande)
+    this.commandeDto.montant_Commande += Number(prix);
+    console.log(this.commandeDto.nom_employee);
+    console.log(this.commandeDto.nom_plat);
+    console.log(this.commandeDto.nom_Supplement);
+    console.log(this.commandeDto.montant_Commande);
   }
 
 

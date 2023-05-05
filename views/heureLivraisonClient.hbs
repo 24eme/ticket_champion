@@ -5,22 +5,31 @@
     <div class="container-time">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center">
-                <button name="submit" class="btn btn-primary btn-lg B1">12h00</button>
-                <button name="submit" class="btn btn-primary btn-lg B1">13h00</button>
-                <button name="submit" class="btn btn-primary btn-lg B1">14h00</button>
+                <button name="submit" class="btn btn-primary btn-lg B1" id="boutton0">12h00</button>
+                <button name="submit" class="btn btn-primary btn-lg B1" id="boutton1">13h00</button>
+                <button name="submit" class="btn btn-primary btn-lg B1" id="boutton2">14h00</button>
             </div>
             <div class="col-md-6 text-center">
-                <button name="submit" class="btn btn-primary btn-lg B1">12h30</button>
-                <button name="submit" class="btn btn-primary btn-lg B1">13h30</button>
-                <button name="submit" class="btn btn-primary btn-lg B1">14h30</button>
+                <button name="submit" class="btn btn-primary btn-lg B1" id="boutton3">12h30</button>
+                <button name="submit" class="btn btn-primary btn-lg B1" id="boutton4">13h30</button>
+                <button name="submit" class="btn btn-primary btn-lg B1" id="boutton5">14h30</button>
             </div>
         </div>
     </div>
+
+            <script>
+ 
+  const allButton = document.querySelectorAll('.B1');
+  allButton.forEach(button => {
+  button.addEventListener('click', (event) => {
+  const buttonText = event.target.textContent;
+  const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/heureLivraison');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ buttonText }));}); });
+</script>
+
 </section>
 
+
 {{> footer}}
-
-<style>
-
-
-</style>

@@ -29,7 +29,7 @@ async employes() {
 @Post('/')
 handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
   this.commandeDto.nom_Client = `${texteSurBouton}`;
-  
+
   this.commandeDto.nom_employee = "";
   this.commandeDto.nom_plat = [];
   this.commandeDto.nom_Supplement = [];
@@ -38,15 +38,13 @@ handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
 }
 
 @Post('/clients1')
-handlePostRequest2(@Body('buttonText') buttonText: string) {
+handlePostRequest2(@Body('buttonText') buttonText: string, @Body('id') id: string) {
   this.commandeDto.nom_employee = `${buttonText}`;
+  this.commandeDto.id_client = Number(id);
   this.commandeDto.nom_plat = [];
   this.commandeDto.nom_Supplement = [];
   this.commandeDto.montant_Commande = 0;
-  console.log(this.commandeDto.nom_employee)
-  console.log(this.commandeDto.nom_plat)
-  console.log(this.commandeDto.nom_Supplement)
-  console.log(this.commandeDto.montant_Commande)
+ 
   
 }
 
@@ -76,10 +74,6 @@ handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: s
   handlePostRequest4(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
     this.commandeDto.nom_Supplement.push(buttonText); 
     this.commandeDto.montant_Commande += Number(prix);
-    // console.log(this.commandeDto.nom_employee);
-    // console.log(this.commandeDto.nom_plat);
-    // console.log(this.commandeDto.nom_Supplement);
-    // console.log(this.commandeDto.montant_Commande);
   }
 
   @Get('heureLivraison')
@@ -89,14 +83,13 @@ handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: s
   @Post('/heureLivraison')
   handlePostRequest5(@Body('buttonText') buttonText: string) {
     this.commandeDto.date_livraison = buttonText;
-    console.log(this.commandeDto.nom_employee);
-    console.log(this.commandeDto.nom_plat);
-    console.log(this.commandeDto.nom_Supplement);
-    console.log(this.commandeDto.montant_Commande);
-    console.log(this.commandeDto.date_livraison);
+    console.log(this.commandeDto.nom_employee)
+    console.log(this.commandeDto.id_client)
+    console.log(this.commandeDto.nom_plat)
+    console.log(this.commandeDto.nom_Supplement)
+    console.log(this.commandeDto.montant_Commande)
+    console.log(this.commandeDto.date_livraison)
   }
-
-
 
   @Post()
   create(@Body() createCommandeDto: CreateCommandeDto) {

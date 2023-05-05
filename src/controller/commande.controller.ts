@@ -29,6 +29,7 @@ async employes() {
 @Post('/')
 handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
   this.commandeDto.nom_Client = `${texteSurBouton}`;
+  
   this.commandeDto.nom_employee = "";
   this.commandeDto.nom_plat = [];
   this.commandeDto.nom_Supplement = [];

@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Res } from '
 import { CommandeService } from '../services/commande.service';
 import { CreateCommandeDto } from '../commande/dto/create-commande.dto';
 import { UpdateCommandeDto } from '../commande/dto/update-commande.dto';
-import { join } from 'path';
 
 @Controller('/')
 export class CommandeController {
@@ -21,20 +20,18 @@ export class CommandeController {
 @Render('clientsPage')
 async employes() {
   
-  const data = await this.commandeService.getClientsFromJson();
-  // creer un nouvel objet
+  const data = await this.commandeService.getDataFromjson('config/clientsconfig.json');
   return {data: data};
 }
 
 @Post('/')
 handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
   this.commandeDto.nom_Client = `${texteSurBouton}`;
-
   this.commandeDto.nom_employee = "";
   this.commandeDto.nom_plat = [];
   this.commandeDto.nom_Supplement = [];
   this.commandeDto.montant_Commande = 0;
-  // traitez les données soumises ici
+
 }
 
 @Post('/clients1')
@@ -44,14 +41,13 @@ handlePostRequest2(@Body('buttonText') buttonText: string, @Body('id') id: strin
   this.commandeDto.nom_plat = [];
   this.commandeDto.nom_Supplement = [];
   this.commandeDto.montant_Commande = 0;
- 
   
 }
 
   @Get('plats')
   @Render('platsPage')
   async plat() {
-    const data = await this.commandeService.getPlatFromjson();
+    const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
     const employee = this.commandeDto.nom_employee;
     return { data : data, employee  };   
   }
@@ -66,15 +62,27 @@ handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: s
   @Get('supplements')
   @Render('supplementsPage')
   async supp() {
-    const data = await this.commandeService.getSupplementFromJson();
+    const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
     return {data: data};
-  }
+  
+}
+
+
 
   @Post('/supplements')
   handlePostRequest4(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
     this.commandeDto.nom_Supplement.push(buttonText); 
     this.commandeDto.montant_Commande += Number(prix);
   }
+  
+
+  @Get('commandes')
+  @Render('commandesPage') 
+  @Post()
+  createCommande(@Body() createCommandeDto: CreateCommandeDto) {
+    this.commandeService.createCommande(createCommandeDto);
+  }
+
 
   @Get('heureLivraison')
   @Render('heureLivraisonClient')
@@ -89,6 +97,7 @@ handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: s
     console.log(this.commandeDto.nom_Supplement)
     console.log(this.commandeDto.montant_Commande)
     console.log(this.commandeDto.date_livraison)
+
   }
 
   @Post()

@@ -35,8 +35,9 @@ handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
 }
 
 @Post('/clients1')
-handlePostRequest2(@Body('buttonText') buttonText: string) {
+handlePostRequest2(@Body('buttonText') buttonText: string, @Body('id') id: string) {
   this.commandeDto.nom_employee = `${buttonText}`;
+  this.commandeDto.id_client = Number(id);
   this.commandeDto.nom_plat = [];
   this.commandeDto.nom_Supplement = [];
   this.commandeDto.montant_Commande = 0;
@@ -90,9 +91,14 @@ handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: s
   @Post('/heureLivraison')
   handlePostRequest5(@Body('buttonText') buttonText: string) {
     this.commandeDto.date_livraison = buttonText;
+    console.log(this.commandeDto.nom_employee)
+    console.log(this.commandeDto.id_client)
+    console.log(this.commandeDto.nom_plat)
+    console.log(this.commandeDto.nom_Supplement)
+    console.log(this.commandeDto.montant_Commande)
+    console.log(this.commandeDto.date_livraison)
+
   }
-
-
 
   @Post()
   create(@Body() createCommandeDto: CreateCommandeDto) {

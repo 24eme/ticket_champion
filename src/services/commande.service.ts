@@ -7,34 +7,12 @@ import * as fs from 'fs';
 @Injectable()
 export class CommandeService {
 
-  async getPlatFromjson() {
-    const data = JSON.parse(fs.readFileSync('config/restaurantsconfig.json', 'utf8')); 
+  async getDataFromjson(cheminFichier : string) {
+    const data = JSON.parse(fs.readFileSync(cheminFichier, 'utf8')); 
     return { data };
   }
 
-  async getSupplementFromJson() {
-    const data = JSON.parse(fs.readFileSync('config/restaurantsconfig.json', 'utf8'));
-    return {data};
-  }
 
-  async getClientsFromJson() {
-    const data = JSON.parse(fs.readFileSync('config/clientsconfig.json', 'utf8'));
-    return {data};
-  }
-
-  
-  // async getInfo() {
-  //   var plat_nom
-
-  //   const platBoutons = document.querySelectorAll('.B1');
-  //   platBoutons.forEach(button => {
-  //     button.addEventListener('click', (event) => {
-  //       const target = event.currentTarget as HTMLButtonElement;
-  //       plat_nom = target.getAttribute('data-plat-nom'); } 
-  //   )})
-
-  //         return plat_nom;
-  // }
 
   create(createCommandeDto: CreateCommandeDto) {
     return 'This action adds a new commande';

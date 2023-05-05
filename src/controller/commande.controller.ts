@@ -21,8 +21,7 @@ export class CommandeController {
 @Render('clientsPage')
 async employes() {
   
-  const data = await this.commandeService.getClientsFromJson();
-  // creer un nouvel objet
+  const data = await this.commandeService.getDataFromjson('config/clientsconfig.json');
   return {data: data};
 }
 
@@ -41,23 +40,21 @@ handlePostRequest2(@Body('buttonText') buttonText: string) {
   @Get('plats')
   @Render('platsPage')
   async plat() {
-    const data = await this.commandeService.getPlatFromjson();
+    const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
     const employee = this.commandeDto.nom_employee;
     return { data : data, employee  };   
   }
 
 
   @Post('/plats')
-handlePostRequest3(@Body('buttonText') buttonText: string) {
-  this.commandeDto.nom_plat.push(buttonText);
-  
-}
+  handlePostRequest3(@Body('buttonText') buttonText: string) {
+    this.commandeDto.nom_plat.push(buttonText);
+  } 
 
   @Get('supplements')
   @Render('supplementsPage')
   async supp() {
-    const data = await this.commandeService.getSupplementFromJson();
-
+    const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
     return {data: data};
   }
 

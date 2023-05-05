@@ -88,6 +88,10 @@ handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: s
     console.log(this.commandeDto.montant_Commande);
   }
 
+  @Get('heureLivraison')
+  @Render('heureLivraisonClient')
+  async heureLivraison() {}
+
 
 
   @Post()

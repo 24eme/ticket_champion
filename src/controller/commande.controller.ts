@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Res } from '
 import { CommandeService } from '../services/commande.service';
 import { CreateCommandeDto } from '../commande/dto/create-commande.dto';
 import { UpdateCommandeDto } from '../commande/dto/update-commande.dto';
-import { join } from 'path';
 
 @Controller('/')
 export class CommandeController {
@@ -28,7 +27,6 @@ async employes() {
 @Post('/')
 handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
   this.commandeDto.nom_Client = `${texteSurBouton}`;
-  // traitez les données soumises ici
 }
 
 @Post('/clients1')
@@ -62,6 +60,17 @@ handlePostRequest2(@Body('buttonText') buttonText: string) {
   handlePostRequest4(@Body('buttonText') buttonText: string) {
     this.commandeDto.nom_Supplement.push(buttonText); 
   }
+  
+
+
+
+  @Get('commandes')
+  @Render('commandesPage') 
+  @Post()
+  createCommande(@Body() createCommandeDto: CreateCommandeDto) {
+    this.commandeService.createCommande(createCommandeDto);
+  }
+
 
 
 

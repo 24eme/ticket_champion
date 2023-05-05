@@ -1,17 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCommandeDto } from '../commande/dto/create-commande.dto';
 import { UpdateCommandeDto } from '../commande/dto/update-commande.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DeepPartial, Repository } from 'typeorm';
+import { Commande } from 'src/typeorm/entities/Commande';
+import { CommandModel } from 'src/utils/types';
 import * as fs from 'fs';
-//import * from event.currentTarget;
 
 @Injectable()
 export class CommandeService {
-
+  constructor(
+    @InjectRepository(Commande) private commandeRepository: Repository<Commande>,
+  ){}
+  
   async getDataFromjson(cheminFichier : string) {
     const data = JSON.parse(fs.readFileSync(cheminFichier, 'utf8')); 
     return { data };
   }
 
+  createCommande(commandeDetails: CommandModel) {
+    const newCommand = this.commandeRepository.create({ ...commandeDetails } as unknown as DeepPartial<Commande>);
+    return this.commandeRepository.save(newCommand);
+  }
 
 
   create(createCommandeDto: CreateCommandeDto) {

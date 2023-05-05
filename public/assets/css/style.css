@@ -1480,7 +1480,7 @@ Footer Section style
     margin-bottom: 50px;
 }
 /* Center align the dropdown menu */
-.dropdown-menu {
+.sauver {
     margin-top: 0;
     margin-left: auto;
     margin-right: auto;
@@ -1489,7 +1489,7 @@ Footer Section style
     text-align: center;
 }
 
-#dropdownMenuButton {
+.sauver-le-bouton {
     height: 50px;
     width: 220px;
 }

@@ -11,7 +11,6 @@ export class CommandeController {
   @Render('platsPage')
   async plat() {
     const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
-    //creer un nouveau objet 
     return { data : data }; 
   }
   
@@ -20,7 +19,6 @@ export class CommandeController {
   @Render('supplementsPage')
   async supplement() {
     const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
-    //creer un nouveau objet
     return {data: data};
   }
 
@@ -32,38 +30,8 @@ export class CommandeController {
     this.commandeService.createCommande(createCommandeDto);
   }
 
-  fillTablePlats() {
-    console.log("Hello Charlène");
-    this.commandeService.fillPlatsTable();
-  }
-
-  //fill client table
- /* @Get('seed')
-  async seedClients() {
-    await this.commandeService.seedClients();
-    return { message: 'Clients seeded successfully' };
-  }*/
-
-
-
   @Get()
   getCommandes() {
     return this.commandeService.getCommandes();
   }
-
-
-  /*@Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.commandeService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCommandeDto: UpdateCommandeDto) {
-    return this.commandeService.update(+id, updateCommandeDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.commandeService.remove(+id);
-  }*/
 }

@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn,OneToOne, JoinColumn  } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn,OneToMany  } from "typeorm";
 import { Commande  } from "./Commande";
 
 @Entity({ name: 'clients' })
@@ -15,7 +15,8 @@ export class Client {
   @Column({ nullable : true })
   telephone: string;
 
-  @OneToOne(() => Commande)
-  @JoinColumn()
-  profile: Commande
+  @OneToMany(() => Commande, (commande) => commande.client)
+  commandes: Commande[];
 }
+
+

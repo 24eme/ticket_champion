@@ -1470,3 +1470,45 @@ Footer Section style
 #monBouton{
     cursor: pointer;
 }
+
+.gif-container {
+    margin-left: 723px;
+}
+/* Center align the title */
+.texte-intro {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+/* Center align the dropdown menu */
+.dropdown-menu {
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+#dropdownMenuButton {
+    height: 50px;
+    width: 220px;
+}
+
+.cook-gif {
+    height: 400px;
+    width: 400px;
+    margin-top: -177px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.time-item {
+    cursor: pointer;
+}
+
+.btn-valider {
+    width: 220px;
+    height: 50px;
+    margin-top: 10px;
+    margin-left: 813px;
+}

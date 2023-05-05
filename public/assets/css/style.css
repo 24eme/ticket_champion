@@ -1462,3 +1462,11 @@ Footer Section style
     margin-bottom: 40px;
     width: 140px;
 }
+
+#marcoBouton {
+    cursor: pointer;
+}
+
+#monBouton{
+    cursor: pointer;
+}

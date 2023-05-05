@@ -32,6 +32,9 @@ handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
 @Post('/clients1')
 handlePostRequest2(@Body('buttonText') buttonText: string) {
   this.commandeDto.nom_employee = `${buttonText}`;
+  this.commandeDto.nom_plat = [];
+  this.commandeDto.nom_Supplement = [];
+  this.commandeDto.montant_Commande = 0;
   
 }
 
@@ -44,21 +47,28 @@ handlePostRequest2(@Body('buttonText') buttonText: string) {
   }
 
 
-  @Post('/plats')
-  handlePostRequest3(@Body('buttonText') buttonText: string) {
-    this.commandeDto.nom_plat.push(buttonText);
-  } 
+@Post('/plats')
+handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
+  this.commandeDto.nom_plat.push(buttonText);
+  this.commandeDto.montant_Commande += Number(prix);
+  
+}
 
-  @Get('supplements')
-  @Render('supplementsPage')
-  async supp() {
+@Get('supplements')
+@Render('supplementsPage')
+async supp() {
     const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
     return {data: data};
   }
 
   @Post('/supplements')
-  handlePostRequest4(@Body('buttonText') buttonText: string) {
+  handlePostRequest4(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
     this.commandeDto.nom_Supplement.push(buttonText); 
+    this.commandeDto.montant_Commande += Number(prix);
+    console.log(this.commandeDto.nom_employee);
+    console.log(this.commandeDto.nom_plat);
+    console.log(this.commandeDto.nom_Supplement);
+    console.log(this.commandeDto.montant_Commande);
   }
   
 
@@ -71,6 +81,10 @@ handlePostRequest2(@Body('buttonText') buttonText: string) {
     this.commandeService.createCommande(createCommandeDto);
   }
 
+
+  @Get('heureLivraison')
+  @Render('heureLivraisonClient')
+  async heureLivraison() {}
 
 
 

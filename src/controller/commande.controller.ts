@@ -61,20 +61,13 @@ handlePostRequest2(@Body('buttonText') buttonText: string) {
 @Post('/plats')
 handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
   this.commandeDto.nom_plat.push(buttonText);
-  this.commandeDto.montant_Commande += Number(prix);
-  // console.log(this.commandeDto.nom_employee);
-  // console.log(this.commandeDto.nom_plat);
-  // console.log(this.commandeDto.nom_Supplement);
-  // console.log(this.commandeDto.montant_Commande);
-  
+  this.commandeDto.montant_Commande += Number(prix); 
 }
 
   @Get('supplements')
   @Render('supplementsPage')
   async supp() {
     const data = await this.commandeService.getSupplementFromJson();
-  
-
     return {data: data};
   }
 
@@ -82,15 +75,25 @@ handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: s
   handlePostRequest4(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
     this.commandeDto.nom_Supplement.push(buttonText); 
     this.commandeDto.montant_Commande += Number(prix);
-    console.log(this.commandeDto.nom_employee);
-    console.log(this.commandeDto.nom_plat);
-    console.log(this.commandeDto.nom_Supplement);
-    console.log(this.commandeDto.montant_Commande);
+    // console.log(this.commandeDto.nom_employee);
+    // console.log(this.commandeDto.nom_plat);
+    // console.log(this.commandeDto.nom_Supplement);
+    // console.log(this.commandeDto.montant_Commande);
   }
 
   @Get('heureLivraison')
   @Render('heureLivraisonClient')
   async heureLivraison() {}
+
+  @Post('/heureLivraison')
+  handlePostRequest5(@Body('buttonText') buttonText: string) {
+    this.commandeDto.date_livraison = buttonText;
+    console.log(this.commandeDto.nom_employee);
+    console.log(this.commandeDto.nom_plat);
+    console.log(this.commandeDto.nom_Supplement);
+    console.log(this.commandeDto.montant_Commande);
+    console.log(this.commandeDto.date_livraison);
+  }
 
 
 

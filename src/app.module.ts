@@ -8,13 +8,14 @@ import { CommandeService } from './services/commande.service';
 import { CommandeController } from './controller/commande.controller';
 import { RestaurantController } from './controller/restaurant.controller';
 import { Commande } from './typeorm/entities/Commande';
+import { Client } from './typeorm/entities/Client';
 
 
 @Module({
   imports: [
      TypeOrmModule.forRoot(
        require('../config/ormconfig.json')
-     ),TypeOrmModule.forFeature([Commande]),
+     ),TypeOrmModule.forFeature([Commande,Client]),
     //CommandeModule,
   ],
   controllers: [AppController, HomePageController, CommandeController, RestaurantController],

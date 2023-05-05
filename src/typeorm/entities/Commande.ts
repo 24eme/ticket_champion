@@ -30,4 +30,4 @@ export class Commande {
 
   @OneToMany(() => CommandeSupplement, (commandeSupplement) => commandeSupplement.commandePlat)
   commandeSupplements: CommandeSupplement[];
-}
+    }

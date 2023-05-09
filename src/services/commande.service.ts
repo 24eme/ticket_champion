@@ -12,13 +12,12 @@ import { Supplement } from 'src/typeorm/entities/Supplement';
 
 @Injectable()
 export class CommandeService {
-  connectionManager: any;
   constructor(
     @InjectRepository(Commande) private commandeRepository: Repository<Commande>,
     @InjectRepository(Client) private clientRepository: Repository<Client>,
     @InjectRepository(Plat) private platRepository: Repository<Plat>,
     @InjectRepository(Supplement) private supplementRepository : Repository<Supplement>,
-    ){}
+  ){}
   
   async getDataFromjson(cheminFichier : string) {
     const data = JSON.parse(fs.readFileSync(cheminFichier, 'utf8')); 
@@ -26,18 +25,23 @@ export class CommandeService {
   }
 
   createCommande(commandeDetails: CommandModel) {
-    //remplir des données dans commandes model
     const newCommand = this.commandeRepository.create({ ...commandeDetails } as unknown as DeepPartial<Commande>);
     return this.commandeRepository.save(newCommand);
   }
+
+  async getClientsFromJson() {
+    const data = JSON.parse(fs.readFileSync('config/clientsconfig.json', 'utf8'));
+    return {data};
+  }
+
   //make a code refactoring for all those 3 functions cuz they look alike
   async fillClientsTable() {
     //modyfy the code to avoid filling the table with same client many times
-    const entreprises = await this.getDataFromjson('config/clientsConfig.json');
+    const entreprises = await this.getDataFromjson('config/clientsconfig.json');
     entreprises.data.entreprises.forEach((entreprise) => {
       entreprise.employes.forEach((employe) => {
         const client = new Client();
-        client.nom = employe.nom;
+        client.nom = employe.name;
         client.entreprise = entreprise.nomEntreprise;
         this.clientRepository.save(client);
       });
@@ -48,10 +52,8 @@ export class CommandeService {
     platsSupplements.data.restaurants.forEach((restaurant) => {
       restaurant.plats.forEach((plat) => {
         const plats = new Plat();
-        plats.nom_plat = plat.nom_plat;
-        console.log(plats.nom_plat )
-        plats.prix_plat = plat.prix_plat;
-        console.log(plats.prix_plat )
+        plats.nom_plat = plat.nom;
+        plats.prix_plat = plat.prix;
         this.platRepository.save(plats);
       });
     });
@@ -62,19 +64,15 @@ export class CommandeService {
     platsSupplements.data.restaurants.forEach((restaurant) => {
       restaurant.supplements.forEach((supp) => {
         const supplements = new Supplement();
-        supplements.nom_supplement= supp.nom_supp;
-        console.log(supplements.nom_supplement )
-        supplements.prix_supplement = supp.prix_supp;
-        console.log(supplements.prix_supplement )
+        supplements.nom_supplement= supp.nom;
+        supplements.prix_supplement = supp.prix;
         this.supplementRepository.save(supplements);
       });
     });
   }
 
-  
-  
-  
-  create(CreateCommandeDto: CreateCommandeDto) {
+
+  create(createCommandeDto: CreateCommandeDto) {
     return 'This action adds a new commande';
   }
 
@@ -86,7 +84,7 @@ export class CommandeService {
     return `This action returns a #${id} commande`;
   }
 
-  Date(id: number, UpdateCommandeDto: UpdateCommandeDto) {
+  update(id: number, updateCommandeDto: UpdateCommandeDto) {
     return `This action updates a #${id} commande`;
   }
 

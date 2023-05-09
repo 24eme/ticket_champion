@@ -18,7 +18,7 @@ export class CommandeController {
   @Render('clientsPage')
   async employes() {
     
-    const data = await this.commandeService.getDataFromjson('config/clientsConfig.json');
+    const data = await this.commandeService.getDataFromjson('config/clientsconfig.json');
     return {data: data};
   }
 

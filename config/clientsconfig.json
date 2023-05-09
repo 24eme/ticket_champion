@@ -5,52 +5,52 @@
             "employes" : [
                 {
                     "id" : 1,
-                    "nom": "Amal"
+                    "name": "Amal"
                 },
 
                 {
                     "id" : 2,
-                    "nom": "Charlène"
+                    "name": "Charlène"
                 },
 
                 {
                     "id" : 3,
-                    "nom": "Fatoumata"
+                    "name": "Fatoumata"
                 },
 
                 {
                     "id" : 4,
-                    "nom": "Gabriel"
+                    "name": "Gabriel"
                 },
 
                 {
                     "id" : 5,
-                    "nom": "Honorine"
+                    "name": "Honorine"
                 },
 
                 {
                     "id" : 6,
-                    "nom": "Jean-Baptiste"
+                    "name": "Jean-Baptiste"
                 },
 
                 {
                     "id" : 7,
-                    "nom": "Nicolas"
+                    "name": "Nicolas"
                 },
 
                 {
                     "id" : 8,
-                    "nom": "Tangui"
+                    "name": "Tangui"
                 },
 
                 {
                     "id" : 9,
-                    "nom": "Tanguy"
+                    "name": "Tanguy"
                 },
 
                 {
                     "id" : 10,
-                    "nom": "Vincent"
+                    "name": "Vincent"
                 }
             ]
         },
@@ -59,36 +59,36 @@
             "employes" : [
                 {
                     "id" : 1,
-                    "nom": "Alexa"
+                    "name": "Alexa"
                 },
 
                 {
                     "id" : 2,
-                    "nom": "Anne B"
+                    "name": "Anne B"
                 },
                 {
                     "id" : 3,
-                    "nom": "Anne de F"
+                    "name": "Anne de F"
                 },
 
                 {
                     "id" : 4,
-                    "nom": "Héloïse"
+                    "name": "Héloïse"
                 },
 
                 {
                     "id" : 5,
-                    "nom": "Elise"
+                    "name": "Elise"
                 },
 
                 {
                     "id" : 6,
-                    "nom": "Sophie"
+                    "name": "Sophie"
                 },
 
                 {
                     "id" : 7,
-                    "nom": "Pauline"
+                    "name": "Pauline"
                 }
             ]
         }

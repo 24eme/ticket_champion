@@ -7,10 +7,10 @@ export class Supplement {
   @PrimaryGeneratedColumn()
   id_supplement: number;
 
-  @Column({ nullable : false })
+  @Column()
   nom_supplement: string;
 
-  @Column({ nullable : false })
+  @Column()
   prix_supplement: number;
 
   @OneToMany(() => CommandeSupplement, (commandeSupplement) => commandeSupplement.supplement)

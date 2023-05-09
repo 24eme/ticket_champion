@@ -14,35 +14,33 @@ export class CommandeController {
     
   }
 
+  @Get('clients1')
+  @Render('clientsPage')
+  async employes() {
+    
+    const data = await this.commandeService.getDataFromjson('config/clientsconfig.json');
+    return {data: data};
+  }
 
+  @Post('/')
+  handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
+    this.commandeDto.nom_Client = `${texteSurBouton}`;
+    this.commandeDto.nom_employee = "";
+    this.commandeDto.nom_plat = [];
+    this.commandeDto.nom_Supplement = [];
+    this.commandeDto.montant_Commande = 0;
 
-@Get('clients1')
-@Render('clientsPage')
-async employes() {
-  
-  const data = await this.commandeService.getDataFromjson('config/clientsconfig.json');
-  return {data: data};
-}
+  }
 
-@Post('/')
-handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
-  this.commandeDto.nom_Client = `${texteSurBouton}`;
-  this.commandeDto.nom_employee = "";
-  this.commandeDto.nom_plat = [];
-  this.commandeDto.nom_Supplement = [];
-  this.commandeDto.montant_Commande = 0;
-
-}
-
-@Post('/clients1')
-handlePostRequest2(@Body('buttonText') buttonText: string, @Body('id') id: string) {
-  this.commandeDto.nom_employee = `${buttonText}`;
-  this.commandeDto.id_client = Number(id);
-  this.commandeDto.nom_plat = [];
-  this.commandeDto.nom_Supplement = [];
-  this.commandeDto.montant_Commande = 0;
-  
-}
+  @Post('/clients1')
+  handlePostRequest2(@Body('buttonText') buttonText: string, @Body('id') id: string) {
+    this.commandeDto.nom_employee = `${buttonText}`;
+    this.commandeDto.id_client = Number(id);
+    this.commandeDto.nom_plat = [];
+    this.commandeDto.nom_Supplement = [];
+    this.commandeDto.montant_Commande = 0;
+    
+  }
 
   @Get('plats')
   @Render('platsPage')
@@ -52,29 +50,25 @@ handlePostRequest2(@Body('buttonText') buttonText: string, @Body('id') id: strin
     return { data : data, employee  };   
   }
 
-
-@Post('/plats')
-handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
-  this.commandeDto.nom_plat.push(buttonText);
-  this.commandeDto.montant_Commande += Number(prix); 
-}
+  @Post('/plats')
+  handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
+    this.commandeDto.nom_plat.push(buttonText);
+    this.commandeDto.montant_Commande += Number(prix); 
+  }
 
   @Get('supplements')
   @Render('supplementsPage')
   async supp() {
     const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
     return {data: data};
-  
-}
-
-
+    
+  }
 
   @Post('/supplements')
   handlePostRequest4(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
     this.commandeDto.nom_Supplement.push(buttonText); 
     this.commandeDto.montant_Commande += Number(prix);
   }
-  
 
   @Get('commandes')
   @Render('commandesPage') 
@@ -82,7 +76,6 @@ handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: s
   createCommande(@Body() createCommandeDto: CreateCommandeDto) {
     this.commandeService.createCommande(createCommandeDto);
   }
-
 
   @Get('heureLivraison')
   @Render('heureLivraisonClient')
@@ -108,17 +101,6 @@ handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: s
   @Get()
   findAll() {
     return this.commandeService.findAll();
-  }
-
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.commandeService.findOne(+id);
-  // }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCommandeDto: UpdateCommandeDto) {
-    return this.commandeService.update(+id, updateCommandeDto);
   }
 
   @Delete(':id')

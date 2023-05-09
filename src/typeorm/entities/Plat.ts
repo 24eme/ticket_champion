@@ -7,10 +7,10 @@ export class Plat {
   @PrimaryGeneratedColumn()
   id_plat: number;
 
-  @Column({ nullable : false })
+  @Column({ nullable: true })
   nom_plat: string;
 
-  @Column({ nullable : false })
+  @Column({ nullable: true })
   prix_plat: number;
 
   @OneToMany(() => CommandePlat, (commandePlat) => commandePlat.plat)

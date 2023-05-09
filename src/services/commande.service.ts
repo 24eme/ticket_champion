@@ -36,17 +36,26 @@ export class CommandeService {
 
   //make a code refactoring for all those 3 functions cuz they look alike
   async fillClientsTable() {
-    //modyfy the code to avoid filling the table with same client many times
     const entreprises = await this.getDataFromjson('config/clientsconfig.json');
-    entreprises.data.entreprises.forEach((entreprise) => {
-      entreprise.employes.forEach((employe) => {
-        const client = new Client();
-        client.nom = employe.name;
-        client.entreprise = entreprise.nomEntreprise;
-        this.clientRepository.save(client);
-      });
-    });
+      entreprises.data.entreprises.forEach((entreprise) => {
+        entreprise.employes.forEach(async (employe) => {
+         const client = new Client();
+         client.nom = employe.name;
+         client.entreprise = entreprise.nomEntreprise;
+         const find_client = await this.clientRepository.findOne({
+          where: {
+            //nom : client.nom
+            id_client : client.id_client
+          } 
+         })
+         if(find_client == undefined){
+          this.clientRepository.save(client);
+         }
+         
+       });
+     });      
   }
+
   async fillPlatsTable() {
     const platsSupplements = await this.getDataFromjson('config/restaurantsconfig.json');
     platsSupplements.data.restaurants.forEach((restaurant) => {

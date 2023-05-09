@@ -59,11 +59,18 @@ export class CommandeService {
   async fillPlatsTable() {
     const platsSupplements = await this.getDataFromjson('config/restaurantsconfig.json');
     platsSupplements.data.restaurants.forEach((restaurant) => {
-      restaurant.plats.forEach((plat) => {
+      restaurant.plats.forEach(async(plat) => {
         const plats = new Plat();
         plats.nom_plat = plat.nom;
         plats.prix_plat = plat.prix;
+        const find_plat = await this.platRepository.findOne({
+          where: {
+            id_plat : plats.id_plat
+          }
+        })
+        if(find_plat == undefined){
         this.platRepository.save(plats);
+        }
       });
     });
   }
@@ -71,10 +78,16 @@ export class CommandeService {
   async fillSupplementsTable() {
     const platsSupplements = await this.getDataFromjson('config/restaurantsconfig.json');
     platsSupplements.data.restaurants.forEach((restaurant) => {
-      restaurant.supplements.forEach((supp) => {
+      restaurant.supplements.forEach(async(supp) => {
         const supplements = new Supplement();
         supplements.nom_supplement= supp.nom;
         supplements.prix_supplement = supp.prix;
+        const find_supplement = await this.supplementRepository.findOne({
+          where: {
+            id_supplement : supplements.id_supplement
+          }
+        })
+        if(find_supplement == undefined)
         this.supplementRepository.save(supplements);
       });
     });

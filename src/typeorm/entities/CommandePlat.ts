@@ -6,6 +6,7 @@ import { CommandeSupplement } from "./CommandeSupplement";
 
 @Entity({ name: 'commande_plat' })
 export class CommandePlat {
+  
   @PrimaryGeneratedColumn()
   id_commande_plat: number;
 
@@ -14,7 +15,7 @@ export class CommandePlat {
   commande: Commande;
 
   @ManyToOne(() => Plat, (plat) => plat.commandePlats)
-  @JoinColumn({ name: 'id_plat' })
+  @JoinColumn({ name: 'nom_plat' })
   plat: Plat;
 
   @OneToMany(() => CommandeSupplement, (commandeSupplement) => commandeSupplement.commandePlat)

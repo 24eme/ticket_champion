@@ -1,13 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany  } from "typeorm";
+import { Column, Entity, PrimaryColumn, OneToMany  } from "typeorm";
 import { CommandeSupplement } from "./CommandeSupplement";
 
 
 @Entity({ name: 'supplements' })
 export class Supplement {
-  @PrimaryGeneratedColumn()
-  id_supplement: number;
-
-  @Column()
+  
+  @PrimaryColumn()
   nom_supplement: string;
 
   @Column()

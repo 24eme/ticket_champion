@@ -8,11 +8,11 @@ export class CommandeSupplement {
   id_commande_supplement: number;
 
   @ManyToOne(type => CommandePlat, commandePlat => commandePlat.commandeSupplements)
-  @JoinColumn({ name: 'id_commande_plat' })
+  @JoinColumn({ name: 'id_commande' })
   commandePlat: CommandePlat;
 
   @ManyToOne(type => Supplement, supplement => supplement.commandeSupplements)
-  @JoinColumn({ name: 'id_supplement' })
+  @JoinColumn({ name: 'nom_supplement' })
   supplement: Supplement;
 
   @Column()

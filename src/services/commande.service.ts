@@ -65,7 +65,7 @@ export class CommandeService {
         plats.prix_plat = plat.prix;
         const find_plat = await this.platRepository.findOne({
           where: {
-            id_plat : plats.id_plat
+            nom_plat : plats.nom_plat
           }
         })
         if(find_plat == undefined){
@@ -84,7 +84,7 @@ export class CommandeService {
         supplements.prix_supplement = supp.prix;
         const find_supplement = await this.supplementRepository.findOne({
           where: {
-            id_supplement : supplements.id_supplement
+            nom_supplement : supplements.nom_supplement
           }
         })
         if(find_supplement == undefined)

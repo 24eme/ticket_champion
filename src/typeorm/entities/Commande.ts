@@ -13,22 +13,22 @@ export class Commande {
   @Column({ default: () => "CURRENT_TIMESTAMP" })
   date_commande: Date;
 
-  @Column()
+  @Column({default : 0})
   montant_commande: number;
 
-  @Column()
-  heure_de_livraison: Date;
+  @Column({default : ""})
+  heure_de_livraison: string;
 
   @Column({default : false})
   prete : boolean;
 
   @ManyToOne(() => Client, (client) => client.commandes)
-  @JoinColumn({ name: 'id_client' })
+  @JoinColumn()
   client: Client;
 
   @OneToMany(() => CommandePlat, (commandePlat) => commandePlat.commande)
   commandePlats: CommandePlat[];
 
-  @OneToMany(() => CommandeSupplement, (commandeSupplement) => commandeSupplement.commandePlat)
+  @OneToMany(() => CommandeSupplement, (commandeSupplement) => commandeSupplement.commande)
   commandeSupplements: CommandeSupplement[];
     }

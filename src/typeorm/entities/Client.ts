@@ -1,9 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn,OneToMany  } from "typeorm";
+import { Column, Entity, PrimaryColumn,OneToMany  } from "typeorm";
 import { Commande  } from "./Commande";
 
 @Entity({ name: 'clients' })
 export class Client {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id_client: number;
 
   @Column()

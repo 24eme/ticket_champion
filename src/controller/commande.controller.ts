@@ -2,15 +2,20 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Res } from '
 import { CommandeService } from '../services/commande.service';
 import { CreateCommandeDto } from '../commande/dto/create-commande.dto';
 import { UpdateCommandeDto } from '../commande/dto/update-commande.dto';
+import { CreatePlatDto } from 'src/commande/dto/create-plat-dto';
+import { CreateSupplementtDto } from 'src/commande/dto/create-supplement-dto';
+import { Supplement } from 'src/typeorm/entities/Supplement';
 
 @Controller('/')
 export class CommandeController {
 
-  private readonly commandeDto = new CreateCommandeDto();
+  private commandeDto = new CreateCommandeDto();
+  //private commandePlatDto: CreatePlatDto[] = [];
+  //private commandeSupplementDto : CreateSupplementtDto[] = [];
 
   constructor(private readonly commandeService: CommandeService) {
-    this.commandeDto.nom_plat = [];
-    this.commandeDto.nom_Supplement = [];
+    this.commandeDto.plats = [];
+    this.commandeDto.supplements = [];
     
   }
 
@@ -24,10 +29,12 @@ export class CommandeController {
 
   @Post('/')
   handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
-    this.commandeDto.nom_Client = `${texteSurBouton}`;
+    // this.commandeDto.nom_Client = `${texteSurBouton}`;
+    //this.commandePlatDto = [];
+   // this.commandeSupplementDto = [];
     this.commandeDto.nom_employee = "";
-    this.commandeDto.nom_plat = [];
-    this.commandeDto.nom_Supplement = [];
+    this.commandeDto.plats = [];
+    this.commandeDto.supplements = [];
     this.commandeDto.montant_Commande = 0;
 
   }
@@ -36,8 +43,10 @@ export class CommandeController {
   handlePostRequest2(@Body('buttonText') buttonText: string, @Body('id') id: string) {
     this.commandeDto.nom_employee = `${buttonText}`;
     this.commandeDto.id_client = Number(id);
-    this.commandeDto.nom_plat = [];
-    this.commandeDto.nom_Supplement = [];
+    //this.commandePlatDto = [];
+    //this.commandeSupplementDto = [];
+    this.commandeDto.plats = [];
+    this.commandeDto.supplements = [];
     this.commandeDto.montant_Commande = 0;
     
   }
@@ -52,8 +61,18 @@ export class CommandeController {
 
   @Post('/plats')
   handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
-    this.commandeDto.nom_plat.push(buttonText);
+
+    
+    //plat.quantite ++;
+    if(this.commandeDto.plats.find(plat => plat.nom_plat === buttonText) == undefined  )
+
+    {let plat = new CreatePlatDto();
+      plat.nom_plat = buttonText;
+      plat.quantite = 1;
+      this.commandeDto.plats.push(plat);}
+      else {this.commandeDto.plats.find(plat => plat.nom_plat === buttonText).quantite ++;}
     this.commandeDto.montant_Commande += Number(prix); 
+    
   }
 
   @Get('supplements')
@@ -66,15 +85,28 @@ export class CommandeController {
 
   @Post('/supplements')
   handlePostRequest4(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
-    this.commandeDto.nom_Supplement.push(buttonText); 
-    this.commandeDto.montant_Commande += Number(prix);
+    if(this.commandeDto.supplements.find(supplement => supplement.nom_supplement === buttonText) == undefined  )
+
+    {let supplement = new CreateSupplementtDto();
+      supplement.nom_supplement = buttonText;
+      supplement.quantite = 1;
+      this.commandeDto.supplements.push(supplement);}
+      else {this.commandeDto.supplements.find(suplement => suplement.nom_supplement === buttonText).quantite ++;}
+    this.commandeDto.montant_Commande += Number(prix); 
+
+    console.log(this.commandeDto.id_client);
+    console.log(this.commandeDto.montant_Commande);
+    console.log(this.commandeDto.nom_employee);
+    console.log(this.commandeDto.plats);
+    console.log(this.commandeDto.supplements);
+    
   }
 
-  @Get('commandes')
+  @Get('confirmation')
   @Render('commandesPage') 
-  @Post()
-  createCommande(@Body() createCommandeDto: CreateCommandeDto) {
-    this.commandeService.createCommande(createCommandeDto);
+  createCommande() {
+    this.commandeService.create(this.commandeDto, this.commandeDto.plats, this.commandeDto.supplements)
+    //this.commandeService.create(this.commandeDto);
   }
 
   @Get('heureLivraison')
@@ -84,18 +116,18 @@ export class CommandeController {
   @Post('/heureLivraison')
   handlePostRequest5(@Body('buttonText') buttonText: string) {
     this.commandeDto.date_livraison = buttonText;
-    console.log(this.commandeDto.nom_employee)
-    console.log(this.commandeDto.id_client)
-    console.log(this.commandeDto.nom_plat)
-    console.log(this.commandeDto.nom_Supplement)
-    console.log(this.commandeDto.montant_Commande)
-    console.log(this.commandeDto.date_livraison)
+    // console.log(this.commandeDto.nom_employee)
+    // console.log(this.commandeDto.id_client)
+    // console.log(this.commandeDto.nom_plat)
+    // console.log(this.commandeDto.nom_Supplement)
+    // console.log(this.commandeDto.montant_Commande)
+    // console.log(this.commandeDto.date_livraison)
 
   }
 
   @Post()
   create(@Body() createCommandeDto: CreateCommandeDto) {
-    return this.commandeService.create(createCommandeDto);
+    //return this.commandeService.create(createCommandeDto);
   }
 
   @Get()

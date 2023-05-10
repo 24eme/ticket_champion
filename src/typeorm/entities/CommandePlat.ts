@@ -18,9 +18,6 @@ export class CommandePlat {
   @JoinColumn({ name: 'nom_plat' })
   plat: Plat;
 
-  @OneToMany(() => CommandeSupplement, (commandeSupplement) => commandeSupplement.commandePlat)
-  commandeSupplements: CommandeSupplement[];
-
   @Column()
   quantite: number;
 }

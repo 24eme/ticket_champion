@@ -11,13 +11,15 @@ import { Commande } from './typeorm/entities/Commande';
 import { Client } from './typeorm/entities/Client';
 import { Supplement } from './typeorm/entities/Supplement';
 import { Plat } from './typeorm/entities/Plat';
+import { CommandeSupplement } from './typeorm/entities/CommandeSupplement';
+import { CommandePlat } from './typeorm/entities/CommandePlat';
 
 
 @Module({
   imports: [
      TypeOrmModule.forRoot(
        require('../config/ormconfig.json')
-     ),TypeOrmModule.forFeature([Commande,Client,Supplement,Plat]),
+     ),TypeOrmModule.forFeature([Commande,Client,Supplement,Plat, CommandePlat, CommandeSupplement]),
   ],
   controllers: [AppController, HomePageController, CommandeController, RestaurantController],
   providers: [AppService, CommandeService],

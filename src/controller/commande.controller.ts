@@ -29,9 +29,6 @@ export class CommandeController {
 
   @Post('/')
   handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
-    // this.commandeDto.nom_Client = `${texteSurBouton}`;
-    //this.commandePlatDto = [];
-   // this.commandeSupplementDto = [];
     this.commandeDto.nom_employee = "";
     this.commandeDto.plats = [];
     this.commandeDto.supplements = [];
@@ -40,11 +37,9 @@ export class CommandeController {
   }
 
   @Post('/clients1')
-  handlePostRequest2(@Body('buttonText') buttonText: string, @Body('id') id: string) {
+  handlePostRequestClient(@Body('buttonText') buttonText: string, @Body('id') id: string) {
     this.commandeDto.nom_employee = `${buttonText}`;
     this.commandeDto.id_client = Number(id);
-    //this.commandePlatDto = [];
-    //this.commandeSupplementDto = [];
     this.commandeDto.plats = [];
     this.commandeDto.supplements = [];
     this.commandeDto.montant_Commande = 0;
@@ -60,10 +55,8 @@ export class CommandeController {
   }
 
   @Post('/plats')
-  handlePostRequest3(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
+  handlePostRequestPlat(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
 
-    
-    //plat.quantite ++;
     if(this.commandeDto.plats.find(plat => plat.nom_plat === buttonText) == undefined  )
 
     {let plat = new CreatePlatDto();
@@ -84,7 +77,7 @@ export class CommandeController {
   }
 
   @Post('/supplements')
-  handlePostRequest4(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
+  handlePostRequestSupplement(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
     if(this.commandeDto.supplements.find(supplement => supplement.nom_supplement === buttonText) == undefined  )
 
     {let supplement = new CreateSupplementtDto();
@@ -106,7 +99,6 @@ export class CommandeController {
   @Render('commandesPage') 
   createCommande() {
     this.commandeService.create(this.commandeDto, this.commandeDto.plats, this.commandeDto.supplements)
-    //this.commandeService.create(this.commandeDto);
   }
 
   @Get('heureLivraison')
@@ -114,15 +106,8 @@ export class CommandeController {
   async heureLivraison() {}
 
   @Post('/heureLivraison')
-  handlePostRequest5(@Body('buttonText') buttonText: string) {
+  handlePostRequestLivraison(@Body('buttonText') buttonText: string) {
     this.commandeDto.date_livraison = buttonText;
-    // console.log(this.commandeDto.nom_employee)
-    // console.log(this.commandeDto.id_client)
-    // console.log(this.commandeDto.nom_plat)
-    // console.log(this.commandeDto.nom_Supplement)
-    // console.log(this.commandeDto.montant_Commande)
-    // console.log(this.commandeDto.date_livraison)
-
   }
 
   @Post()

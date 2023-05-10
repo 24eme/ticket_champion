@@ -98,23 +98,16 @@ export class CommandeService {
     });
   }
 
-  // async findByEntreprise(entreprise : string, id : number){
+  async getClientCommandesGroupedByEntreprise(): Promise<any> {
+    const queryBuilder = this.clientRepository
+      .createQueryBuilder('client')
+      .leftJoinAndSelect('client.commandes', 'commande')
+      .select('client.entreprise', 'entreprise')
+      .addSelect('COUNT(commande.id_commande)', 'nombreCommandes')
+      .groupBy('client.entreprise');
 
-  //   let commande : Commande[];
-  //   const parsedhp = parseInt(id.toString());
-  //   const listClient : Client[] = await this.clientRepository.find({
-  //     where : {
-  //       entreprise : entreprise,
-  //     },
-  //   })
-
-  //   const commandes: Commande[] = await this.commandeRepository.find({
-  //     where: {
-  //       client :
-  //     },
-  //   });
-  //   return commandes;
-  // }
+    return queryBuilder.getRawMany();
+  }
 
 
   async create(createCommandeDto: CreateCommandeDto, createPlatDto : CreatePlatDto[], createSupplementtDto : CreateSupplementtDto[]) {

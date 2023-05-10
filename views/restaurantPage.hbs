@@ -13,4 +13,23 @@
       </div>
 </section>
 
+
+    <table>
+      <thead>
+        <tr>
+          <th>Entreprise</th>
+          <th>Nombre de commandes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each data}}
+        <tr>
+          <td>{{this.entreprise}}</td>
+          <td>{{this.nombreCommandes}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </body>
+
 {{> footer}}

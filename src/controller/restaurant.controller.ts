@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import { Controller, Get, Post, Render } from '@nestjs/common';
-=======
-import { Controller, Get, Render } from '@nestjs/common';
 import { CommandeService } from 'src/services/commande.service';
->>>>>>> master
 
 @Controller('/')
 export class RestaurantController {
@@ -13,7 +9,7 @@ export class RestaurantController {
       }
 
 
-    @Get('/restaurant')
+    @Get('')
     @Render('restaurantPage')
     async restaurant() {
         const result = await this.commandeService.getClientCommandesGroupedByEntreprise();

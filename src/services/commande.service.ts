@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCommandeDto } from '../commande/dto/create-commande.dto';
+import { CreatePlatDto } from 'src/commande/dto/create-plat-dto';
+import { CreateSupplementtDto } from 'src/commande/dto/create-supplement-dto';
 import { UpdateCommandeDto } from '../commande/dto/update-commande.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeepPartial, Repository, } from 'typeorm';
@@ -9,6 +11,9 @@ import { CommandModel } from 'src/utils/types';
 import * as fs from 'fs';
 import { Plat } from 'src/typeorm/entities/Plat';
 import { Supplement } from 'src/typeorm/entities/Supplement';
+import { CommandeSupplement } from 'src/typeorm/entities/CommandeSupplement';
+import { CommandePlat } from 'src/typeorm/entities/CommandePlat';
+
 
 @Injectable()
 export class CommandeService {
@@ -17,16 +22,13 @@ export class CommandeService {
     @InjectRepository(Client) private clientRepository: Repository<Client>,
     @InjectRepository(Plat) private platRepository: Repository<Plat>,
     @InjectRepository(Supplement) private supplementRepository : Repository<Supplement>,
+    @InjectRepository(CommandePlat) private CommandePlatRepository: Repository<CommandePlat>,
+    @InjectRepository(CommandeSupplement) private commandeSupplementRepository : Repository<CommandeSupplement>,
   ){}
   
   async getDataFromjson(cheminFichier : string) {
     const data = JSON.parse(fs.readFileSync(cheminFichier, 'utf8')); 
     return { data };
-  }
-
-  createCommande(commandeDetails: CommandModel) {
-    const newCommand = this.commandeRepository.create({ ...commandeDetails } as unknown as DeepPartial<Commande>);
-    return this.commandeRepository.save(newCommand);
   }
 
   async getClientsFromJson() {
@@ -37,10 +39,12 @@ export class CommandeService {
   //make a code refactoring for all those 3 functions cuz they look alike
   async fillClientsTable() {
     const entreprises = await this.getDataFromjson('config/clientsconfig.json');
+    
       entreprises.data.entreprises.forEach((entreprise) => {
         entreprise.employes.forEach(async (employe) => {
          const client = new Client();
          client.nom = employe.name;
+         client.id_client = employe.id;
          client.entreprise = entreprise.nomEntreprise;
          const find_client = await this.clientRepository.findOne({
           where: {
@@ -53,7 +57,8 @@ export class CommandeService {
          }
          
        });
-     });      
+     }); 
+       
   }
 
   async fillPlatsTable() {
@@ -93,9 +98,49 @@ export class CommandeService {
     });
   }
 
+  // async findByEntreprise(entreprise : string, id : number){
 
-  create(createCommandeDto: CreateCommandeDto) {
-    return 'This action adds a new commande';
+  //   let commande : Commande[];
+  //   const parsedhp = parseInt(id.toString());
+  //   const listClient : Client[] = await this.clientRepository.find({
+  //     where : {
+  //       entreprise : entreprise,
+  //     },
+  //   })
+
+  //   const commandes: Commande[] = await this.commandeRepository.find({
+  //     where: {
+  //       client :
+  //     },
+  //   });
+  //   return commandes;
+  // }
+
+
+  async create(createCommandeDto: CreateCommandeDto, createPlatDto : CreatePlatDto[], createSupplementtDto : CreateSupplementtDto[]) {
+    const  montant_commande = createCommandeDto.montant_Commande;
+    let client = new Client();
+    client.id_client = createCommandeDto.id_client;
+    const heure_de_livraison = createCommandeDto.date_livraison;
+    const newCommand = await this.commandeRepository.save({  montant_commande, heure_de_livraison, client} as unknown as DeepPartial<Commande>);
+    let commande = new Commande();
+    commande.id_commande = newCommand.id_commande;
+    for (let ele of createPlatDto) {
+
+      let plat = new Plat();
+      plat.nom_plat = ele.nom_plat;
+      let quantite = ele.quantite;
+      await this.CommandePlatRepository.save({commande, plat, quantite} as unknown as DeepPartial<CommandePlat>);
+    }
+
+    for (let supp of createSupplementtDto ){
+      let supplement = new Supplement();
+      supplement.nom_supplement = supp.nom_supplement;
+      let quantite = supp.quantite;
+      await this.commandeSupplementRepository.save({commande, supplement, quantite} as unknown as DeepPartial<CommandeSupplement>);
+
+    }
+    
   }
 
   findAll() {

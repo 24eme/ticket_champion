@@ -1,9 +1,11 @@
+import { CreatePlatDto } from 'src/commande/dto/create-plat-dto';
+import { CreateSupplementtDto } from 'src/commande/dto/create-supplement-dto';
 export class CreateCommandeDto {
-    nom_Client : string;
+   // nom_Client : string;
     id_client : number;
     nom_employee : string;
-    nom_plat : string[];
-    nom_Supplement : string[];
+    plats : CreatePlatDto[];
+    supplements : CreateSupplementtDto[];
     montant_Commande : number;
     date_livraison : string;
 }

@@ -1582,3 +1582,8 @@ Footer Section style
     object-fit: contain;
     filter: grayscale(100%);
 }
+
+/* Désactiver les tooltips */
+[data-tooltip]::after {
+    content: none !important;
+}

@@ -10,8 +10,6 @@ import { Supplement } from 'src/typeorm/entities/Supplement';
 export class CommandeController {
 
   private commandeDto = new CreateCommandeDto();
-  //private commandePlatDto: CreatePlatDto[] = [];
-  //private commandeSupplementDto : CreateSupplementtDto[] = [];
 
   constructor(private readonly commandeService: CommandeService) {
     this.commandeDto.plats = [];
@@ -19,7 +17,7 @@ export class CommandeController {
     
   }
 
-  @Get('clients1')
+  @Get('clients')
   @Render('clientsPage')
   async employes() {
     
@@ -36,7 +34,7 @@ export class CommandeController {
 
   }
 
-  @Post('/clients1')
+  @Post('/clients')
   handlePostRequestClient(@Body('buttonText') buttonText: string, @Body('id') id: string) {
     this.commandeDto.nom_employee = `${buttonText}`;
     this.commandeDto.id_client = Number(id);

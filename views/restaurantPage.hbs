@@ -15,22 +15,20 @@
 </section>
 
 
-    <table>
-      <thead>
-        <tr>
-          <th>Entreprise</th>
-          <th>Nombre de commandes</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each data}}
-        <tr>
-          <td>{{this.entreprise}}</td>
-          <td>{{this.nombreCommandes}}</td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </body>
+<form action="/restaurant" method="POST">
+
+    <div class="container">
+        <div class="">
+            <ul>  {{#each data}}
+                <label for="{{this.entreprise}}" class="h1-restaurant"> {{this.heure_de_livraison}} </label>
+                    <li> <input id="{{this.entreprise}}" type ="submit" class="btn btn-primary btn-lg commande" name="{{this.heure_de_livraison}}" value="{{this.nombreCommandes}} pour le {{this.entreprise}}" > 
+                    <input id="entreprise" name="{{this.entreprise}}" type="hidden" value="{{this.heure_de_livraison}}">
+                    </li>
+                {{/each}}
+                </ul>
+            </div>
+        </div>
+</form>
+
 
 {{> footer}}

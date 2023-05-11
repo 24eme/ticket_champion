@@ -36,7 +36,6 @@ export class CommandeService {
     return {data};
   }
 
-  //make a code refactoring for all those 3 functions cuz they look alike
   async fillClientsTable() {
     const entreprises = await this.getDataFromjson('config/clientsconfig.json');
     
@@ -48,17 +47,14 @@ export class CommandeService {
          client.entreprise = entreprise.nomEntreprise;
          const find_client = await this.clientRepository.findOne({
           where: {
-            //nom : client.nom
             id_client : client.id_client
           } 
          })
          if(find_client == undefined){
           this.clientRepository.save(client);
-         }
-         
+         }  
        });
-     }); 
-       
+     });      
   }
 
   async fillPlatsTable() {
@@ -103,11 +99,15 @@ export class CommandeService {
       .createQueryBuilder('client')
       .leftJoinAndSelect('client.commandes', 'commande')
       .select('client.entreprise', 'entreprise')
+      .addSelect('commande.heure_de_livraison', 'heure_de_livraison')
       .addSelect('COUNT(commande.id_commande)', 'nombreCommandes')
-      .groupBy('client.entreprise');
+      .groupBy('client.entreprise')
+      .addGroupBy('commande.heure_de_livraison')
+      .having('COUNT(commande.id_commande) > :id', { id: 0 });
 
     return queryBuilder.getRawMany();
   }
+
 
   async getCommandesInfoPerEntreprise(enterprise: string, time: string): Promise<Commande[]> {
     return this.commandeRepository
@@ -138,15 +138,12 @@ export class CommandeService {
       let quantite = ele.quantite;
       await this.CommandePlatRepository.save({commande, plat, quantite} as unknown as DeepPartial<CommandePlat>);
     }
-
     for (let supp of createSupplementtDto ){
       let supplement = new Supplement();
       supplement.nom_supplement = supp.nom_supplement;
       let quantite = supp.quantite;
       await this.commandeSupplementRepository.save({commande, supplement, quantite} as unknown as DeepPartial<CommandeSupplement>);
-
-    }
-    
+    }   
   }
 
   findAll() {

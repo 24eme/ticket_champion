@@ -96,7 +96,7 @@ export class CommandeController {
   }
 
   @Get('confirmation')
-  @Render('commandesPage') 
+  @Render('confirmationPage')
   createCommande() {
     this.commandeService.create(this.commandeDto, this.commandeDto.plats, this.commandeDto.supplements)
   }

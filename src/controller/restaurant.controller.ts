@@ -20,6 +20,12 @@ export class RestaurantController {
 
     @Get('/historique')
     @Render('restaurantHistoriquePage')
-    async historique() {}
+    async historique() {
+      const totalCost = await this.commandeService.getTotalCostCommandesGroupedByEntreprise();
+      console.log(totalCost);
+      return { data: totalCost };
+    
+    }
+
 
 }

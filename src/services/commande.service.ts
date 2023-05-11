@@ -108,6 +108,15 @@ export class CommandeService {
     return queryBuilder.getRawMany();
   }
 
+  async getTotalCostCommandesGroupedByEntreprise(): Promise<any> {
+    const queryBuilder = this.commandeRepository
+      .createQueryBuilder('commande')
+      .leftJoinAndSelect('commande.client', 'client')
+      .select('client.entreprise', 'entreprise')
+      .addSelect('SUM(commande.montant_commande)', 'sumCommandes')    
+      .groupBy('client.entreprise');
+    return queryBuilder.getRawMany();
+  }
 
   async getCommandesInfoPerEntreprise(enterprise: string, time: string): Promise<Commande[]> {
     return this.commandeRepository

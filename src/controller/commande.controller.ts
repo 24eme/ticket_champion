@@ -19,6 +19,10 @@ export class CommandeController {
     
   }
 
+  @Get('selectionClientPage')
+  @Render('selectionClientPage')
+  async provisoire() {}
+
   @Get('clients1')
   @Render('clientsPage')
   async employes() {

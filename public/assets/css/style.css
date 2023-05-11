@@ -1546,3 +1546,39 @@ Footer Section style
 .note-wrapper {
     width: 100%;
 }
+
+.logo-link {
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.image-container-client {
+    display: flex;
+    height: 100vh;
+}
+
+.image-container-client .left-image-client,
+.image-container-client .right-image-client {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container-client .left-image-client:hover img {
+    filter: grayscale(0%);
+}
+
+.image-container-client .right-image-client:hover img {
+    filter: grayscale(0%);
+}
+
+.image-container-client img {
+    transition: filter 0.5s;
+    cursor: pointer;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+}

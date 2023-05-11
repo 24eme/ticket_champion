@@ -1,0 +1,35 @@
+{{> header}}
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="restaurant-container">
+        <h1 class="h1-restaurant">Liste des commandes passées par {{enterprise}} et qui doivent être livrées à {{time}}</h1>
+        <ul>
+          {{#each commandes}}
+          <li>
+            <h3>Commande n°{{this.id_commande}}</h3>
+            <p>Nom du Client: {{this.client.nom}}</p>
+            <p>Plats :</p>
+            <ul>
+              {{#each this.commandePlats}}
+              <li>{{this.plat.nom_plat}}</li>
+              {{/each}}
+            </ul>
+            {{#if this.commandeSupplements}}
+              <p>Suppléments :</p>
+              <ul>
+                {{#each this.commandeSupplements}}
+                  <li>{{this.supplement.nom_supplement}}</li>
+                {{/each}}
+              </ul>
+            {{/if}}
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{> footer}}

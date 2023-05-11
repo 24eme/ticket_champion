@@ -108,6 +108,21 @@ export class CommandeService {
     return queryBuilder.getRawMany();
   }
 
+
+  async getCommandesInfoPerEntreprise(enterprise: string, time: string): Promise<Commande[]> {
+    return this.commandeRepository
+      .createQueryBuilder('commande')
+      .leftJoinAndSelect('commande.client', 'client')
+      .leftJoinAndSelect('commande.commandePlats', 'commande_plat')
+      .leftJoinAndSelect('commande.commandeSupplements', 'commande_supplement')
+      .leftJoinAndSelect('commande_plat.plat', 'plat')
+      .leftJoinAndSelect('commande_supplement.supplement', 'supplement')
+      .where('client.entreprise = :entreprise', { entreprise: enterprise })
+      .andWhere('commande.heure_de_livraison = :heure_livraison', { heure_livraison: time })
+      .getMany();
+  }
+
+
   async create(createCommandeDto: CreateCommandeDto, createPlatDto : CreatePlatDto[], createSupplementtDto : CreateSupplementtDto[]) {
     const  montant_commande = createCommandeDto.montant_Commande;
     let client = new Client();

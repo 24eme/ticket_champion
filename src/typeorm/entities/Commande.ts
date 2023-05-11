@@ -4,6 +4,7 @@ import { CommandePlat } from "./CommandePlat";
 import { CommandeSupplement } from "./CommandeSupplement";
 
 @Entity({ name: 'commandes' })
+//revoir cela pour verifier juste en fonction de la date 
 @Unique(['date_commande', 'client']) //pour empecher un client de faire plusieurs commandes / jour
 
 export class Commande {

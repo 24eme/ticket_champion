@@ -128,7 +128,6 @@ body {
 
 .B1 {
 
-    margin-bottom: 200px;
 }
 
 .dropdown-menu {
@@ -1461,6 +1460,10 @@ Footer Section style
 }
 
 .bouton-ajout {
+    margin-top: 20px;
+}
+
+.commande{
     margin-top: 20px;
 }
 

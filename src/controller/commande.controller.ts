@@ -122,4 +122,7 @@ export class CommandeController {
   remove(@Param('id') id: string) {
     return this.commandeService.remove(+id);
   }
+
+
+ 
 }

@@ -38,4 +38,17 @@ export class RestaurantController {
        const Info = await this.commandeService.getCommandesInfoPerEntreprise(this.nonEntreprise,  this.time);
        return { commandes: Info, entreprise : this.nonEntreprise, time : this.time };
     }
+
+
+    @Get('/historique')
+    @Render('restaurantHistoriquePage')
+    async historique() {
+      const totalCost = await this.commandeService.getTotalCostCommandesGroupedByEntreprise();
+      console.log(totalCost);
+      return { data: totalCost };
+    
+    }
+
+
+
 }

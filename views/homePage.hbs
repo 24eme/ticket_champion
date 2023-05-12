@@ -171,46 +171,9 @@
             </nav>
 
 
-            <!--Home Sections-->
+  </section> <!--End off About section -->
 
-            <section id="hello" class="home bg-mega">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="main_home">
-                            <div class="home_text">
-
-                                <h1 class="text-white">Bienvenue,<br /> Commandez vos plats préférés !</h1>
-                            </div>
-
-
-
-                            <div class="dropdown home_btns m-top-40">
-                                <button class="btn btn-primary dropdown-toggle m-top-20 m-r-15 color_white btn-font" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clients </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <ul class="list-group list-group-flush"></ul>
-                                        <li class="list-group list-group-flush"> 
-                                            <ul class="">
-                                            <a onclick="window.location = '/clients'" class="dropdown-item btn-droulant btn-font-20" id="monBouton"> 24EME </a>
-                                             </ul>
-                                            <ul><div class="separator_milieu"></div> </ul> 
-                                            <ul> <a href="" class="dropdown-item btn-droulant btn-font-20" id="marcoBouton">MARCOPOLETTE</a></ul>
-                                         </li>
-                                    </ul>
-                            </div>
-
-                            <a onclick="window.location = '/restaurant'" class="btn btn-primary m-top-20 btn-font"> Restaurant </a>
-                            
-                           
-
-    
-                            </div>
-                        </div>
-                    </div><!--End off row-->
-                </div><!--End off container -->
-            </section> <!--End off Home Sections-->
-
-            <script>
+<script>
   const monBouton = document.querySelector('#monBouton');
   monBouton.addEventListener('click', () => {
     const texteSurBouton = monBouton.textContent;
@@ -220,97 +183,6 @@
     xhr.send(JSON.stringify({ texteSurBouton }));
   });
 </script>
-
-
-
-            <!--About Sections-->
-            <section id="about" class="about roomy-100">
-                <div class="container">
-                    <div class="row">
-                        <div class="main_about">
-                            <div class="col-md-6">
-                                <div class="about_content">
-                                    <h2>ABOUT US</h2>
-                                    <div class="separator_left"></div>
-
-                                    <p>Bienvenue sur notre application web de commande de repas en ligne ! 
-                                        Nous sommes une équipe passionnée par la nourriture et la technologie, et nous avons créé cette plateforme pour simplifier 
-                                        votre expérience de commande de repas. Avec notre application, vous pouvez parcourir le menu de réstaurant Champion, 
-                                        passer des commandes, personnaliser vos plats et planifier la date de récupération de votre commande pour éviter le temps d'attentes.
-                                        Rejoignez-nous pour découvrir une nouvelle façon pratique de commander vos repas préférés en ligne ! </p>
-                                </div>
-                            </div>
-                          
-                        </div>
-                    </div><!--End off row-->
-                </div><!--End off container -->
-                <br />
-                <br />
-                <br />
-                <br />
-                <hr />
-                <br />
-                <br />
-                <div class="container">
-                    <div class="row">
-                        <div class="about_bottom_content">
-                            <div class="col-md-4">
-                                <div class="about_bottom_item m-top-20">
-                                    <div class="ab_head">
-                                        <div class="ab_head_icon">
-                                            <i class="icofont icofont-fire-burn"></i>
-                                        </div>
-                                        <h6 class="m-top-20"> Valeur 1</h6>
-                                    </div>
-                                    <p class="m-top-20">Description</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="about_bottom_item m-top-20">
-                                    <div class="ab_head">
-                                        <div class="ab_head_icon">
-                                            <i class="icofont icofont-speech-comments"></i>
-                                        </div>
-                                        <h6 class="m-top-20">Valeur 2</h6>
-                                    </div>
-                                    <p class="m-top-20">Description</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="about_bottom_item m-top-20">
-                                    <div class="ab_head">
-                                        <div class="ab_head_icon">
-                                            <i class="icofont icofont-heart"></i>
-                                        </div>
-                                        <h6 class="m-top-20">Valeur 3</h6>
-                                    </div>
-                                    <p class="m-top-20">Description </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--End off row-->
-                </div><!--End off container -->
-            </section> <!--End off About section -->
-
-
-            <!--Video section-->
-            <section id="video" class="video">
-                <div class="overlay"></div>
-                <div class="main_video roomy-100 m-top-100 m-bottom-100 text-center">
-                    <div class="video_text text-center">
-                        <a href="https://www.facebook.com/TresTresBon/videos/bouiboui-champion/999600510981651/" class="video-link"><span class="fa fa-play"></span></a>
-                    </div>
-                </div>
-                <h6 class="m-top-20">Valeur 3</h6>
-              </div>
-              <p class="m-top-20">Description </p>
-            </div>
-          </div>
-        </div>
-      </div><!--End off row-->
-    </div><!--End off container -->
-  </section> <!--End off About section -->
-
 
   <!--Video section-->
   <section id="video" class="video">
@@ -351,14 +223,14 @@
 
 
 
-  <!--Maps Section-->
+<!--  Maps Section
   <div class="main_maps text-center fix">
     <div class="overlay"></div>
     <div class="maps_text">
       <h3 class="text-white" onclick="showmap()">FIND US ON THE MAP <i class="fa fa-angle-down"></i></h3>
       <div id="map_canvas" class="mapheight"></div>
     </div>
-  </div><!-- End off Maps Section-->
+  </div> End off Maps Section-->
 
 
 

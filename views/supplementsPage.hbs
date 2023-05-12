@@ -13,7 +13,7 @@
             <div class="card-body">
               <h5 class="card-title">{{this.nom}} - {{this.prix}}€</h5>
               <p class="liste-ingredients">{{this.ingredients}}</p>
-              <button type="button" class="btn btn-primary bouton-plats"  name="{{this.prix}}" id="{{this.nom}}">Ajouter à la commande</button>
+              <button type="button" class="btn btn-primary bouton-plats B1"  name="{{this.prix}}" id="{{this.nom}}">Ajouter à la commande</button>
             </div>
           </div>
         </div>
@@ -51,6 +51,7 @@
     button.addEventListener('click', (event) => {
       const buttonText = event.target.id;
       const prix = event.target.name;
+      console.log("ping");
 
       // incrémentation de la quantité
       if (commande.hasOwnProperty(buttonText)) {

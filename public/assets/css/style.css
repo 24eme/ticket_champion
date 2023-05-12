@@ -1615,8 +1615,8 @@ Footer Section style
     filter: grayscale(100%);
 }
 
-/* Désactiver les tooltips */
-[data-tooltip]::after {
-    content: none !important;
+.selection-nom-employee {
+    margin-bottom: 5px;
+    width: 250px;
 }
 

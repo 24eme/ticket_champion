@@ -9,7 +9,7 @@
       {{#each data.data.restaurants.[0].plats}}
         <div class="col-sm-2 card-plats">
           <div class="card">
-            <img class="card-img-top" src={{this.img}} alt="image du plat">
+            <img class="card-img-top" src={{this.img}} alt="image du plat" style="border-radius: 15px;">
             <div class="card-body">
               <h5 class="card-title">{{this.nom}} - {{this.prix}}€</h5>
               <p class="liste-ingredients">{{this.ingredients}}</p>
@@ -21,7 +21,7 @@
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-4" style="border-radius: 15px;">
       <section>
         <h2 class="text-center texte-intro">Vous avez choisi :</h2>
         <ul id="recap-commande"></ul>

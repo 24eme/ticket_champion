@@ -1615,7 +1615,7 @@ Footer Section style
 .container-card {
     margin: auto 10px;
     margin-block-end: 10em;
-    width: 60%;
+    /* width: 60%; */
 }
 
 .card-plats {
@@ -1661,3 +1661,51 @@ padding: 1em;
     float: right;
     width: 140px;
 }
+
+/* supplementsPage CSS */
+.supplements-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .supplement-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+  }
+  
+  .supplement-image {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .bouton-ajout {
+    margin: auto;
+  }
+
+  .btn-next{
+    margin-right: 800px;
+  }
+
+  .btn-previous{
+    margin-left: 400px;
+  }
+
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.42857143;
+    color: #333;
+  }
+
+  .col-md-4{
+    float: left;
+    background-color: salmon;
+  }
+

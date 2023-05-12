@@ -12,7 +12,7 @@
       <div class="card-body">
         <h5 class="card-title">{{this.nom}} - {{this.prix}}€</h5>
         <p class="liste-ingredients">{{this.ingredients}}</p>
-        <button type="button" class="btn btn-primary bouton-plats" title="{{this.prix}}" id="{{this.nom}}" >Ajouter a la commande</button>
+        <button type="button" class="btn btn-primary bouton-plats" name="{{this.prix}}" id="{{this.nom}}" >Ajouter a la commande</button>
       </div>
     </div>
 
@@ -34,11 +34,11 @@
 
             <script>
 
-  const allButton = document.querySelectorAll('.B1');
+  const allButton = document.querySelectorAll('.bouton-plats');
   allButton.forEach(button => {
   button.addEventListener('click', (event) => {
   const buttonText = event.target.id;
-  const prix = event.target.title;
+  const prix = event.target.name;
   const xhr = new XMLHttpRequest();
     xhr.open('POST', '/plats');
     xhr.setRequestHeader('Content-Type', 'application/json');

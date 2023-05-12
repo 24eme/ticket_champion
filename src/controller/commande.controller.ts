@@ -14,23 +14,23 @@ export class CommandeController {
   constructor(private readonly commandeService: CommandeService) {
     this.commandeDto.plats = [];
     this.commandeDto.supplements = [];
-    
+
   }
 
   @Get('selectionClientPage')
   @Render('selectionClientPage')
-  async provisoire() {}
+  async selectionClientPage() {}
 
   @Get('clients')
   @Render('clientsPage')
   async employes() {
-    
+
     const data = await this.commandeService.getDataFromjson('config/clientsconfig.json');
     return {data: data};
   }
 
-  @Post('/')
-  handlePostRequest(@Body('texteSurBouton') texteSurBouton: string) {
+  @Post('/selectionClientPage')
+  handlePostRequest(@Body('entreprise') texteSurBouton: string) {
     this.commandeDto.nom_employee = "";
     this.commandeDto.plats = [];
     this.commandeDto.supplements = [];
@@ -45,7 +45,7 @@ export class CommandeController {
     this.commandeDto.plats = [];
     this.commandeDto.supplements = [];
     this.commandeDto.montant_Commande = 0;
-    
+
   }
 
   @Get('plats')
@@ -53,7 +53,7 @@ export class CommandeController {
   async plat() {
     const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
     const employee = this.commandeDto.nom_employee;
-    return { data : data, employee  };   
+    return { data : data, employee  };
   }
 
   @Post('/plats')
@@ -66,8 +66,8 @@ export class CommandeController {
       plat.quantite = 1;
       this.commandeDto.plats.push(plat);}
       else {this.commandeDto.plats.find(plat => plat.nom_plat === buttonText).quantite ++;}
-    this.commandeDto.montant_Commande += Number(prix); 
-    
+    this.commandeDto.montant_Commande += Number(prix);
+
   }
 
   @Get('supplements')
@@ -75,7 +75,7 @@ export class CommandeController {
   async supp() {
     const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
     return {data: data};
-    
+
   }
 
   @Post('/supplements')
@@ -87,14 +87,14 @@ export class CommandeController {
       supplement.quantite = 1;
       this.commandeDto.supplements.push(supplement);}
       else {this.commandeDto.supplements.find(suplement => suplement.nom_supplement === buttonText).quantite ++;}
-    this.commandeDto.montant_Commande += Number(prix); 
+    this.commandeDto.montant_Commande += Number(prix);
 
     console.log(this.commandeDto.id_client);
     console.log(this.commandeDto.montant_Commande);
     console.log(this.commandeDto.nom_employee);
     console.log(this.commandeDto.plats);
     console.log(this.commandeDto.supplements);
-    
+
   }
 
   @Get('confirmation')
@@ -128,5 +128,5 @@ export class CommandeController {
   }
 
 
- 
+
 }

@@ -8,7 +8,7 @@
                     <img class="image-de-plat" src={{this.img}} alt="image du supplement">
                     <h4 class="text-center nom-du-plat">{{this.nom}} - {{this.prix}}€</h4>
                     <span class="liste-ingredients">{{this.ingredients}}</span>
-                    <li> <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout" title="{{this.prix}}" id="{{this.nom}}">Ajouter a la commande</button></li>
+                    <li> <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout" name="{{this.prix}}" id="{{this.nom}}">Ajouter a la commande</button></li>
                 {{/each}}
                 </ul>
             </div>
@@ -23,7 +23,7 @@
   allButton.forEach(button => {
   button.addEventListener('click', (event) => {
   const buttonText = event.target.id;
-  const prix = event.target.title;
+  const prix = event.target.name;
   const xhr = new XMLHttpRequest();
     xhr.open('POST', '/supplements');
     xhr.setRequestHeader('Content-Type', 'application/json');

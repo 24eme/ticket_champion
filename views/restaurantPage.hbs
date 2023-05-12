@@ -6,6 +6,10 @@
               <div class="restaurant-container">
                       <h1 class="h1-restaurant">Bienvenue Champion &#128525;!</h1>
                       <div class="separator_restaurant m-bottom-20"></div> 	
+                      <button type="button" class="btn-restaurant  text-white"> Historique </button>
+                       <h2 class="h2-clients m-top-80"> &#129369; Aujourd'hui, Vous devez préparer les commandes suivantes : </h2>
+                       <h4> Cliquer sur le bouttons pour consulter les détails de commandes par heure de laivraison &#128513;</h4> 
+                       
                       <button type="button" class="btn-restaurant  text-white" onclick="window.location ='/historique'"> Historique </button>
                        <h2 class="h2-clients m-top-80"> &#129369; Aujourd'hui, Vous devez préparer les commandes suivantes : </h2>      
               </div>
@@ -14,20 +18,21 @@
 </section>
 
 
-<form action="/restaurant" method="POST">
-
+{{!-- <form action="/commandesInfo" method="POST"> --}}
+<div>
     <div class="container">
         <div class="">
             <ul>  {{#each data}}
-                <label for="{{this.entreprise}}" class="h1-restaurant"> {{this.heure_de_livraison}} </label>
-                    <li> <input id="{{this.entreprise}}" type ="submit" class="btn btn-primary btn-lg commande" name="{{this.heure_de_livraison}}" value="{{this.nombreCommandes}} pour le {{this.entreprise}}" > 
-                    <input id="entreprise" name="{{this.entreprise}}" type="hidden" value="{{this.heure_de_livraison}}">
+                <h3 class="h1-restaurant"> A {{this.heure_de_livraison}} vous avez : </h3>
+                    <li> <a href="/commandesInfo"> <input type = "submit"  id="{{this.entreprise}}" class="btn btn-primary btn-lg commande" name="{{this.heure_de_livraison}}" value="{{this.nombreCommandes}} pour le {{this.entreprise}}" /> </a>
+                    
                     </li>
                 {{/each}}
                 </ul>
             </div>
         </div>
-</form>
+</div>
 
 
+  <script src="assets/js/vendor/restaurantPage.js"></script>
 {{> footer}}

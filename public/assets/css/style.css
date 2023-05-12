@@ -623,6 +623,9 @@ Extra height css
 .m-bottom-40 {
     margin-bottom: 40px;
 }
+.m-bottom-50 {
+    margin-bottom: 40px;
+}
 
 .m-bottom-60 {
     margin-bottom: 60px;
@@ -1497,6 +1500,7 @@ Footer Section style
 
 .gif-container {
     margin-left: 723px;
+     
 }
 /* Center align the title */
 .texte-intro {
@@ -1521,8 +1525,8 @@ Footer Section style
 .cook-gif {
     height: 400px;
     width: 400px;
-    margin-top: -177px;
-    margin-bottom: 20px;
+    margin-top: -350px;
+    margin-bottom: 50px;
     align-items: center;
 }
 
@@ -1648,7 +1652,7 @@ padding: 1em;
 
 .container-prev-next {
     margin: auto 42em;
-    margin-bottom: 2em;
+    margin-bottom: 4em;
 }
 
   .btn-previous {

@@ -2,52 +2,35 @@
 
 <section style="align-items: center;">
     <h2 class="text-center texte-intro">A quelle heure souhaites-tu récupérer ta commande ? ⏰</h2>
-    <div class="dropdown text-center">
-        <button class="btn btn-secondary dropdown-toggle sauver-le-bouton" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Selectionnez une heure
-        </button>
-        <div class="dropdown-menu dropdown-toggle sauver" aria-labelledby="dropdownMenuButton" style="width: 160px;">
+    <div class="container row text-center">
+        <div class="sauver" id="" style="width: 160px;">
             <ul>
-                <li class="dropdown-item time-item" data-value="12h00">12h00</li>
-                <li class="dropdown-item time-item" data-value="12h30">12h30</li>
-                <li class="dropdown-item time-item" data-value="13h00">13h00</li>
-                <li class="dropdown-item time-item" data-value="13h30">13h30</li>
-                <li class="dropdown-item time-item" data-value="14h00">14h00</li>
+                
+                <li class=" btn btn-primary time-item m-bottom-20" data-value="12h00">12h00</li>
+                <li class=" btn btn-primary time-item m-bottom-20" data-value="12h30">12h30</li>
+                <li class=" btn btn-primary time-item m-bottom-20" data-value="13h00">13h00</li>
+                <li class=" btn btn-primary time-item m-bottom-20" data-value="13h30">13h30</li>
+                <li class="  btn btn-primary time-item m-bottom-20" data-value="14h00">14h00</li>
             </ul>
-        </div>
+        
+        
     </div>
-  <a href='#'>
-    <input type="submit" class="btn btn-primary btn-lg B1 btn-valider" value="Valider"/>
-  </a>
+
     <div class="gif-container">
     <img class="cook-gif" src="/assets/images/cook.gif">
-    </div>
-</section>x
+    
+    </div class="restaurant-container">
+    <div> <a href='/confirmation'>
+    <input type="submit" class="btn btn-primary btn-lg btn-valider m-bottom-70" value="Valider"/> </a> </div>
+</section>
 
 <script>
-    // Get the dropdown button and menu
-    const dropdownButton = document.getElementById('dropdownMenuButton');
-    const dropdownMenu = document.querySelector('.dropdown-menu ul');
-
-    // Add a click event listener to the menu items
-    dropdownMenu.addEventListener('click', (event) => {
-        // Get the value of the selected item
-        const selectedValue = event.target.dataset.value;
-        // Update the button text with the selected value
-        dropdownButton.textContent = selectedValue;
-    });
-
-
-
-
-
-
-
 
     const allButton = document.querySelectorAll('.time-item');
     allButton.forEach(button => {
         button.addEventListener('click', (event) => {
             const buttonText = event.target.textContent;
+            console.log(buttonText);
             const xhr = new XMLHttpRequest();
             xhr.open('POST', '/heurelivraison');
             xhr.setRequestHeader('Content-Type', 'application/json');

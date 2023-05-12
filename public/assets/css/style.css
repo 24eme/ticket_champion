@@ -1485,18 +1485,7 @@ Footer Section style
     width: 400px;
 }
 
-.btn-previous {
-    margin-left: 40px;
-    margin-bottom: 40px;
-    width: 140px;
-}
 
-.btn-next {
-    float: right;
-    margin-right: 40px;
-    margin-bottom: 40px;
-    width: 140px;
-}
 
 #marcoBouton {
     cursor: pointer;
@@ -1567,7 +1556,6 @@ Footer Section style
     font-weight: bold;
     color: #461e1e;
   }
-=======
 /* Texte */
 
 .note-totale {
@@ -1620,3 +1608,56 @@ Footer Section style
     width: 250px;
 }
 
+
+
+/* CSS PAGE PLAT */
+
+.container-card {
+    margin: auto 10px;
+    margin-block-end: 10em;
+    width: 60%;
+}
+
+.card-plats {
+    width: 15rem;
+    padding: 0;
+    margin-right: 30px;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.card-title {
+    margin-top: 1em;
+}
+
+.liste-ingredients {
+    padding: 1em auto;
+}
+.bouton-plats {
+color: #fff;
+background-color: #d46864;
+border-color: #d46864;
+-webkit-transition: all 0.6s;
+transition: all 0.6s;
+text-transform: uppercase;
+font-size:13px;
+font-weight: 500;
+padding: 1em;
+}
+
+
+.container-prev-next {
+    margin: auto 42em;
+    margin-bottom: 2em;
+}
+
+  .btn-previous {
+    float: left;
+    width: 140px;
+    margin: 0 auto;;
+}
+
+.btn-next {
+    float: right;
+    width: 140px;
+}

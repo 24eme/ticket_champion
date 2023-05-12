@@ -1,54 +1,88 @@
 {{> header}}
 
 <section class="d-flex justify-content-center">
-    <h2 class="text-center texte-intro">Bonjour {{employee}}, que veux-tu manger ?</h2>
 
+  <h2 class="text-center texte-intro">Bonjour {{employee}}, que veux-tu manger ?</h2>
 
-<div class="row container-card">
-  {{#each data.data.restaurants.[0].plats}}
-  <div class="col-sm-2 card-plats">
-    <div class="card">
-      <img class="card-img-top" src={{this.img}} alt="image du plat">
-      <div class="card-body">
-        <h5 class="card-title">{{this.nom}} - {{this.prix}}€</h5>
-        <p class="liste-ingredients">{{this.ingredients}}</p>
-        <button type="button" class="btn btn-primary bouton-plats" name="{{this.prix}}" id="{{this.nom}}" >Ajouter a la commande</button>
-      </div>
+  <div class="row">
+    <div class="row container-card col-md-6">
+      {{#each data.data.restaurants.[0].plats}}
+        <div class="col-sm-2 card-plats">
+          <div class="card">
+            <img class="card-img-top" src={{this.img}} alt="image du plat">
+            <div class="card-body">
+              <h5 class="card-title">{{this.nom}} - {{this.prix}}€</h5>
+              <p class="liste-ingredients">{{this.ingredients}}</p>
+              <button type="button" class="btn btn-primary bouton-plats"  name="{{this.prix}}" id="{{this.nom}}">Ajouter à la commande</button>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+
     </div>
 
+    <div class="col-md-4">
+      <section>
+        <h2 class="text-center texte-intro">Vous avez choisi :</h2>
+        <ul id="recap-commande"></ul>
+      </section>
+    </div>
   </div>
-   {{/each}} 
-</div>
 
-
-<div class="row container-prev-next">
   <a href='/clients'>
     <input type="submit" class="btn btn-primary btn-previous" value="Précédent"/>
   </a>
   <a href='/supplements'>
     <input type="submit" class="btn btn-primary btn-next" value="Suivant"/>
   </a>
-</div>
 
 </section>
 
-            <script>
-
+<script>
   const allButton = document.querySelectorAll('.bouton-plats');
+  const recapCommande = document.getElementById('recap-commande');
+  let commande = {}; // initialisation de l'objet commande
+
+
   allButton.forEach(button => {
-  button.addEventListener('click', (event) => {
-  const buttonText = event.target.id;
-  const prix = event.target.name;
-  const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/plats');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({ buttonText, prix }));
+    button.addEventListener('click', (event) => {
+      const buttonText = event.target.id;
+      const prix = event.target.name;
+
+      // incrémentation de la quantité
+      if (commande.hasOwnProperty(buttonText)) {
+        commande[buttonText].quantite += 1;
+      } else {
+        commande[buttonText] = {
+          quantite: 1,
+          prix: prix
+        };
+      }
 
 
-});
+      // affichage du récapitulatif
+      recapCommande.innerHTML = '';
+      let total = 0;
+      Object.keys(commande).forEach((plat) => {
+        const item = document.createElement('li');
+        item.textContent = `${commande[plat].quantite} x ${plat} - ${commande[plat].prix}€`;
+        recapCommande.appendChild(item);
+
+        total += commande[plat].quantite * commande[plat].prix;
+      });
+
+      const totalItem = document.createElement('li');
+      totalItem.textContent = `Total : ${total}€`;
+      recapCommande.appendChild(totalItem);
+
+      // envoi de la commande au serveur
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/plats');
+      xhr.setRequestHeader('Content-Type', 'application/json');
     
+      xhr.send(JSON.stringify( buttonText, prix }));
+    });
   });
 </script>
 
 {{> footer}}
-

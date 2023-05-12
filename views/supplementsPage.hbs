@@ -11,7 +11,7 @@
             <img class="supplement-image" src={{this.img}} alt="image du supplement">
             <h4 class="text-center nom-du-plat">{{this.nom}} - {{this.prix}}€</h4>
             <span class="liste-ingredients">{{this.ingredients}}</span>
-            <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout" title="{{this.prix}}" id="{{this.nom}}">Ajouter a la commande</button>
+            <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout" name="{{this.prix}}" id="{{this.nom}}">Ajouter a la commande</button>
           </li>
           {{/each}}
         </ul>
@@ -36,7 +36,7 @@
   allButton.forEach(button => {
     button.addEventListener('click', (event) => {
       const buttonText = event.target.id;
-      const prix = event.target.title;
+      const prix = event.target.name;
 
       // incrémentation de la quantité
       if (commande.hasOwnProperty(buttonText)) {

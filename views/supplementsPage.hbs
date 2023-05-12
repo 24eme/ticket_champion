@@ -2,20 +2,26 @@
 
 <section>
   <h2 class="text-center texte-intro">Un (ou plusieurs..) petit supplément ?</h2>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <ul class="supplements-list row row-cols-2">
-          {{#each data.data.restaurants.[0].supplements}}
-          <li class="supplement-item col">
-            <img class="supplement-image" src={{this.img}} alt="image du supplement">
-            <h4 class="text-center nom-du-plat">{{this.nom}} - {{this.prix}}€</h4>
-            <span class="liste-ingredients">{{this.ingredients}}</span>
-            <button type="button" class="btn btn-primary btn-lg B1 bouton-ajout" name="{{this.prix}}" id="{{this.nom}}">Ajouter a la commande</button>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
+
+  
+  <div class="row">
+    <div class="row container-card col-md-6">
+      {{#each data.data.restaurants.[0].supplements}}
+        <div class="col-sm-2 supplement-item">
+          <div class="card">
+            <img class="card-img-top" src={{this.img}} alt="image du supplement">
+            <div class="card-body">
+              <h5 class="card-title">{{this.nom}} - {{this.prix}}€</h5>
+              <p class="liste-ingredients">{{this.ingredients}}</p>
+              <button type="button" class="btn btn-primary bouton-plats"  name="{{this.prix}}" id="{{this.nom}}">Ajouter à la commande</button>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+
+    </div>
+
+
       <div class="col-md-4">
         <section>
           <h2 class="text-center texte-intro">Vous avez choisi:</h2>
@@ -23,13 +29,16 @@
         </section>
       </div>
     </div>
-  </div>
+
+<div class="container-prev-next">
   <a href='/plats'>
     <input type="submit" class="btn btn-primary btn-previous" value="Précédent"/>
   </a>
   <a href='/heureLivraison'>
     <input type="submit" class="btn btn-primary btn-next" value="Suivant"/>
   </a>
+</div>
+
 
 </section>
 

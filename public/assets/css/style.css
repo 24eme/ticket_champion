@@ -1622,7 +1622,7 @@ Footer Section style
     /* width: 60%; */
 }
 
-.card-plats {
+.card-plats, .supplement-item {
     width: 15rem;
     padding: 0;
     margin-right: 30px;
@@ -1651,7 +1651,6 @@ padding: 1em;
 
 
 .container-prev-next {
-    margin: auto 42em;
     margin-bottom: 4em;
 }
 

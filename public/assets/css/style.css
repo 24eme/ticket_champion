@@ -344,7 +344,7 @@ h5 {
     font-size: 1.3rem;
 }
 h6 {
-    font-size: 1rem;
+    font-size: 1.3rem;
 }
 
 
@@ -1112,11 +1112,13 @@ Nav Menu style
 }
 
 
+
+
 /*
 Home Section style
 ==================*/
 .head{
-    background: url(../images/background/hd.jpg) no-repeat bottom center;
+    background-color: #fed1c4;
     background-position: top;
     background-size: 100%;
     position: relative;
@@ -1363,6 +1365,15 @@ Contact Section style
 Footer Section style
 =====================*/
 
+
+
+#footer {  
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height:100px; 
+}
+
 .main_footer{
     overflow: hidden;
 }
@@ -1465,6 +1476,8 @@ Footer Section style
 
 .commande{
     margin-top: 20px;
+    font-size: 25px;
+    margin-bottom: 20px;
 }
 
 .image-de-plat {
@@ -1525,6 +1538,25 @@ Footer Section style
 }
 
 
+.info-p {
+    color: #461e1e;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  /* Style pour les listes à puces */
+  .info-ul {
+
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .info-titre{
+    font-weight: bold;
+    color: #461e1e;
+  }
+=======
 /* Texte */
 
 .note-totale {
@@ -1535,6 +1567,49 @@ Footer Section style
 .note-wrapper {
     width: 100%;
 }
+
+.logo-link {
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.image-container-client {
+    display: flex;
+    height: 100vh;
+}
+
+.image-container-client .left-image-client,
+.image-container-client .right-image-client {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container-client .left-image-client:hover img {
+    filter: grayscale(0%);
+}
+
+.image-container-client .right-image-client:hover img {
+    filter: grayscale(0%);
+}
+
+.image-container-client img {
+    transition: filter 0.5s;
+    cursor: pointer;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+}
+
+/* Désactiver les tooltips */
+[data-tooltip]::after {
+    content: none !important;
+}
+
+
 
 /* CSS PAGE PLAT */
 

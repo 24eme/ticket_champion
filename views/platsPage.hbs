@@ -15,19 +15,23 @@
         <button type="button" class="btn btn-primary bouton-plats" title="{{this.prix}}" id="{{this.nom}}" >Ajouter a la commande</button>
       </div>
     </div>
+
   </div>
    {{/each}} 
 </div>
 
-<div class="row container-prev-next d-flex justify-content-around">
-<button class="btn btn-primary btn-previous col-sm-2" onclick="window.location = '/plats'">Précédent</button>
-<button class="btn btn-primary btn-next col-sm-2" onclick="window.location.href = '/heureLivraison';" style="margin-left: 10px;">Suivant</button>
-</div>
+
+  <a href='/clients'>
+    <input type="submit" class="btn btn-primary btn-previous" value="Précédent"/>
+  </a>
+  <a href='/supplements'>
+    <input type="submit" class="btn btn-primary btn-next" value="Suivant"/>
+  </a>
 
 </section>
 
             <script>
- 
+
   const allButton = document.querySelectorAll('.B1');
   allButton.forEach(button => {
   button.addEventListener('click', (event) => {

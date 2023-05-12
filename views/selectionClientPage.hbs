@@ -1,0 +1,41 @@
+{{>header}}
+
+<section>
+  <div class="image-container-client">
+    <div class="left-image-client">
+      <a href='/clients' name="24EME" id="monBouton1">
+        <img src="/assets/images/24eme_logo.svg" alt="Image 1"  >
+      </a>
+    </div>
+    <div class="right-image-client">
+      <a href="#" name="Marcopolette" id="monBouton2">
+        <img src="/assets/images/marcopolette_logo.png" alt="Image 2"  >
+      </a>
+    </div>
+  </div>
+</section>
+
+{{>footer}}
+
+<script>
+  // Sélectionner le bouton à écouter
+  const buttons = document.querySelectorAll('[id^="monBouton"]');
+  buttons.forEach(button => {
+    button.addEventListener('click', event => {
+
+      const entreprise = button.name;
+      console.log(entreprise);
+      // Effectuer une requête fetch pour envoyer les données du formulaire
+      fetch('/selectionClientPage', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ entreprise})
+      })
+
+        .catch(error => console.error(error));
+
+    });
+  });
+</script>

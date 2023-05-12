@@ -1,44 +1,48 @@
-{{> header}} 
+{{> header}}
 
 <section>
-      <div class="container">
-          <div class="row">
-              <div class="col-lg">
-                  <div class="clients-container">
-                    <h1 class="h1-clients">Bienvenue 24ème ! </h1>
-                    <div class="separator_center"></div>
-                    <h2 class="h2-clients"> &#127835; Aujourd'hui, je veux commander pour &#127790; </h2> 
+  <div class="container">
+    <div class="row">
+      <div class="col-lg">
+        <div class="clients-container">
+          <h1 class="h1-clients">Bienvenue 24ème ! </h1>
+          <div class="separator_center"></div>
+          <h2 class="h2-clients"> &#127835; Aujourd'hui, je veux commander pour &#127790; </h2>
+          <div class="list-group border-clients">
+            <li class="list-group-item">
+              {{#each data.data.entreprises.[0].employes}}
+                <ul class="client-ul">
+                  <a href='/plats'>
+                    <input type="submit" class="btn-clients text-white" id="employeButton{{@index}}" name="{{this.id}}" value="{{this.name}}" style="margin-bottom: 5px; width: 150px"/>
+                  </a>
+                </ul>
 
-                    <div class="list-group border-clients">
-                        <li class="list-group-item">{{#each data.data.entreprises.[0].employes}}
-                            <ul class="clients-ul"> <button onclick="window.location = '/plats'" type="button" class="btn-clients text-white " id="employeButton{{@index}}" title="{{this.id}}"> {{this.name}}
-                            </button></ul>
-                            {{/each}}                            
-                        </li>                   
-                    </div>
+              {{/each}}
 
-                
-                  </div>
-              </div>
+            </li>
           </div>
+
+
+        </div>
       </div>
+    </div>
+  </div>
 </section>
 
-            <script>
- 
+<script>
+
   const allButton = document.querySelectorAll('[id^="employeButton"]');
   allButton.forEach(button => {
   button.addEventListener('click', (event) => {
-  const buttonText = event.target.textContent;
-  const id = event.target.title;
+  const buttonText = event.target.value;
+  const id = event.target.name;
   const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/clients1');
+    xhr.open('POST', '/clients');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({ buttonText, id }));
 
+    });
 
-});
-    
   });
 </script>
 

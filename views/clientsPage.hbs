@@ -13,7 +13,7 @@
               {{#each data.data.entreprises.[0].employes}}
                 <ul class="client-ul">
                   <a href='/plats'>
-                    <input type="submit" class="btn-clients text-white" id="employeButton{{@index}}" title="{{this.id}}" value="{{this.name}}" style="margin-bottom: 5px; width: 150px"/>
+                    <input type="submit" class="btn-clients text-white" id="employeButton{{@index}}" name="{{this.id}}" value="{{this.name}}" style="margin-bottom: 5px; width: 150px"/>
                   </a>
                 </ul>
 
@@ -33,14 +33,13 @@
 
   const allButton = document.querySelectorAll('[id^="employeButton"]');
   allButton.forEach(button => {
-    button.addEventListener('click', (event) => {
-      const buttonText = event.target.value;
-      const id = event.target.title;
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', '/clients1');
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.send(JSON.stringify({ buttonText, id }));
-
+  button.addEventListener('click', (event) => {
+  const buttonText = event.target.value;
+  const id = event.target.name;
+  const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/clients');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ buttonText, id }));
 
     });
 

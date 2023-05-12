@@ -4,25 +4,26 @@
   <div class="container">
     <div class="row">
       <div class="restaurant-container">
-        <h1 class="h1-restaurant">Liste des commandes passées par {{enterprise}} et qui doivent être livrées à {{time}}</h1>
+        <h1 class="h1-restaurant">Liste des commandes passées par {{entreprise}} et qui doivent être livrées à {{time}} :</h1>
         <ul>
           {{#each commandes}}
           <li>
-            <h3>Commande n°{{this.id_commande}}</h3>
-            <p>Nom du Client: {{this.client.nom}}</p>
-            <p>Plats :</p>
-            <ul>
+            <h2>	&#129369; Commande n°{{this.id_commande}} 	&#129369;</h2>
+            <h3 classe ="info-titre"> ❥ Nom du Client: </h3>
+             <h4> {{this.client.nom}}</h4>
+            <h3 classe ="info-titre"> ❥ Plats :</h3>
+            <ul >
               {{#each this.commandePlats}}
-              <li>{{this.plat.nom_plat}}</li>
+              <li> <h4 classe ="info-titre"> {{this.plat.nom_plat}}</h4></li>
               {{/each}}
             </ul>
             {{#if this.commandeSupplements}}
-              <p>Suppléments :</p>
+              <h3 classe ="info-titre "> ❥ Suppléments: </h3>
               <ul>
                 {{#each this.commandeSupplements}}
-                  <li>{{this.supplement.nom_supplement}}</li>
+                  <li> <h4 classe ="info-titre"> {{this.supplement.nom_supplement}} </h4></li>
                 {{/each}}
-              </ul>
+              </ul >
             {{/if}}
           </li>
           {{/each}}

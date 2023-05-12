@@ -1472,18 +1472,7 @@ Footer Section style
     width: 400px;
 }
 
-.btn-previous {
-    margin-left: 40px;
-    margin-bottom: 40px;
-    width: 140px;
-}
 
-.btn-next {
-    float: right;
-    margin-right: 40px;
-    margin-bottom: 40px;
-    width: 140px;
-}
 
 #marcoBouton {
     cursor: pointer;
@@ -1580,4 +1569,21 @@ text-transform: uppercase;
 font-size:13px;
 font-weight: 500;
 padding: 1em;
+}
+
+
+.container-prev-next {
+    margin: auto 42em;
+    margin-bottom: 2em;
+}
+
+  .btn-previous {
+    float: left;
+    width: 140px;
+    margin: 0 auto;;
+}
+
+.btn-next {
+    float: right;
+    width: 140px;
 }

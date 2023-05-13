@@ -1,33 +1,61 @@
 {{> header}}
-
 <section>
   <div class="container">
     <div class="row">
-      <div class="restaurant-container">
-        <h1 class="h1-restaurant">Liste des commandes passées par {{entreprise}} et qui doivent être livrées à {{time}} :</h1>
-        <ul>
+      <div class="restaurant-cont">
+        <h1 class="h1-restaurant">Liste des commandes passées par {{enterprise}} et qui doivent être livrées à {{time}}</h1>
+        <div class="commandes-container row">
           {{#each commandes}}
-          <li>
-            <h2>	&#129369; Commande n°{{this.id_commande}} 	&#129369;</h2>
-            <h3 classe ="info-titre"> ❥ Nom du Client: </h3>
-             <h4> {{this.client.nom}}</h4>
-            <h3 classe ="info-titre"> ❥ Plats :</h3>
-            <ul >
-              {{#each this.commandePlats}}
-              <li> <h4 classe ="info-titre"> {{this.plat.nom_plat}}</h4></li>
-              {{/each}}
-            </ul>
+          <div class="col-md-4 commandes-box">
+            <h3 class="commandes-title">Commande n°{{this.id_commande}}</h3>
+            <p class="commandes-info">❥ Nom du Client: {{this.client.nom}}</p>
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="commandes-subtitle">❥ Plats :</h4>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nom</th>
+                      <th scope="col">Quantité</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each this.commandePlats}}
+                    <tr>
+                      <td>{{this.plat.nom_plat}}</td>
+                      <td>{{this.quantite}}</td>
+                    </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
             {{#if this.commandeSupplements}}
-              <h3 classe ="info-titre "> ❥ Suppléments: </h3>
-              <ul>
-                {{#each this.commandeSupplements}}
-                  <li> <h4 classe ="info-titre"> {{this.supplement.nom_supplement}} </h4></li>
-                {{/each}}
-              </ul >
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="commandes-subtitle">❥ Suppléments :</h4>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nom</th>
+                      <th scope="col">Quantité</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each this.commandeSupplements}}
+                    <tr>
+                      <td>{{this.supplement.nom_supplement}}</td>
+                      <td>{{this.quantite}}</td>
+                    </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
             {{/if}}
-          </li>
+          </div>
           {{/each}}
-        </ul>
+        </div>
       </div>
     </div>
   </div>

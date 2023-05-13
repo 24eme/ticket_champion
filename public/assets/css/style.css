@@ -1710,3 +1710,39 @@ body {
     float: left;
     background-color: salmon;
 }
+
+
+/* CommanesInfo page CSS */
+  
+.commandes-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .commandes-info {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  @media (min-width: 768px) {
+    .commandes-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    .commandes-box {
+      margin-right: 30px;
+      margin-bottom: 30px;
+      width: calc(33.33% - 30px);
+      background-color: salmon
+    }
+  
+    .commandes-box:last-child {
+      margin-right: 0;
+    }
+
+    .restaurant-cont{
+        text-align: left;
+    }
+  }
+  

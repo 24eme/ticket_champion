@@ -1453,7 +1453,7 @@ Footer Section style
 }
 
 .texte-intro {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
 }
 
 .nom-du-plat {
@@ -1755,5 +1755,5 @@ body {
     .restaurant-cont{
         text-align: left;
     }
-  }
+}
   

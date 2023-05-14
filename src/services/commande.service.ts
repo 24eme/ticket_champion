@@ -7,12 +7,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeepPartial, Repository, } from 'typeorm';
 import { Commande } from 'src/typeorm/entities/Commande';
 import { Client } from 'src/typeorm/entities/Client';
-import { CommandModel } from 'src/utils/types';
-import * as fs from 'fs';
 import { Plat } from 'src/typeorm/entities/Plat';
 import { Supplement } from 'src/typeorm/entities/Supplement';
 import { CommandeSupplement } from 'src/typeorm/entities/CommandeSupplement';
 import { CommandePlat } from 'src/typeorm/entities/CommandePlat';
+import * as fs from 'fs';
 
 
 @Injectable()

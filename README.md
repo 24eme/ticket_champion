@@ -12,6 +12,8 @@
 - choose your db username
 - choose your db password
 - choose the name of your db
+- create a new database with the name chosen before
+- connect to the database
 - run `npm install` at the root of the project
 - run `systemctl start mysql` to start Mysql DB
 - run `npm run start:dev` to start developing

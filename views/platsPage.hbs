@@ -84,6 +84,11 @@
           delete commande[plat];
           recapCommande.removeChild(item);
           updateTotal();
+
+          // Supprimer l'élément correspondant dans le DTO
+          const xhr = new XMLHttpRequest();
+          xhr.open('DELETE', `/plats/${plat}`);
+          xhr.send();
         });
         item.innerHTML += `${commande[plat].quantite} x ${plat} - ${commande[plat].prix}€`;
         item.appendChild(deleteButton);

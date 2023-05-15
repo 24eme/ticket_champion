@@ -27,7 +27,7 @@
         <div class="restaurant-container">
             <div>
                 <a href='/confirmation'>
-                    <input type="submit" class="btn btn-primary btn-lg btn-valider m-bottom-70" value="Valider" style="border-radius: 15px;"/>
+                    <input type="submit" class="btn btn-primary btn-lg btn-valider m-bottom-70" value="Valider" style="border-radius: 15px;"disabled/>
                 </a>
             </div>
         </div>
@@ -36,6 +36,8 @@
 
 <script>
     const allButton = document.querySelectorAll('.time-item');
+    const boutonValider = document.querySelector('.btn-valider');
+
     allButton.forEach(button => {
         button.addEventListener('click', (event) => {
             // Désactiver tous les boutons
@@ -49,6 +51,9 @@
             // Désactiver le bouton cliqué
             currentButton.classList.add('disabled');
 
+            // Activer le bouton de validation
+            boutonValider.disabled = false;
+
             // Envoyer la valeur du bouton au serveur
             const xhr = new XMLHttpRequest();
             xhr.open('POST', '/heurelivraison');
@@ -56,6 +61,7 @@
             xhr.send(JSON.stringify({ buttonText: currentButton.dataset.value }));
         });
     });
+
 </script>
 
 {{> footer}}

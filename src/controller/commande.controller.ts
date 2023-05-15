@@ -58,13 +58,14 @@ export class CommandeController {
   @Post('/plats')
   handlePostRequestPlat(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
 
-    if(this.commandeDto.plats.find(plat => plat.nom_plat === buttonText) == undefined  )
-
-    {let plat = new CreatePlatDto();
+    if(this.commandeDto.plats.find(plat => plat.nom_plat === buttonText) == undefined  ){
+      let plat = new CreatePlatDto();
       plat.nom_plat = buttonText;
       plat.quantite = 1;
-      this.commandeDto.plats.push(plat);}
-      else {this.commandeDto.plats.find(plat => plat.nom_plat === buttonText).quantite ++;}
+      plat.prix = Number(prix);
+      this.commandeDto.plats.push(plat);
+      
+    }else {this.commandeDto.plats.find(plat => plat.nom_plat === buttonText).quantite ++;}
     this.commandeDto.montant_Commande += Number(prix);
 
   }
@@ -73,19 +74,19 @@ export class CommandeController {
   @Render('supplementsPage')
   async supp() {
     const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
-    return {data: data};
+    return {data: data, plats : this.commandeDto.plats, montant : this.commandeDto.montant_Commande};
 
   }
 
   @Post('/supplements')
   handlePostRequestSupplement(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
-    if(this.commandeDto.supplements.find(supplement => supplement.nom_supplement === buttonText) == undefined  )
-
-    {let supplement = new CreateSupplementtDto();
+    if(this.commandeDto.supplements.find(supplement => supplement.nom_supplement === buttonText) == undefined  ){
+      let supplement = new CreateSupplementtDto();
       supplement.nom_supplement = buttonText;
       supplement.quantite = 1;
-      this.commandeDto.supplements.push(supplement);}
-      else {this.commandeDto.supplements.find(suplement => suplement.nom_supplement === buttonText).quantite ++;}
+      this.commandeDto.supplements.push(supplement);
+
+    }else {this.commandeDto.supplements.find(suplement => suplement.nom_supplement === buttonText).quantite ++;}
     this.commandeDto.montant_Commande += Number(prix);
 
     console.log(this.commandeDto.id_client);

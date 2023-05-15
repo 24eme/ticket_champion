@@ -20,18 +20,29 @@
 </section>
 <div class="container">
   <div class="info">
-    <ul class="row">
-      {{#each data}}
-      <li class="col-sm-6">
-        <h3 class="h1-restaurant">A {{this.heure_de_livraison}}, vous avez :</h3>
-        <a href="/commandesInfo">
-          <input type="submit" id="{{this.entreprise}}" class="btn btn-primary btn-lg commande" name="{{this.heure_de_livraison}}" value="{{this.nombreCommandes}} commande(s) pour {{this.entreprise}}" style="border-radius: 15px;" />
-        </a>
-      </li>
-      {{/each}}
-    </ul>
+    {{#if data}}
+      <ul class="row">
+        {{#each data}}
+        <li class="col-sm-6">
+          <h3 class="h1-restaurant">A {{this.heure_de_livraison}}, vous avez :</h3>
+          <a href="/commandesInfo">
+            <input type="submit" id="{{this.entreprise}}" class="btn btn-primary btn-lg commande" name="{{this.heure_de_livraison}}" value="{{this.nombreCommandes}} commande(s) pour {{this.entreprise}}" style="border-radius: 15px;" />
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+    {{else}}
+      <center>
+      <h3 class="h1-restaurant m-top-30">Pas de commande aujourd'hui.</h3>
+      </center>
+      <div  class="kid-cook-container">
+        <img class="" src="/assets/images/kid-cook.jpg" style="border-radius: 15px; width: 400px; height: auto;">
+      </div>
+      
+    {{/if}}
   </div>
 </div>
+
 <script src="assets/js/vendor/restaurantPage.js"></script>
 
 {{> footer}}

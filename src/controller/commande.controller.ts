@@ -24,13 +24,13 @@ export class CommandeController {
   @Get('clients')
   @Render('clientsPage')
   async employes() {
-
-    const data = await this.commandeService.getDataFromjson('config/clientsconfig.json');
-    return {data: data};
+    const listEmployee = await this.commandeService.getClientByEntreprise(this.commandeDto.entreprise);
+    return {listEmployee : listEmployee};
   }
 
   @Post('/selectionClientPage')
-  handlePostRequest(@Body('entreprise') texteSurBouton: string) {
+  async handlePostRequest(@Body('entreprise') entreprise: string) {
+    this.commandeDto.entreprise = entreprise;
     this.commandeDto.nom_employee = "";
     this.commandeDto.plats = [];
     this.commandeDto.supplements = [];
@@ -39,7 +39,7 @@ export class CommandeController {
   }
 
   @Post('/clients')
-  handlePostRequestClient(@Body('buttonText') buttonText: string, @Body('id') id: string) {
+  async handlePostRequestClient(@Body('buttonText') buttonText: string, @Body('id') id: string) {
     this.commandeDto.nom_employee = `${buttonText}`;
     this.commandeDto.id_client = Number(id);
     this.commandeDto.plats = [];

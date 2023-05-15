@@ -340,7 +340,8 @@ h4 {
     line-height: 2.2rem;
 }
 h5 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+    color: salmon;
 }
 h6 {
     font-size: 1.3rem;
@@ -1452,7 +1453,7 @@ Footer Section style
 }
 
 .texte-intro {
-    padding-top: 40px;
+    font-size: 2.5rem;
 }
 
 .nom-du-plat {
@@ -1501,7 +1502,7 @@ Footer Section style
     margin-left: 723px;
 
 }
-/* Center align the title */
+
 .texte-intro {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -1618,11 +1619,11 @@ Footer Section style
 .container-card {
     margin: auto 10px;
     margin-block-end: 10em;
-    /* width: 60%; */
+    height: 400px;
 }
 
 .card-plats, .supplement-item {
-    width: 15rem;
+    width: 300px;
     padding: 0;
     margin-right: 30px;
     text-align: center;
@@ -1631,6 +1632,7 @@ Footer Section style
 
 .card-title {
     margin-top: 1em;
+    font-weight: bold;
 }
 
 .liste-ingredients {
@@ -1651,19 +1653,29 @@ Footer Section style
 
 .container-prev-next {
     margin-bottom: 4em;
+    
 }
 
 .btn-previous {
     float: left;
     width: 140px;
-    margin: 0 auto;;
+    background-color: grey;
+    margin-left: 650px;
 }
 
 .btn-next {
     float: right;
     width: 140px;
+    margin-right: 650px;
 }
 
+#recap-commande {
+    margin-top: -50px;
+    font-size: 0.8em;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
 /* supplementsPage CSS */
 .supplements-list {
     display: flex;
@@ -1681,9 +1693,9 @@ Footer Section style
     margin: 1rem;
 }
 
-.supplement-image {
-    width: 250px;
-    height: 250px;
+.card-img-top {
+    width: 550px;
+    height: 300px;
     object-fit: cover;
 }
 
@@ -1691,13 +1703,6 @@ Footer Section style
     margin: auto;
 }
 
-.btn-next{
-    margin-right: 800px;
-}
-
-.btn-previous{
-    margin-left: 400px;
-}
 
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1706,7 +1711,49 @@ body {
     color: #333;
 }
 
-.col-md-4{
+.col-md-1{
     float: left;
+    width: 20%;
+    margin-right: 2%;
     background-color: salmon;
 }
+
+#recap-section {
+    margin-top: -20px;
+  }
+  
+
+/* CommanesInfo page CSS */
+  
+.commandes-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .commandes-info {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  @media (min-width: 768px) {
+    .commandes-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    .commandes-box {
+      margin-right: 30px;
+      margin-bottom: 30px;
+      width: calc(33.33% - 30px);
+      background-color: salmon
+    }
+  
+    .commandes-box:last-child {
+      margin-right: 0;
+    }
+
+    .restaurant-cont{
+        text-align: left;
+    }
+}
+  

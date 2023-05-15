@@ -1,38 +1,34 @@
 {{> header}} 
 
 <section>
-      <div class="container">
-          <div class="row">
-              <div class="restaurant-container">
-                      <h1 class="h1-restaurant">Bienvenue Champion &#128525;!</h1>
-                      <div class="separator_restaurant m-bottom-20"></div> 	
-                      <a href='/historique'>
-                  <input type="submit" class="btn-restaurant  text-white" value="Historique"/>
-                </a>
-                       <h2 class="h2-clients m-top-80"> &#129369; Aujourd'hui, Vous devez préparer les commandes suivantes : </h2>
-                       <h4> Cliquer sur le bouttons pour consulter les détails de commandes par heure de laivraison &#128513;</h4> 
-                       
-              </div>
-          </div>
+  <div class="container">
+    <div class="row">
+      <div class="restaurant-container">
+        <h1 class="h1-restaurant">Bienvenue Champion &#128525;!</h1>
+        <div class="separator_restaurant m-bottom-20"></div>
+        <a href="/historique">
+          <input type="submit" class="btn-restaurant text-white" value="Historique" />
+        </a>
+        <h2 class="h2-clients m-top-80">&#129369; Aujourd'hui, vous devez préparer les commandes suivantes :</h2>
+        <h4>Cliquez sur les boutons pour consulter les détails de commandes par heure de livraison &#128513;</h4>
       </div>
+    </div>
+  </div>
 </section>
-
-
-{{!-- <form action="/commandesInfo" method="POST"> --}}
-<div>
-    <div class="container">
-        <div class="">
-            <ul>  {{#each data}}
-                <h3 class="h1-restaurant"> A {{this.heure_de_livraison}} vous avez : </h3>
-                    <li> <a href="/commandesInfo"> <input type = "submit"  id="{{this.entreprise}}" class="btn btn-primary btn-lg commande" name="{{this.heure_de_livraison}}" value="{{this.nombreCommandes}} pour le {{this.entreprise}}" /> </a>
-                    
-                    </li>
-                {{/each}}
-                </ul>
-            </div>
-        </div>
+<div class="container">
+  <div class="info">
+    <ul class="row">
+      {{#each data}}
+      <li class="col-md-4 col-sm-6">
+        <h3 class="h1-restaurant">A {{this.heure_de_livraison}}, vous avez :</h3>
+        <a href="/commandesInfo">
+          <input type="submit" id="{{this.entreprise}}" class="btn btn-primary btn-lg commande" name="{{this.heure_de_livraison}}" value="{{this.nombreCommandes}} pour {{this.entreprise}}" />
+        </a>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
 </div>
+<script src="assets/js/vendor/restaurantPage.js"></script>
 
-
-  <script src="assets/js/vendor/restaurantPage.js"></script>
 {{> footer}}

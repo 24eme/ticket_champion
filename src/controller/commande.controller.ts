@@ -70,6 +70,15 @@ export class CommandeController {
 
   }
 
+  //pour supprimer un plat
+  @Delete('/plats/:plat')
+  handleDeleteRequestPlat(@Param('plat') plat: string) {
+    const platIndex = this.commandeDto.plats.findIndex((p) => p.nom_plat === plat);
+    if (platIndex !== -1) {
+      this.commandeDto.plats.splice(platIndex, 1);
+    }
+  }
+
   @Get('supplements')
   @Render('supplementsPage')
   async supp() {

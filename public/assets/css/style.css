@@ -1456,10 +1456,6 @@ Footer Section style
     font-size: 2.5rem;
 }
 
-.nom-du-plat {
-    padding-top: 10px;
-}
-
 .plat-parent {
     border: none;
 }
@@ -1633,10 +1629,12 @@ Footer Section style
 .card-title {
     margin-top: 1em;
     font-weight: bold;
+    color: #d46864;
 }
 
 .liste-ingredients {
     padding: 1em auto;
+    color: gray;
 }
 .bouton-plats {
     color: #fff;

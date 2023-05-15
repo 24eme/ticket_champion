@@ -109,6 +109,14 @@ export class CommandeService {
     return queryBuilder.getRawMany();
   }
 
+  async getClientByEntreprise(entreprise: string): Promise<any> {
+    const queryBuilder = this.clientRepository
+      .createQueryBuilder('client')
+      .select('client.*')
+      .where('client.entreprise = :entreprise', { entreprise: entreprise });
+    return queryBuilder.getRawMany();
+  }  
+  
   async getTotalCostCommandesGroupedByEntreprise(): Promise<any> {
     const queryBuilder = this.commandeRepository
       .createQueryBuilder('commande')

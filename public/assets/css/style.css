@@ -1785,6 +1785,12 @@ body {
 
 .adaptative-div {
     display: flex;
-    min-height: 100vh;
+    min-height: 80vh;
+    flex-direction: column;
+}
+
+.adaptative-div-restaurant {
+    display: flex;
+    min-height: 45vh;
     flex-direction: column;
 }

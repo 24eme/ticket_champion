@@ -8,6 +8,7 @@ export class CreateCommandeDto {
     supplements : CreateSupplementtDto[];
     montant_Commande : number;
     date_livraison : string;
+    entreprise : string;
 }
 
 

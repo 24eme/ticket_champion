@@ -25,7 +25,7 @@ export class CommandeController {
   @Render('clientsPage')
   async employes() {
     const listEmployee = await this.commandeService.getClientByEntreprise(this.commandeDto.entreprise);
-    return {listEmployee : listEmployee};
+    return {listEmployee : listEmployee, entreprise : this.commandeDto.entreprise};
   }
 
   @Post('/selectionClientPage')

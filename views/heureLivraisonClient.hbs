@@ -26,14 +26,14 @@
 
         <div class="restaurant-container">
             <div>
-              <input type="checkbox" id="modal" class="btn btn-primary btn-lg m-bottom-70">
-              <label for="modal" class="btn btn-primary btn-lg m-bottom-70">Recapitulatif de la commande</label>
-              <label for="modal" class="modal-background"></label>
-              <div class="modal">
-                <div class="modal-header">
+              <input type="checkbox" id="modal-confirmation">
+              <label for="modal-confirmation" class="btn btn-primary btn-lg m-bottom-70" style="border-radius: 15px">Recapitulatif de la commande</label>
+              <label for="modal-confirmation" class="modal-background"></label>
+              <div class="modal-confirmation">
+                <div class="modal-confirmation-header">
                   <h3>Votre commande</h3>
-                  <label for="modal">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC" width="16" height="16" alt="" style="margin-bottom: 10px">
+                  <label for="modal-confirmation">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC" width="16" height="16" alt="">
                   </label>
                 </div>
                 <p>Contenu de la commande</p>
@@ -45,18 +45,13 @@
         </div>
     </div>
 
-
-
-<!--  <a href='/confirmation'>
-    <input type="submit" class="btn btn-primary btn-lg btn-valider m-bottom-70" value="Valider" style="border-radius: 15px;"/>
-  </a>-->
 </section>
 
 <style>
   input[type="checkbox"] {
     display:none;
   }
-  input[type="checkbox"]:checked ~ .modal,
+  input[type="checkbox"]:checked ~ .modal-confirmation,
   input[type="checkbox"]:checked ~ .modal-background {
     display: block;
   }
@@ -70,7 +65,7 @@
     display: none;
     z-index: 9998;
   }
-  .modal {
+  .modal-confirmation {
     position: fixed;
     top: 0;
     left: 0;
@@ -84,17 +79,17 @@
     box-sizing: border-box;
     z-index: 9999;
   }
-  .modal > p {
+  .modal-confirmation > p {
     padding: 15px;
     margin: 0;
   }
-  .modal-header {
+  .modal-confirmation-header {
     background-color: #f9f9f9;
     border-bottom: 1px solid #dddddd;
     box-sizing: border-box;
     height: 50px;
   }
-  .modal-header h3 {
+  .modal-confirmation-header h3 {
     margin: 0;
     box-sizing: border-box;
     padding-left: 15px;
@@ -103,7 +98,7 @@
     font-size: 16px;
     display: inline-block;
   }
-  .modal-header label {
+  .modal-confirmation-header label {
     box-sizing: border-box;
     border-left: 1px solid #dddddd;
     float: right;
@@ -111,7 +106,7 @@
     padding: 0 15px 0 15px;
     cursor: pointer;
   }
-  .modal-header label:hover img {
+  .modal-confirmation-header label:hover img {
     opacity: 0.6;
   }
 </style>

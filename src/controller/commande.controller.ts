@@ -45,7 +45,6 @@ export class CommandeController {
     this.commandeDto.plats = [];
     this.commandeDto.supplements = [];
     this.commandeDto.montant_Commande = 0;
-
   }
 
   @Get('plats')

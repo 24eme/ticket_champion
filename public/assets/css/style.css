@@ -1121,7 +1121,7 @@ Nav Menu style
 Home Section style
 ==================*/
 .head{
-    background-color: #fed1c4;
+    background-color: #6a1c06;
     background-position: top;
     background-size: 100%;
     position: relative;
@@ -1755,5 +1755,18 @@ body {
     .restaurant-cont{
         text-align: left;
     }
+
+    .historique-container {
+        position: fixed;
+        margin-top: 50px;
+        margin-right: 50px;
+      }
+
+    .fixed-button {
+        position: fixed;
+        margin-top: 50px;
+        margin-right: 50px;
+      }
+      
 }
   

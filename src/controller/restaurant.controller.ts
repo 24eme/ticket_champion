@@ -17,6 +17,20 @@ export class RestaurantController {
         const result = await this.commandeService.getClientCommandesGroupedByEntreprise();
         return { data: result };
     }
+
+    @Post('restaurant')
+    //@Render('restaurantPage')
+    async envoirestaurantinfo(@Body() body: any, @Req() req : Request) {
+      console.log(req.body);
+      const keys = Object.keys(req.body);
+      const values = Object.values(req.body)[0].split(' ');
+      const nombre = values[0];
+      const entreprise  = values[values.length - 1];
+      console.log(entreprise); 
+      console.log(nombre);
+      console.log(keys);
+    }
+    
   
     @Post('/commandesInfo')
     //@Render('commandesInfoPage')

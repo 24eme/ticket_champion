@@ -17,28 +17,21 @@
       </div>
     </div>
   </div>
-
 </section>
 <section class="adaptative-div-restaurant">
 <div class="container">
   <div class="info">
-    <form action="/restaurant" method="POST">
-      <div>
     {{#if data}}
       <ul class="row">
         {{#each data}}
         <li class="col-sm-6">
           <h3 class="h1-restaurant">A {{this.heure_de_livraison}}, vous avez :</h3>
-            <input type="submit" class="btn btn-primary btn-lg commande" name="{{this.heure_de_livraison}}" value="{{this.nombreCommandes}} commande(s) pour {{this.entreprise}}" style="border-radius: 15px;" />
+          <a href="/commandesInfo">
+            <input type="submit" id="{{this.entreprise}}" class="btn btn-primary btn-lg commande" name="{{this.heure_de_livraison}}" value="{{this.nombreCommandes}} commande(s) pour {{this.entreprise}}" style="border-radius: 15px;" />
+          </a>
         </li>
-        
         {{/each}}
-      </ul> </div>     
-        
-
-</form>
-
-
+      </ul>
     {{else}}
       <center>
       <h3 class="h1-restaurant m-top-30">Pas de commande aujourd'hui.</h3>
@@ -51,5 +44,7 @@
   </div>
 </div>
 </section>
+
+<script src="assets/js/vendor/restaurantPage.js"></script>
 
 {{> footer}}

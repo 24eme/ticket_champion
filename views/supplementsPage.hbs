@@ -26,7 +26,8 @@
         <h2 class="text-center texte-intro" style="font-size: 1.5rem">Panier</h2>
         <ul id="recap-commande">
         {{#each plats}}
-        <li> {{this.quantite}} x {{this.nom_plat}} - {{this.prix}}€</li> {{/each}}
+        <li> {{this.quantite}} x {{this.nom_plat}} - {{this.prix}}€</li> 
+        {{/each}}
         </ul>
         <ul><li>Total : <span id="total-amount" class="montant">{{montant}}</span></li></ul>
       </section>
@@ -74,10 +75,8 @@
         const existingItem = recapCommande.querySelector(`li[data-nom-plat="${supplement}"]`);
         if (existingItem) {
           const quantite = commande[supplement].quantite;
-          const prixUnitaire = commande[supplement].prix;
-          const prixTotal = quantite * prixUnitaire;
-          existingItem.textContent = `${quantite} x ${supplement} - ${prixTotal}€`;
-          total += prixTotal;
+          existingItem.textContent = `${quantite} x ${supplement} - ${commande[supplement].prix}€`;
+          total += quantite * commande[supplement].prix;
         } else {
           const item = document.createElement('li');
           const quantite = commande[supplement].quantite;
@@ -102,8 +101,6 @@
     });
   });
 </script>
-
-
 
 
 {{> footer}}

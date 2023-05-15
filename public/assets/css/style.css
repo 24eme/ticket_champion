@@ -153,7 +153,7 @@ body {
 
 
 /*
-    Spacing & Alignment 
+    Spacing & Alignment
 ------------------------------------------*/
 
 .B1 {
@@ -1121,7 +1121,7 @@ Nav Menu style
 Home Section style
 ==================*/
 .head{
-    background-color: #fed1c4;
+    background-color: lightcoral;
     background-position: top;
     background-size: 100%;
     position: relative;
@@ -1653,7 +1653,7 @@ Footer Section style
 
 .container-prev-next {
     margin-bottom: 4em;
-    
+
 }
 
 .btn-previous {
@@ -1675,7 +1675,7 @@ Footer Section style
     padding: 10px;
     max-height: 200px;
     overflow-y: auto;
-  }
+}
 /* supplementsPage CSS */
 .supplements-list {
     display: flex;
@@ -1720,40 +1720,53 @@ body {
 
 #recap-section {
     margin-top: -20px;
-  }
-  
+}
+
 
 /* CommanesInfo page CSS */
-  
+
 .commandes-title {
     font-size: 24px;
     margin-bottom: 20px;
-  }
-  
-  .commandes-info {
+}
+
+.commandes-info {
     font-size: 18px;
     margin-bottom: 10px;
-  }
-  
-  @media (min-width: 768px) {
+}
+
+@media (min-width: 768px) {
     .commandes-container {
-      display: flex;
-      flex-wrap: wrap;
+        display: flex;
+        flex-wrap: wrap;
     }
-  
+
     .commandes-box {
-      margin-right: 30px;
-      margin-bottom: 30px;
-      width: calc(33.33% - 30px);
-      background-color: salmon
+        margin-right: 30px;
+        margin-bottom: 30px;
+        width: calc(33.33% - 30px);
+        background-color: salmon
     }
-  
+
     .commandes-box:last-child {
-      margin-right: 0;
+        margin-right: 0;
     }
 
     .restaurant-cont{
         text-align: left;
     }
 }
-  
+
+.list-group-item {
+    border-radius: 15px !important;
+}
+
+.shadowed-div {
+    box-shadow: 0 7px 4px rgba(0, 0, 0, 0.2);
+}
+
+.adaptative-div {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}

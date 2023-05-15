@@ -1755,6 +1755,26 @@ body {
     .restaurant-cont{
         text-align: left;
     }
+
+    .historique-container {
+        position: fixed;
+        margin-top: 50px;
+        margin-right: 50px;
+      }
+
+    .fixed-button {
+        position: fixed;
+        margin-top: 50px;
+        margin-right: 50px;
+      }
+
+      .kid-cook-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 70vh;
+      }
+      
 }
 
 .list-group-item {

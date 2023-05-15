@@ -102,7 +102,9 @@ export class CommandeService {
       .addSelect('COUNT(commande.id_commande)', 'nombreCommandes')
       .groupBy('client.entreprise')
       .addGroupBy('commande.heure_de_livraison')
-      .having('COUNT(commande.id_commande) > :id', { id: 0 });
+      .having('COUNT(commande.id_commande) > :id', { id: 0 })
+      .orderBy('commande.heure_de_livraison', 'ASC'); // Tri croissant
+      
 
     return queryBuilder.getRawMany();
   }

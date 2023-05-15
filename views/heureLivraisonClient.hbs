@@ -1,139 +1,88 @@
 {{> header}}
 
 <style>
-    .time-item.disabled {
-        background-color: grey;
-        cursor: not-allowed;
-    }
+  .time-item.disabled {
+    background-color: grey;
+    cursor: not-allowed;
+  }
 </style>
 
 <section style="align-items: center;">
-    <h2 class="text-center texte-intro">A quelle heure souhaites-tu récupérer ta commande ? ⏰</h2>
-    <div class="container row text-center">
-        <div class="sauver" id="" style="width: 160px;">
-            <ul>
-                <li class="btn btn-primary time-item m-bottom-20" data-value="12h00" style="border-radius: 15px;">12h00</li>
-                <li class="btn btn-primary time-item m-bottom-20" data-value="12h30" style="border-radius: 15px;">12h30</li>
-                <li class="btn btn-primary time-item m-bottom-20" data-value="13h00" style="border-radius: 15px;">13h00</li>
-                <li class="btn btn-primary time-item m-bottom-20" data-value="13h30" style="border-radius: 15px;">13h30</li>
-                <li class="btn btn-primary time-item m-bottom-20" data-value="14h00" style="border-radius: 15px;">14h00</li>
-            </ul>
-        </div>
-
-        <div class="gif-container">
-            <img class="cook-gif" src="/assets/images/cook.gif" style="border-radius: 15px;">
-        </div>
-
-        <div class="restaurant-container">
-            <div>
-              <input type="checkbox" id="modal-confirmation">
-              <label for="modal-confirmation" class="btn btn-primary btn-lg m-bottom-70" style="border-radius: 15px">Recapitulatif de la commande</label>
-              <label for="modal-confirmation" class="modal-background"></label>
-              <div class="modal-confirmation">
-                <div class="modal-confirmation-header">
-                  <h3>Votre commande</h3>
-                  <label for="modal-confirmation">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC" width="16" height="16" alt="">
-                  </label>
-                </div>
-                <p>Contenu de la commande</p>
-                <a href='/confirmation'>
-                  <input type="submit" class="btn btn-primary btn-lg m-bottom-70" value="Valider" style="border-radius: 15px;"/>
-                </a>
-              </div>
-            </div>
-        </div>
+  <h2 class="text-center texte-intro">A quelle heure souhaites-tu récupérer ta commande ? ⏰</h2>
+  <div class="container row text-center">
+    <div class="sauver" id="" style="width: 160px;">
+      <ul>
+        <li class="btn btn-primary time-item m-bottom-20" data-value="12h00" style="border-radius: 15px;">12h00</li>
+        <li class="btn btn-primary time-item m-bottom-20" data-value="12h30" style="border-radius: 15px;">12h30</li>
+        <li class="btn btn-primary time-item m-bottom-20" data-value="13h00" style="border-radius: 15px;">13h00</li>
+        <li class="btn btn-primary time-item m-bottom-20" data-value="13h30" style="border-radius: 15px;">13h30</li>
+        <li class="btn btn-primary time-item m-bottom-20" data-value="14h00" style="border-radius: 15px;">14h00</li>
+      </ul>
     </div>
+
+    <div class="gif-container">
+      <img class="cook-gif" src="/assets/images/cook.gif" style="border-radius: 15px;">
+    </div>
+
+    <div class="restaurant-container">
+      <div>
+        <input type="checkbox" id="modal-confirmation">
+        <label for="modal-confirmation" class="btn btn-primary btn-lg m-bottom-70" style="border-radius: 15px">Récapitulatif de la commande</label>
+        <label for="modal-confirmation" class="modal-background"></label>
+        <div class="modal-confirmation" style="height: 65%; width: 30%">
+          <div class="modal-confirmation-header">
+            <h3>Récapitulatif de la commande</h3>
+            <label for="modal-confirmation">
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC" width="16" height="16" alt="">
+            </label>
+          </div>
+          <p>{{command.nom_employee}}, pour</p>
+          <p id="heurePlaceHolder"></p>
+          <p style="font-weight: bold">Tu as choisis :</p>
+          {{#each command.plats}}
+            <p>{{this.quantite}} {{this.nom_plat}}</p>
+          {{/each}}
+          <p style="font-weight: bold">Accompagné de :</p>
+          {{#each command.supplements}}
+            <p>{{this.quantite}} {{this.nom_supplement}}</p>
+          {{/each}}
+          <p style="font-weight: bold">Pour un total de {{command.montant_Commande}}€.</p>
+          <a href='/confirmation'>
+            <input type="submit" class="btn btn-primary btn-lg m-bottom-70" value="Valider" style="border-radius: 15px;"/>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </section>
 
-<style>
-  input[type="checkbox"] {
-    display:none;
-  }
-  input[type="checkbox"]:checked ~ .modal-confirmation,
-  input[type="checkbox"]:checked ~ .modal-background {
-    display: block;
-  }
-  .modal-background {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: none;
-    z-index: 9998;
-  }
-  .modal-confirmation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    display: none;
-    width: 300px;
-    height: 300px;
-    background-color: #fff;
-    box-sizing: border-box;
-    z-index: 9999;
-  }
-  .modal-confirmation > p {
-    padding: 15px;
-    margin: 0;
-  }
-  .modal-confirmation-header {
-    background-color: #f9f9f9;
-    border-bottom: 1px solid #dddddd;
-    box-sizing: border-box;
-    height: 50px;
-  }
-  .modal-confirmation-header h3 {
-    margin: 0;
-    box-sizing: border-box;
-    padding-left: 15px;
-    line-height: 50px;
-    color: #4d4d4d;
-    font-size: 16px;
-    display: inline-block;
-  }
-  .modal-confirmation-header label {
-    box-sizing: border-box;
-    border-left: 1px solid #dddddd;
-    float: right;
-    line-height: 50px;
-    padding: 0 15px 0 15px;
-    cursor: pointer;
-  }
-  .modal-confirmation-header label:hover img {
-    opacity: 0.6;
-  }
-</style>
-
-
 <script>
-    const allButton = document.querySelectorAll('.time-item');
-    allButton.forEach(button => {
-        button.addEventListener('click', (event) => {
-            // Désactiver tous les boutons
-            allButton.forEach(btn => {
-                btn.classList.remove('disabled');
-            });
+  const allButton = document.querySelectorAll('.time-item');
+  const buttonContentPlaceholder = document.getElementById('heurePlaceHolder');
+  allButton.forEach(button => {
+    button.addEventListener('click', (event) => {
+      // Désactiver tous les boutons
+      allButton.forEach(btn => {
+        btn.classList.remove('disabled');
+      });
 
-            // Récupérer le bouton cliqué
-            const currentButton = event.target;
+      // Récupérer le bouton cliqué
+      const currentButton = event.target;
 
-            // Désactiver le bouton cliqué
-            currentButton.classList.add('disabled');
+      // Désactiver le bouton cliqué
+      currentButton.classList.add('disabled');
 
-            // Envoyer la valeur du bouton au serveur
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', '/heurelivraison');
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(JSON.stringify({ buttonText: currentButton.dataset.value }));
-        });
+      buttonContentPlaceholder.textContent = currentButton.textContent;
+
+      // Envoyer la valeur du bouton au serveur
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/heurelivraison');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({ buttonText: currentButton.dataset.value }));
     });
+  });
+
 </script>
 
 {{> footer}}

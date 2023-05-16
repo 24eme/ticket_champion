@@ -25,7 +25,7 @@
     </div>
     <div class="restaurant-container">
       <div>
-        <input type="checkbox" id="modal-confirmation">
+        <input type="hidden" id="modal-confirmation">
         <label for="modal-confirmation" class="btn btn-primary btn-lg m-bottom-70" style="border-radius: 15px">Récapitulatif de la commande</label>
         <label for="modal-confirmation" class="modal-background"></label>
         <div class="modal-confirmation" style="height: 65%; width: 30%">
@@ -59,6 +59,7 @@
 <script>
   const allButton = document.querySelectorAll('.time-item');
   const buttonContentPlaceholder = document.getElementById('heurePlaceHolder');
+  const inputToEnable = document.getElementById('modal-confirmation');
   allButton.forEach(button => {
     button.addEventListener('click', (event) => {
       // Désactiver tous les boutons
@@ -71,6 +72,9 @@
 
       // Désactiver le bouton cliqué
       currentButton.classList.add('disabled');
+
+      // Activer le bouton de recap
+      inputToEnable.type = "checkbox";
 
       buttonContentPlaceholder.textContent = currentButton.textContent;
 

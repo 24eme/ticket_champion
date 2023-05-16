@@ -24,8 +24,8 @@
   <div class="info">
     <form action="/restaurant" method="POST">
       <div>
-    {{#if data}}
-      <ul class="row">
+      {{#if data}}
+        <ul class="row">
         {{#each data}}
         <li class="col-sm-6">
           <h3 class="h1-restaurant">A {{this.heure_de_livraison}}, vous avez :</h3>
@@ -33,10 +33,9 @@
         </li>
         
         {{/each}}
-      </ul> </div>     
-        
-
-</form>
+        </ul> 
+        </div>     
+    </form>
 
 
     {{else}}

@@ -44,9 +44,10 @@ export class CommandeController {
   }
 
   @Post('/clients')
-  async handlePostRequestClient(@Body('buttonText') buttonText: string, @Body('id') id: string) {
-    this.commandeDto.nom_employee = `${buttonText}`;
-    this.commandeDto.id_client = Number(id);
+  @Redirect('/plats')
+  async handlePostRequestClient(@Req() req: Request) {
+    this.commandeDto.nom_employee = Object.values(req.body)[0];
+    this.commandeDto.id_client = Number(Object.keys(req.body)[0]);
     this.commandeDto.plats = [];
     this.commandeDto.supplements = [];
     this.commandeDto.montant_Commande = 0;

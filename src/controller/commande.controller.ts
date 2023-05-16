@@ -114,7 +114,9 @@ export class CommandeController {
 
   @Get('heureLivraison')
   @Render('heureLivraisonClient')
-  async heureLivraison() {}
+  async heureLivraison() {
+    return { command: this.commandeDto };
+  }
 
   @Post('/heureLivraison')
   handlePostRequestLivraison(@Body('buttonText') buttonText: string) {

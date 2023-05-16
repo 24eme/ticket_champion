@@ -23,32 +23,39 @@
     <div class="gif-container">
       <img class="cook-gif" src="/assets/images/cook.gif" style="border-radius: 15px;">
     </div>
-    <div class="restaurant-container">
-      <div>
-        <input type="hidden" id="modal-confirmation">
-        <label for="modal-confirmation" class="btn btn-primary btn-lg m-bottom-70" style="border-radius: 15px">Récapitulatif de la commande</label>
-        <label for="modal-confirmation" class="modal-background"></label>
-        <div class="modal-confirmation" style="height: 65%; width: 30%">
-          <div class="modal-confirmation-header">
-            <h3>Récapitulatif de la commande</h3>
-            <label for="modal-confirmation">
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC" width="16" height="16" alt="">
-            </label>
+
+    <div class="container-prev-next">
+      <a href='/supplements'>
+        <input type="submit" class="btn btn-primary btn-previous" value="Précédent"/>
+      </a>
+
+      <div class="restaurant-container">
+        <div>
+          <input type="hidden" id="modal-confirmation">
+          <label for="modal-confirmation" class="btn btn-primary btn-lg m-bottom-70" style="border-radius: 15px">Récapitulatif de la commande</label>
+          <label for="modal-confirmation" class="modal-background"></label>
+          <div class="modal-confirmation" style="height: 65%; width: 30%">
+            <div class="modal-confirmation-header">
+              <h3>Récapitulatif de la commande</h3>
+              <label for="modal-confirmation">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC" width="16" height="16" alt="">
+              </label>
+            </div>
+            <p>{{command.nom_employee}}, pour</p>
+            <p id="heurePlaceHolder"></p>
+            <p style="font-weight: bold">Tu as choisis :</p>
+            {{#each command.plats}}
+              <p>{{this.quantite}} {{this.nom_plat}}</p>
+            {{/each}}
+            <p style="font-weight: bold">Accompagné de :</p>
+            {{#each command.supplements}}
+              <p>{{this.quantite}} {{this.nom_supplement}}</p>
+            {{/each}}
+            <p style="font-weight: bold">Pour un total de {{command.montant_Commande}}€.</p>
+            <a href='/confirmation'>
+              <input type="submit" class="btn btn-primary btn-lg m-bottom-70" value="Valider" style="border-radius: 15px;"/>
+            </a>
           </div>
-          <p>{{command.nom_employee}}, pour</p>
-          <p id="heurePlaceHolder"></p>
-          <p style="font-weight: bold">Tu as choisis :</p>
-          {{#each command.plats}}
-            <p>{{this.quantite}} {{this.nom_plat}}</p>
-          {{/each}}
-          <p style="font-weight: bold">Accompagné de :</p>
-          {{#each command.supplements}}
-            <p>{{this.quantite}} {{this.nom_supplement}}</p>
-          {{/each}}
-          <p style="font-weight: bold">Pour un total de {{command.montant_Commande}}€.</p>
-          <a href='/confirmation'>
-            <input type="submit" class="btn btn-primary btn-lg m-bottom-70" value="Valider" style="border-radius: 15px;"/>
-          </a>
         </div>
       </div>
     </div>

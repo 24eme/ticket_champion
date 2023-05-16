@@ -41,7 +41,7 @@
 </section>
 
 <script>
-  const allButton = document.querySelectorAll('.bouton-plats');
+ const allButton = document.querySelectorAll('.bouton-plats');
   const recapCommande = document.getElementById('recap-commande');
   let commande = {}; // initialisation de l'objet commande
 
@@ -60,14 +60,38 @@
           prix: prix
         };
       }
+    
+      //update total
+      function updateTotal() {
+        let total = 0;
 
+        Object.keys(commande).forEach((plat) => {
+          total += commande[plat].quantite * commande[plat].prix;
+        });
+
+        const totalItem = document.querySelector('#recap-commande li:last-child');
+        totalItem.textContent = `Total : ${total}€`;
+      }
 
       // affichage du récapitulatif
       recapCommande.innerHTML = '';
       let total = 0;
       Object.keys(commande).forEach((plat) => {
         const item = document.createElement('li');
-        item.textContent = `${commande[plat].quantite} x ${plat} - ${commande[plat].prix}€`;
+        const deleteButton = document.createElement('button');
+        deleteButton.innerHTML = 'X';
+        deleteButton.addEventListener('click', () => {
+          delete commande[plat];
+          recapCommande.removeChild(item);
+          updateTotal();
+
+          // Supprimer l'élément correspondant dans le DTO
+          const xhr = new XMLHttpRequest();
+          xhr.open('DELETE', `/plats/${plat}`);
+          xhr.send();
+        });
+        item.innerHTML += `${commande[plat].quantite} x ${plat} - ${commande[plat].prix}€`;
+        item.appendChild(deleteButton);
         recapCommande.appendChild(item);
 
         total += commande[plat].quantite * commande[plat].prix;

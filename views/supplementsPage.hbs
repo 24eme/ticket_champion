@@ -24,7 +24,12 @@
     <div class="col-md-1 shadowed-div" style="border-radius: 15px;">
       <section id="recap-section"> 
         <h2 class="text-center texte-intro" style="font-size: 1.5rem">Panier</h2>
-        <ul id="recap-commande"></ul>
+        <ul id="recap-commande">
+        {{#each plats}}
+        <li> {{this.quantite}} x {{this.nom_plat}} - {{this.prix}}€</li> 
+        {{/each}}
+        </ul>
+        <ul><li>Total : <span id="total-amount" class="montant">{{montant}}</span></li></ul>
       </section>
     </div>
   </div>
@@ -43,7 +48,10 @@
 <script>
   const allButton = document.querySelectorAll('.B1');
   const recapCommande = document.getElementById('recap-commande');
+  const totalAmount = document.getElementById('total-amount');
   let commande = {}; // initialisation de l'objet commande
+
+  let montant = parseInt(totalAmount.textContent); // Récupère la valeur initiale de Total
 
   allButton.forEach(button => {
     button.addEventListener('click', (event) => {
@@ -60,19 +68,30 @@
         };
       }
 
-      // affichage du récapitulatif
-      recapCommande.innerHTML = '';
       let total = 0;
-      Object.keys(commande).forEach((supplement) => {
-        const item = document.createElement('li');
-        item.textContent = `${commande[supplement].quantite} x ${supplement} - ${commande[supplement].prix}€`;
-        recapCommande.appendChild(item);
-        total += commande[supplement].quantite * commande[supplement].prix;
 
+      // Mise à jour du récapitulatif
+      Object.keys(commande).forEach((supplement) => {
+        const existingItem = recapCommande.querySelector(`li[data-nom-plat="${supplement}"]`);
+        if (existingItem) {
+          const quantite = commande[supplement].quantite;
+          existingItem.textContent = `${quantite} x ${supplement} - ${commande[supplement].prix}€`;
+          total += quantite * commande[supplement].prix;
+        } else {
+          const item = document.createElement('li');
+          const quantite = commande[supplement].quantite;
+          const prixUnitaire = commande[supplement].prix;
+          const prixTotal = quantite * prixUnitaire;
+          item.textContent = `${quantite} x ${supplement} - ${prixTotal}€`;
+          item.setAttribute('data-nom-plat', supplement);
+          recapCommande.appendChild(item);
+          total += prixTotal;
+        }
       });
-      const totalItem = document.createElement('li');
-      totalItem.textContent = `Total : ${total}€`;
-      recapCommande.appendChild(totalItem);
+
+      const somme = montant + total; // Calcule la somme de montant et du total
+
+      totalAmount.textContent = `${somme}€`; // Affiche la somme dans l'élément Total
 
       // envoi de la commande au serveur
       const xhr = new XMLHttpRequest();
@@ -82,5 +101,6 @@
     });
   });
 </script>
+
 
 {{> footer}}

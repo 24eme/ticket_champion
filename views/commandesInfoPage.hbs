@@ -53,7 +53,10 @@
               </div>
             </div>
             {{/if}}
-            <button class="btn btn-primary bouton-plats">Fait</button>
+            <div class="div_fait">
+              <button class="command_faite" id="fait-{{this.id_commande}}">Fait</button>
+            </div>
+           
           </div>
           {{/each}}
         </div>
@@ -61,4 +64,33 @@
     </div>
   </div>
 </section>
+
+<script>
+
+    // Sélectionnez tous les boutons "Fait" en utilisant un sélecteur CSS
+  const faitButtons = document.querySelectorAll('.command_faite');
+
+  // Ajoutez un écouteur d'événements à chaque bouton "Fait"
+  faitButtons.forEach((button) => {
+    button.addEventListener('click', async (event) => {
+      // Récupérez l'ID de la commande à partir de l'ID du bouton
+      const commandeId = event.target.id.split('-')[1];
+
+      try {
+        // Appelez votre API backend pour marquer la commande comme prête
+        await fetch(`/marquerCommandePrete/${commandeId}`, { method: 'POST' });
+
+        // Mettez à jour l'apparence de la carte de commande (par exemple, changez le fond en vert)
+        const commandeCard = event.target.closest('.commandes-box');
+        commandeCard.style.backgroundColor = 'green';
+      } catch (error) {
+        // Gérez les erreurs
+        console.error(error);
+        // Affichez un message d'erreur à l'utilisateur si nécessaire
+      }
+    });
+  });
+
+</script>
+
 {{> footer}}

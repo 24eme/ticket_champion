@@ -145,6 +145,7 @@ export class CommandeService {
     const  montant_commande = createCommandeDto.montant_Commande;
     let client = new Client();
     client.id_client = createCommandeDto.id_client;
+    client.commande_faite = true;
     const heure_de_livraison = createCommandeDto.date_livraison;
     const newCommand = await this.commandeRepository.save({  montant_commande, heure_de_livraison, client} as unknown as DeepPartial<Commande>);
     let commande = new Commande();
@@ -163,6 +164,28 @@ export class CommandeService {
       await this.commandeSupplementRepository.save({commande, supplement, quantite} as unknown as DeepPartial<CommandeSupplement>);
     }   
   }
+
+  async markCommandeAsReady(idCommande: number): Promise<void> {
+    // Récupéré la commande à partir de la base de données en utilisant l'ID
+    const commande = new Commande();
+    commande.id_commande = idCommande;
+    const find_commande = await this.commandeRepository.findOne(
+      {
+        where: {
+          id_commande : commande.id_commande
+        }
+      })
+  
+    if (find_commande) {
+      commande.prete = true;   // Mise à jour de la valeur de `prete` de la commande
+  
+      await this.commandeRepository.save(commande);
+    } else {
+      // Géré le cas où la commande n'est pas trouvée
+      throw new Error(`Commande avec l'ID ${idCommande} non trouvée.`);
+    }
+  }
+  
 
   findAll() {
     return `This action returns all commande`;

@@ -1,4 +1,5 @@
-import { Controller, Get, Render, Post, Body, Req, Query, Param, HttpCode, Res, Redirect } from '@nestjs/common';
+import { Controller, Get, Render, Post, Req, Res, Redirect, Param } from '@nestjs/common';
+
 import { CommandeService } from 'src/services/commande.service';
 
 @Controller('/')
@@ -7,9 +8,7 @@ export class RestaurantController {
     private nonEntreprise : string;
     private time : string;
 
-    constructor(private readonly commandeService: CommandeService) {
-      
-    }
+    constructor(private readonly commandeService: CommandeService) {}
 
     @Get('restaurant')
     @Render('restaurantPage')
@@ -47,4 +46,24 @@ export class RestaurantController {
       return { data: totalCost };
     
     }
+
+    
+    @Post('/marquerCommandePrete/:commandeId')
+    async markCommandeAsReady(@Param('commandeId') commandeId: string, @Res() res) {
+      try {
+        // Convertissez l'ID de la commande en nombre entier
+        const idCommande: number = parseInt(commandeId, 10);
+  
+        // Appelez votre service pour marquer la commande comme prête
+        await this.commandeService.markCommandeAsReady(idCommande);
+  
+        // Répondez avec succès
+        return res.status(200).json({ message: 'Commande marquée comme prête' });
+      } catch (error) {
+        // Gérez les erreurs
+        console.error(error);
+        return res.status(500).json({ message: 'Une erreur s\'est produite' });
+      }
+    }
+    
 }

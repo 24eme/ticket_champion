@@ -9,13 +9,14 @@
 - clone this repo locally
 - run `npm install` to install all dependencies
 - Create a config file using ormconfig_example.json (remove the '_example' from 'ormconfig_example.json')
-- choose your db username
-- choose your db password
-- choose the name of your db
-- create a new database with the name chosen before
-- connect to the database
-- run `npm install` at the root of the project
-- run `systemctl start mysql` to start Mysql DB
+- choose your database username
+- choose your database password
+- choose the name of your database
+- open database `mysql -u root -p`
+- log in with your password
+- create a new database with the name chosen before `create database [name_of_your_database];`
+- connect to the database `use [name_of_your_database];`
+
 - run `npm run start:dev` to start developing
 
 

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Res, Redirect, Req } from '@nestjs/common';
 import { CommandeService } from '../services/commande.service';
 import { CreateCommandeDto } from '../commande/dto/create-commande.dto';
 import { UpdateCommandeDto } from '../commande/dto/update-commande.dto';
@@ -21,15 +21,13 @@ export class CommandeController {
   @Render('selectionClientPage')
   async selectionClientPage() {}
 
-  @Get('clients')
-  @Render('clientsPage')
-  async employes() {
-    const listEmployee = await this.commandeService.getClientByEntreprise(this.commandeDto.entreprise);
-    return {listEmployee : listEmployee, entreprise : this.commandeDto.entreprise};
-  }
-
   @Post('/selectionClientPage')
-  async handlePostRequest(@Body('entreprise') entreprise: string) {
+  @Redirect('/clients')
+  async handlePostRequest(@Req() req: Request) {
+    console.log(req.body);
+    const key = Object.keys(req.body);
+    const entreprise = key[0].slice(0, -2); 
+    console.log(entreprise);
     this.commandeDto.entreprise = entreprise;
     this.commandeDto.nom_employee = "";
     this.commandeDto.plats = [];
@@ -38,10 +36,18 @@ export class CommandeController {
 
   }
 
+  @Get('clients')
+  @Render('clientsPage')
+  async employes() {
+    const listEmployee = await this.commandeService.getClientByEntreprise(this.commandeDto.entreprise);
+    return {listEmployee : listEmployee, entreprise : this.commandeDto.entreprise};
+  }
+
   @Post('/clients')
-  async handlePostRequestClient(@Body('buttonText') buttonText: string, @Body('id') id: string) {
-    this.commandeDto.nom_employee = `${buttonText}`;
-    this.commandeDto.id_client = Number(id);
+  @Redirect('/plats')
+  async handlePostRequestClient(@Req() req: Request) {
+    this.commandeDto.nom_employee = Object.values(req.body)[0];
+    this.commandeDto.id_client = Number(Object.keys(req.body)[0]);
     this.commandeDto.plats = [];
     this.commandeDto.supplements = [];
     this.commandeDto.montant_Commande = 0;

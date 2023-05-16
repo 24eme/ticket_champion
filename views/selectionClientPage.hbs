@@ -3,39 +3,18 @@
 <section>
   <div class="image-container-client">
     <div class="left-image-client">
-      <a href='/clients' name="24EME" id="monBouton1">
-        <img src="/assets/images/24eme_logo.svg" alt="Image 1"  >
-      </a>
+      <form action="/selectionClientPage" method="POST">
+      {{!-- <a href='/clients' name="24EME" id="monBouton1"> --}}
+        <input type="image" name="24EME" src="/assets/images/24eme_logo.svg"/>
+      
     </div>
     <div class="right-image-client">
-      <a href="/clients" name="Marcopolette" id="monBouton2">
-        <img src="/assets/images/marcopolette_logo.png" alt="Image 2"  >
-      </a>
+      {{!-- <a href="/clients" name="Marcopolette" id="monBouton2"> --}}
+        <input type="image" name="Marcopolette" src="/assets/images/marcopolette_logo.png"> 
+      
     </div>
   </div>
-</section>
+  </form>
+</section>  
 
 {{>footer}}
-
-<script>
-  // Sélectionner le bouton à écouter
-  const buttons = document.querySelectorAll('[id^="monBouton"]');
-  buttons.forEach(button => {
-    button.addEventListener('click', event => {
-
-      const entreprise = button.name;
-      console.log(entreprise);
-      // Effectuer une requête fetch pour envoyer les données du formulaire
-      fetch('/selectionClientPage', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ entreprise})
-      })
-
-        .catch(error => console.error(error));
-
-    });
-  });
-</script>

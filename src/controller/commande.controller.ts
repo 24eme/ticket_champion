@@ -75,7 +75,10 @@ export class CommandeController {
   handleDeleteRequestPlat(@Param('plat') plat: string) {
     const platIndex = this.commandeDto.plats.findIndex((p) => p.nom_plat === plat);
     if (platIndex !== -1) {
+      const plat = this.commandeDto.plats[platIndex];
+      const prixTotal = plat.prix * plat.quantite;
       this.commandeDto.plats.splice(platIndex, 1);
+      this.commandeDto.montant_Commande -= prixTotal;
     }
   }
 

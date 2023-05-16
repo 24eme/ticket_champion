@@ -41,10 +41,9 @@
 </section>
 
 <script>
- const allButton = document.querySelectorAll('.bouton-plats');
+  const allButton = document.querySelectorAll('.bouton-plats');
   const recapCommande = document.getElementById('recap-commande');
   let commande = {}; // initialisation de l'objet commande
-
 
   allButton.forEach(button => {
     button.addEventListener('click', (event) => {
@@ -60,7 +59,7 @@
           prix: prix
         };
       }
-    
+
       //update total
       function updateTotal() {
         let total = 0;
@@ -105,8 +104,8 @@
       const xhr = new XMLHttpRequest();
       xhr.open('POST', '/plats');
       xhr.setRequestHeader('Content-Type', 'application/json');
-    
-      xhr.send(JSON.stringify( {buttonText, prix }));
+
+      xhr.send(JSON.stringify({ buttonText, prix }));
     });
   });
 </script>

@@ -39,7 +39,7 @@
       <input type="submit" class="btn btn-primary btn-previous" value="Précédent"/>
     </a>
     <a href='/heureLivraison'>
-      <input type="submit" class="btn btn-primary btn-next" value="Suivant"/>
+      <input type="hidden" id="hidden-next" class="btn btn-primary btn-next" value="Suivant"/>
     </a>
   </div>
 
@@ -49,9 +49,15 @@
   const allButton = document.querySelectorAll('.B1');
   const recapCommande = document.getElementById('recap-commande');
   const totalAmount = document.getElementById('total-amount');
+  const hiddenNextButton = document.getElementById('hidden-next');
+
   let commande = {}; // initialisation de l'objet commande
 
   let montant = parseInt(totalAmount.textContent); // Récupère la valeur initiale de Total
+
+  if (montant.valueOf() > 0) {
+    hiddenNextButton.type = "submit";
+  }
 
   allButton.forEach(button => {
     button.addEventListener('click', (event) => {
@@ -86,6 +92,9 @@
           item.setAttribute('data-nom-plat', supplement);
           recapCommande.appendChild(item);
           total += prixTotal;
+          if (prixTotal > 0) {
+              hiddenNextButton.type = "submit";
+          }
         }
       });
 
@@ -100,6 +109,7 @@
       xhr.send(JSON.stringify({ buttonText, prix }));
     });
   });
+
 </script>
 
 

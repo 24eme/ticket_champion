@@ -3,8 +3,8 @@
 <section class="d-flex justify-content-center">
 
   <h2 class="text-center texte-intro">Bonjour {{employee}}, que veux-tu manger ?</h2>
-
   <div class="row">
+    <form action="/plats" method="POST">
     <div class="row container-card col-md-8">
       {{#each data.data.restaurants.[0].plats}}
         <div class="col-sm-2 card-plats">
@@ -13,13 +13,20 @@
             <div class="card-body">
               <h5 class="card-title">{{this.nom}} - {{this.prix}}€</h5>
               <p class="liste-ingredients">{{this.ingredients}}</p>
-              <button type="button" class="btn btn-primary bouton-plats"  name="{{this.prix}}" id="{{this.nom}}">Ajouter à la commande</button>
+              <input type="hidden" id="button-hidden{{@index}}" name="{{this.nom}},{{this.prix}}" value="0"/>
+              <input type="button" id="button-ajouter{{@index}}" class="btn btn-primary bouton-plats" name="{{this.nom}} , {{this.prix}}" value="Ajouter à la commande" onclick="addValue('button-hidden{{@index}}');" />
+               
             </div>
           </div>
         </div>
       {{/each}}
+      {{!-- <input type="hidden" id="button-hidden" name="Mon bouton hidden" value=""/> --}}
+     
 
     </div>
+   
+    
+    
 
     <div class="col-md-1 shadowed-div" style="border-radius: 15px;">
       <section id="recap-section">
@@ -31,16 +38,31 @@
 
 <div class="container-prev-next">
   <a href='/clients'>
-    <input type="submit" class="btn btn-primary btn-previous" value="Précédent"/>
+    <button class="btn btn-primary btn-previous" name="pre"> Précédent </button>
   </a>
-  <a href='/supplements'>
-    <input type="submit" class="btn btn-primary btn-next" value="Suivant"/>
-  </a>
+  
+    <input type="submit" class="btn btn-primary btn-next" name="next" value="Suivant"/>
+    
+  
 </div>
+ </form>
+
+
 
 </section>
 
 <script>
+
+
+
+function addValue(id) {
+  const buttonHidden = document.getElementById(id);
+  
+  buttonHidden.value++;
+  console.log(buttonHidden.value);
+}
+
+
   const allButton = document.querySelectorAll('.bouton-plats');
   const recapCommande = document.getElementById('recap-commande');
   let commande = {}; // initialisation de l'objet commande
@@ -99,13 +121,6 @@
       const totalItem = document.createElement('li');
       totalItem.textContent = `Total : ${total}€`;
       recapCommande.appendChild(totalItem);
-
-      // envoi de la commande au serveur
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', '/plats');
-      xhr.setRequestHeader('Content-Type', 'application/json');
-
-      xhr.send(JSON.stringify({ buttonText, prix }));
     });
   });
 </script>

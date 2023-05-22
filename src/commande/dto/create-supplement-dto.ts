@@ -3,4 +3,5 @@ export class CreateSupplementtDto {
     quantite = 0;
     nom_supplement : string;
     id_commande : number;
+    prix : number;
 }

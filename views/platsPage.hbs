@@ -83,6 +83,7 @@ allBoutonplat.forEach(boutton => {
   Object.keys(commande).forEach((plat) => {
 
       total += commande[plat].quantite * commande[plat].prix;
+
     });
 
   const totalItem = document.querySelector('#recap-commande li:last-child');

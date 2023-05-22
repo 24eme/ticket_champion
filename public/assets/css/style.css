@@ -1558,12 +1558,25 @@ Footer Section style
 }
 /* Texte */
 
+
+.note-entreprise {
+    width: 50%;
+}
+
 .note-totale {
     color: #fff;
     background-color: #204d74;
+    width: 30%;
 }
 
+.note-totale:hover {
+    background-color:rgba(255, 104, 99, 0.4);
+}
+
+
 .note-wrapper {
+    display: flex;
+    justify-content: space-around;
     width: 100%;
 }
 
@@ -1743,7 +1756,9 @@ body {
         margin-right: 30px;
         margin-bottom: 30px;
         width: calc(33.33% - 30px);
-        background-color: salmon
+        height: 600px; 
+        background-color: salmon;
+        position: relative;
     }
 
     .commandes-box:last-child {
@@ -1856,3 +1871,27 @@ input[type="checkbox"]:checked ~ .modal-background {
 .modal-confirmation-header label:hover img {
     opacity: 0.6;
 }
+
+.command_faite{
+    background-color: lightgrey;
+}
+
+.div_fait {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/*.delete-button{
+    margin-left: 30px;
+}
+
+.delete-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }*/
+  

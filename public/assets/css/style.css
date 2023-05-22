@@ -1558,12 +1558,25 @@ Footer Section style
 }
 /* Texte */
 
+
+.note-entreprise {
+    width: 50%;
+}
+
 .note-totale {
     color: #fff;
     background-color: #204d74;
+    width: 30%;
 }
 
+.note-totale:hover {
+    background-color:rgba(255, 104, 99, 0.4);
+}
+
+
 .note-wrapper {
+    display: flex;
+    justify-content: space-around;
     width: 100%;
 }
 

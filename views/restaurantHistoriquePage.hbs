@@ -15,10 +15,11 @@
               <div class="col-lg">
                   <div class="clients-container">
                     <button class="btn-historique">
-                        <span class="d-flex justify-around note-wrapper">
-                            <span>{{this.entreprise}}</span>
-                            <span class="note-totale"> {{this.sumCommandes}}€</span>
-                        </span>
+                        <div class="note-wrapper">
+                            <div class="note-entreprise">{{this.entreprise}}</div>
+                            <div class="vertical-separator"></div>
+                            <div class="note-totale"> {{this.sumCommandes}}€</div>
+                        </div>
                     </button>
                     {{/each}}
 

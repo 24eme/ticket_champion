@@ -21,6 +21,7 @@ export class RestaurantController {
     @Post('restaurant')
     @Redirect('/commandesInfo')
     async envoirestaurantinfo(@Req() req: Request) {
+      
       const heure = Object.keys(req.body)[0];
       const values = Object.values(req.body)[0].split(' ');
       const nombre = values[0];

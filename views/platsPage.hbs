@@ -14,7 +14,7 @@
               <h5 class="card-title">{{this.nom}} - {{this.prix}}€</h5>
               <p class="liste-ingredients">{{this.ingredients}}</p>
               <input type="hidden" id="button-hidden{{@index}}" name="{{this.nom}},{{this.prix}}" value="0"/>
-              <input type="button" id="button-ajouter{{@index}}" class="btn btn-primary bouton-plats" name="{{this.nom}} , {{this.prix}}" value="Ajouter à la commande" onclick="addValue('button-hidden{{@index}}');" />
+              <input type="button" id="{{this.prix}}" class="btn btn-primary bouton-plats" name="{{this.nom}}" value="Ajouter à la commande" onclick="addValue('button-hidden{{@index}}');" />
                
             </div>
           </div>
@@ -31,7 +31,12 @@
     <div class="col-md-1 shadowed-div" style="border-radius: 15px;">
       <section id="recap-section">
         <h2 class="text-center texte-intro" style="font-size: 1.5rem">Panier</h2>
-        <ul id="recap-commande"></ul>
+        <ul id="recap-commande">
+          {{#each plats}}
+          <li class ="commande-existante" data-name="{{this.nom_plat}}" data-prix ="{{this.prix}}" data-quantite ="{{this.quantite}}" > {{this.quantite}} x {{this.nom_plat}} - {{this.prix}}€</li> 
+          {{/each}}
+        </ul>
+        <ul><li>Total : <span id="total-amount" class="montant">{{montant}}</span></li></ul>
       </section>
     </div>
   </div>
@@ -53,37 +58,7 @@
 
 <script>
 
-
-
-function addValue(id) {
-  const buttonHidden = document.getElementById(id);
-  
-  buttonHidden.value++;
-  console.log(buttonHidden.value);
-}
-
-
-  const allButton = document.querySelectorAll('.bouton-plats');
-  const recapCommande = document.getElementById('recap-commande');
-  let commande = {}; // initialisation de l'objet commande
-
-  allButton.forEach(button => {
-    button.addEventListener('click', (event) => {
-      const buttonText = event.target.id;
-      const prix = event.target.name;
-
-      // incrémentation de la quantité
-      if (commande.hasOwnProperty(buttonText)) {
-        commande[buttonText].quantite += 1;
-      } else {
-        commande[buttonText] = {
-          quantite: 1,
-          prix: prix
-        };
-      }
-
-      //update total
-      function updateTotal() {
+   function updateTotal(commande) {
         let total = 0;
 
         Object.keys(commande).forEach((plat) => {
@@ -94,35 +69,105 @@ function addValue(id) {
         totalItem.textContent = `Total : ${total}€`;
       }
 
-      // affichage du récapitulatif
-      recapCommande.innerHTML = '';
-      let total = 0;
-      Object.keys(commande).forEach((plat) => {
-        const item = document.createElement('li');
-        const deleteButton = document.createElement('button');
-        deleteButton.innerHTML = 'X';
-        deleteButton.addEventListener('click', () => {
-          delete commande[plat];
-          recapCommande.removeChild(item);
-          updateTotal();
+function addValue(id) {
 
-          // Supprimer l'élément correspondant dans le DTO
-          const xhr = new XMLHttpRequest();
-          xhr.open('DELETE', `/plats/${plat}`);
-          xhr.send();
-        });
+  const buttonHidden = document.getElementById(id);
+  
+  buttonHidden.value++;
+  console.log(buttonHidden.value);
+   
+  }
+
+  
+//  const commadeExistante = document.querySelectorAll('.commande-existante');
+  let commande = {};
+  //commadeExistante.forEach(boutton =>{
+
+  //  console.log("le bouton ", boutton.dataset.name)
+
+    
+   // commande[boutton.dataset.name] = {
+     // quantite : boutton.datset.quantite,
+     // prix : boutton.dataset.prix
+   // };
+   
+
+ // });
+  console.log("c'est la commande : ", commande);
+
+  allBoutonplat = document.querySelectorAll(".bouton-plats");
+  const recapCommande = document.getElementById('recap-commande');
+
+  allBoutonplat.forEach(boutton => {
+
+    boutton.addEventListener('click', (event) => {
+
+
+        const commadeExistante = document.querySelectorAll('.commande-existante');
+        let commande = {};
+       commadeExistante.forEach(boutton =>{
+
+            console.log("le bouton ", boutton.dataset.name)
+
+    
+    commande[boutton.dataset.name] = {
+      quantite : boutton.dataset.quantite,
+      prix : boutton.dataset.prix
+    };
+   
+
+  });
+
+      const nomPlat = event.target.name;
+      const prix = event.target.id;
+      //console.log('le nom du plats', nomPlat);
+
+ 
+
+      if (commande.hasOwnProperty(nomPlat)) {
+        commande[nomPlat].quantite ++;
+      } else {
+        commande[nomPlat] = {
+          quantite: 1,
+          prix: prix
+        };
+      }
+
+
+      //affichage 
+
+      
+
+      recapCommande.innerHTML = '';
+      Object.keys(commande).forEach((plat) => {
+
+        console.log("c ets le plats : ",plat)
+
+        const item = document.createElement('li');
+        item.setAttribute('data-name', plat);
+        item.setAttribute('class', 'commande-existante');
+        item.setAttribute('data-prix', commande[plat].prix);
+        item.setAttribute('data-quantite', commande[plat].quantite);
         item.innerHTML += `${commande[plat].quantite} x ${plat} - ${commande[plat].prix}€`;
-        item.appendChild(deleteButton);
         recapCommande.appendChild(item);
 
-        total += commande[plat].quantite * commande[plat].prix;
-      });
 
-      const totalItem = document.createElement('li');
-      totalItem.textContent = `Total : ${total}€`;
-      recapCommande.appendChild(totalItem);
+
+      });
+      
+      
+      
+
+
     });
-  });
+
+  })
+
+
+
+   
+   
+     
 </script>
 
 {{> footer}}

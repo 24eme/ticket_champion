@@ -57,13 +57,14 @@
     async plat() {
       const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
       const employee = this.commandeDto.nom_employee;
-      return { data : data, employee  };
+      return { data : data, employee, plats : this.commandeDto.plats, montant : this.commandeDto.montant_Commande };
     }
 
     @Post('/plats')
     @Redirect('/supplements')
     handlePostRequestPlat(@Req() req: Request) {
       //console.log("la requeyt est ", req.body);
+			console.log(req.body);
       let listPlat = Object.keys(req.body);
       let listNombrePlat = Object.values(req.body);
       listPlat.pop();
@@ -74,13 +75,21 @@
       for ( e in listNombrePlat){
 
         if(listNombrePlat[e]>0){
+
           let nomPlat = listPlat[e].split(',')[0];
           let prix = Number(listPlat[e].split(',')[1]);
-					let plat = new CreatePlatDto();
-					plat.nom_plat = nomPlat;
-          plat.quantite = listNombrePlat[e];
-          plat.prix = prix;
-					this.commandeDto.plats.push(plat);
+					
+
+          if(this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat) == undefined  ){
+            let supplement = new CreateSupplementtDto();
+            let plat = new CreatePlatDto();
+            plat.nom_plat = nomPlat;
+            plat.quantite = listNombrePlat[e];
+            plat.prix = prix;
+            this.commandeDto.plats.push(plat);
+    
+          }else {this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat).quantite ++;}
+          
       		this.commandeDto.montant_Commande += prix*listNombrePlat[e];
     		}
     	}

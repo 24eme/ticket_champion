@@ -1569,6 +1569,10 @@ Footer Section style
     width: 30%;
 }
 
+.note-totale:hover {
+    background-color:rgba(255, 104, 99, 0.4);
+}
+
 
 .note-wrapper {
     display: flex;

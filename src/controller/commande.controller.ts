@@ -39,7 +39,8 @@
     @Render('clientsPage')
     async employes() {
       const listEmployee = await this.commandeService.getClientByEntreprise(this.commandeDto.entreprise);
-      return {listEmployee : listEmployee, entreprise : this.commandeDto.entreprise};
+      const dailyCommandName = await this.commandeService.getDailyCommandNames();
+      return {listEmployee : listEmployee, entreprise : this.commandeDto.entreprise, commande_passe: dailyCommandName};
     }
 
     @Post('/clients')

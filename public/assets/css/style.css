@@ -1687,6 +1687,11 @@ Footer Section style
     max-height: 200px;
     overflow-y: auto;
 }
+
+#supp {
+    font-size: 0.8em;
+
+}
 /* supplementsPage CSS */
 .supplements-list {
     display: flex;

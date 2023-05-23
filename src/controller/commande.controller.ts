@@ -58,7 +58,7 @@
     async plat() {
       const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
       const employee = this.commandeDto.nom_employee;
-      return { data : data, employee, plats : this.commandeDto.plats, montant : this.commandeDto.montant_Commande };
+      return { data : data, employee, plats : this.commandeDto.plats, supplements : this.commandeDto.supplements, montant : this.commandeDto.montant_Commande };
     }
 
     @Post('/plats')
@@ -75,12 +75,26 @@
       let e = ""
       for ( e in listNombrePlat){
 
-        if(listNombrePlat[e]>0){
-
           let nomPlat = listPlat[e].split(',')[0];
           let prix = Number(listPlat[e].split(',')[1]);
-					
 
+        if(listNombrePlat[e] <0){
+
+          let thisPlat = this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat);
+
+          thisPlat.quantite = Number(thisPlat.quantite) +  Number(listNombrePlat[e]);
+
+          if (thisPlat.quantite == 0){
+            let index: number = this.commandeDto.plats.indexOf(thisPlat);
+            if (index !== -1) {
+              this.commandeDto.plats.splice(index, 1);
+            }
+            
+          }
+          this.commandeDto.montant_Commande += prix*listNombrePlat[e];
+        }
+
+        if(listNombrePlat[e]>0){
           if(this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat) == undefined  ){
             let supplement = new CreateSupplementtDto();
             let plat = new CreatePlatDto();
@@ -89,7 +103,7 @@
             plat.prix = prix;
             this.commandeDto.plats.push(plat);
     
-          }else {this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat).quantite ++;}
+          }else {this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat).quantite += Number(listNombrePlat[e]);}
           
       		this.commandeDto.montant_Commande += prix*listNombrePlat[e];
     		}
@@ -118,8 +132,10 @@
 
     @Post('/supplements')
     handlePostRequestSupplement(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
+      
       if(this.commandeDto.supplements.find(supplement => supplement.nom_supplement === buttonText) == undefined  ){
         let supplement = new CreateSupplementtDto();
+        supplement.prix = Number(prix);
         supplement.nom_supplement = buttonText;
         supplement.quantite = 1;
         this.commandeDto.supplements.push(supplement);

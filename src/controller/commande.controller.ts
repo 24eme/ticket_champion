@@ -102,7 +102,7 @@
             plat.prix = prix;
             this.commandeDto.plats.push(plat);
     
-          }else {this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat).quantite += Number(listNombrePlat[e]);}
+          }else {this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat).quantite = Number(this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat).quantite) + Number(listNombrePlat[e]);}
           
       		this.commandeDto.montant_Commande += prix*listNombrePlat[e];
     		}

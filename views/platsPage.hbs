@@ -35,13 +35,17 @@
           {{#each plats}}
           <li class ="commande-existante" data-name="{{this.nom_plat}}" data-prix ="{{this.prix}}" data-quantite ="{{this.quantite}}" > {{this.quantite}} x {{this.nom_plat}} - {{this.prix}}€</li> 
           {{/each}}
+
+          
+        {{#each supplements}}
+          <li class="commande-existante" data-name="{{this.nom_supplement}}" data-quantite="{{this.quantite}}" data-prix="{{this.prix}}"> {{this.quantite}} x {{this.nom_supplement}} - {{this.prix}}€</li> 
+          {{/each}}
+
+          <li id="total"> Total : {{montant}} </li>
+          
           
         </ul>
-        <ul id = "supp">
-        {{#each supplements}}
-          <li class="supplement" data-montantsupp="{{this.quantite}}" data-prixsupp="{{this.prix}}"> {{this.quantite}} x {{this.nom_supplement}} - {{this.prix}}€</li> 
-          {{/each}}
-          </ul>
+      
       </section>
     </div>
   </div>
@@ -85,11 +89,6 @@ allBoutonplat.forEach(boutton => {
 
     function updateTotal() {
   let total = 0;
-  const supp = document.querySelectorAll(".supplement");
-    supp.forEach((suppl) => {
-      total += Number(suppl.dataset.montantsupp*suppl.dataset.prixsupp);
-
-    });
 
   Object.keys(commande).forEach((plat) => {
 
@@ -106,7 +105,6 @@ allBoutonplat.forEach(boutton => {
     let commande = {};
     commadeExistante.forEach(boutton =>{
 
-      //console.log("le bouton ", boutton.dataset.name)
       commande[boutton.dataset.name] = {
         quantite : boutton.dataset.quantite,
         prix : boutton.dataset.prix
@@ -130,16 +128,8 @@ allBoutonplat.forEach(boutton => {
 
     let total = 0;
 
-    const supp = document.querySelectorAll(".supplement");
-    supp.forEach((suppl) => {
-      total += Number(suppl.dataset.montantsupp*suppl.dataset.prixsupp);
-
-    });
-
     recapCommande.innerHTML = '';
     Object.keys(commande).forEach((plat) => {
-
-      //console.log("c ets le plats : ",plat)
 
       const item = document.createElement('li');
       const deleteButton = document.createElement('button');
@@ -154,7 +144,6 @@ allBoutonplat.forEach(boutton => {
       total += commande[plat].quantite * commande[plat].prix;
 
       deleteButton.addEventListener('click', () => {
-        //console.log("le contenue avant" ,buttonHidden.value);
          const buttonHidden = document.querySelector(`[data-nonplat="${plat}"]`);
         buttonHidden.value = Number(buttonHidden.value) - Number(commande[plat].quantite);
         delete commande[plat];
@@ -168,7 +157,6 @@ allBoutonplat.forEach(boutton => {
 
     });
     const totalItem = document.createElement('li');
-    //totalItem.setAttribute("data-montant", total);
     totalItem.textContent = `Total : ${total}€`;
     recapCommande.appendChild(totalItem);
     

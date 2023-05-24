@@ -1,11 +1,8 @@
   import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Res, Redirect, Req } from '@nestjs/common';
   import { CommandeService } from '../services/commande.service';
   import { CreateCommandeDto } from '../commande/dto/create-commande.dto';
-  import { UpdateCommandeDto } from '../commande/dto/update-commande.dto';
   import { CreatePlatDto } from 'src/commande/dto/create-plat-dto';
   import { CreateSupplementtDto } from 'src/commande/dto/create-supplement-dto';
-  import { Supplement } from 'src/typeorm/entities/Supplement';
-import { Console } from 'console';
 
   @Controller('/')
   export class CommandeController {

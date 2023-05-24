@@ -127,6 +127,29 @@ export class CommandeService {
     return queryBuilder.getRawMany();
   }
 
+
+  async getTotalCostAndTypeGroupedByEntreprise(): Promise<any> {
+    const queryBuilder = this.commandeRepository
+      .createQueryBuilder('commande')
+      .leftJoinAndSelect('commande.commandePlats', 'commande_plat')
+      .leftJoinAndSelect('commande_plat.plat', 'plat')
+      .leftJoinAndSelect('commande.commandeSupplements', 'commande_supplement')
+      .leftJoinAndSelect('commande_supplement.supplement', 'supplement')
+      .leftJoinAndSelect('commande.client', 'client')
+      .select('client.entreprise', 'entreprise')
+      .addSelect('plat.nom_plat', 'nom_plat')
+      .addSelect('SUM(commande.montant_commande)', 'sumCommandesPlats')
+      .addSelect('supplement.nom_supplement', 'nom_supplement')
+      .addSelect('SUM(commande.montant_commande)', 'sumCommandesSupplements')
+      .groupBy('client.entreprise')
+      .addGroupBy('plat.nom_plat')
+      .addGroupBy('supplement.nom_supplement')
+      // .addSelect('SUM(sumCommandesSupplements.sumCommandesPlats', 'sumTotalCommandeInvoice')
+    
+    return queryBuilder.getRawMany();
+  }
+
+
   async getCommandesInfoPerEntreprise(enterprise: string, time: string): Promise<Commande[]> {
     return this.commandeRepository
       .createQueryBuilder('commande')

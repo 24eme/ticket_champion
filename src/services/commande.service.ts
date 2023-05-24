@@ -187,6 +187,19 @@ export class CommandeService {
   }
   
 
+  async getAllPlat(){
+    const queryBuilder = this.platRepository
+      .createQueryBuilder('plat')
+      .select('plat.nom_plat', 'nom_plat')
+    return queryBuilder.getRawMany(); 
+  }
+
+  async getAllSupplement(){
+    const queryBuilder = this.supplementRepository
+    .createQueryBuilder('supplement')
+    .select('supplement.nom_supplement', 'nom_supplement')
+    return queryBuilder.getRawMany(); 
+  }
   findAll() {
     return `This action returns all commande`;
   }

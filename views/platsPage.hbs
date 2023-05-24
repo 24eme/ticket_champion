@@ -39,12 +39,17 @@
           
         {{#each supplements}}
           <li class="commande-existante" data-name="{{this.nom_supplement}}" data-quantite="{{this.quantite}}" data-prix="{{this.prix}}"> {{this.quantite}} x {{this.nom_supplement}} - {{this.prix}}€</li> 
-          {{/each}}
-
+        {{/each}}
           <li id="total"> Total : {{montant}} </li>
           
           
         </ul>
+
+         {{#each supplements}}
+          <input type="hidden" data-namehidden="{{this.nom_supplement}}" name="{{this.nom_supplement}},{{this.prix}}" value="{{this.quantite}}">
+          {{/each}}
+
+        
       
       </section>
     </div>
@@ -143,16 +148,30 @@ allBoutonplat.forEach(boutton => {
       recapCommande.appendChild(item);
       total += commande[plat].quantite * commande[plat].prix;
 
-      deleteButton.addEventListener('click', () => {
-         const buttonHidden = document.querySelector(`[data-nonplat="${plat}"]`);
-        buttonHidden.value = Number(buttonHidden.value) - Number(commande[plat].quantite);
+      deleteButton.addEventListener('click', (event) => {
+         event.preventDefault();
+        const buttonHidden = document.querySelector(`[data-nonplat="${plat}"]`);
+
+        if (buttonHidden) {
+          buttonHidden.value = Number(buttonHidden.value) - Number(commande[plat].quantite);
+          recapCommande.removeChild(item);
+          
+        }
+
+        const suppDel = document.querySelector(`[data-name="${plat}"]`);
+        if (suppDel !== null) {
+          console.log("hellooo");
+          const buttonHiddenSupp = document.querySelector(`[data-namehidden="${plat}"]`);
+          buttonHiddenSupp.value = Number(commande[plat].quantite)*(-1);
+          suppDel.parentNode.removeChild(suppDel);
+          
+          console.log("this : ", buttonHiddenSupp.value);
+
+        }
         delete commande[plat];
-        recapCommande.removeChild(item);
         updateTotal();
-       
         
-        
-        console.log("le contenue apres" ,buttonHidden.value);
+        console.log("le contenue apres" ,commande);
       });
 
     });

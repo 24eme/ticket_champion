@@ -42,17 +42,24 @@ export class RestaurantController {
       const totalCost = await this.commandeService.getTotalCostCommandesGroupedByEntreprise();
       console.log(totalCost);
       return { data: totalCost };
-    
+
     }
 
 
-    @Get('/facture')
+    // @Post('/historique')
+    // @Redirect('/facture') 
+    // async handlePostRequestFactureRestaurant(@Req() req: Request) {
+    //   const value = Object.values(req.body);
+    //   const entreprise = value[0].slice(0, -2); 
+    // }
+
+    @Get('/facture/:entrepriseName')
     @Render('restaurantFacturePage')
-    async facture() {
-      const factureTotalCost = await this.commandeService.getTotalCostAndTypeGroupedByEntreprise();
-      console.log(factureTotalCost);
-      return { data: factureTotalCost};
+    async factureRestaurant(@Param('entrepriseName') entrepriseName: string) {
+      return {nomEntreprise: entrepriseName};
     }
+
+
 
     
     @Post('/marquerCommandePrete/:commandeId')

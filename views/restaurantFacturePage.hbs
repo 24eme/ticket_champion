@@ -1,22 +1,20 @@
   {{> header}} 
 
+<section style="height: 100vh">
+    <div class="row" style="margin: 0 auto";>
+                <div class="col-lg">
+                    <ul>
+                    <li>Entreprise : {{nomEntreprise}}</li>
+                    {{!-- <li>Nom plat : {{ this.nom_plat }}, Total : {{this.sumCommandesPlats}} </li>
+                    <li>Nom supplément : {{ this.nom_supplement }}, Total : {{ this.sumCommandesSupplements }} </li>
+                    <li>Total commandes : {{this.sumTotalCommandeInvoice}}</li> --}}
+                    </ul>                    
+                </div>
 
 
- <div class="row" style="margin: 0 auto"; >
-            {{#each data}}
-              <div class="col-lg">
-                <ul>
-                  <li>Entreprise : {{this.entreprise}}</li>
-                  <li>Nom plat : {{ this.nom_plat }}, Total : {{this.sumCommandesPlats}} </li>
-                  <li>Nom supplément : {{ this.nom_supplement }}, Total : {{ this.sumCommandesSupplements }} </li>
-                  <li>Total commandes : {{this.sumTotalCommandeInvoice}}</li>
-                </ul>                    
-              </div>
-            {{/each}}
+    </div>
 
-                         
-
-</div>
+</section>
 
 
 {{> footer}}

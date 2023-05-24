@@ -60,13 +60,10 @@
     @Post('/plats')
     @Redirect('/supplements')
     async handlePostRequestPlat(@Req() req: Request) {
-			console.log(req.body);
       let listPlat = Object.keys(req.body);
       let listNombrePlat = Object.values(req.body);
       listPlat.pop();
       listNombrePlat.pop();
-      //console.log(listPlat);
-      //console.log(listNombrePlat);
       let e = ""
       let plats = await this.commandeService.getAllPlat();
       let listTotalPlats: string[] = [];

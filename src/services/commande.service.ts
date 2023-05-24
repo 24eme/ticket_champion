@@ -94,17 +94,19 @@ export class CommandeService {
   }
 
   async getClientCommandesGroupedByEntreprise(): Promise<any> {
+    const currentDate = new Date().toISOString().split('T')[0];
     const queryBuilder = this.clientRepository
       .createQueryBuilder('client')
       .leftJoinAndSelect('client.commandes', 'commande')
       .select('client.entreprise', 'entreprise')
       .addSelect('commande.heure_de_livraison', 'heure_de_livraison')
       .addSelect('COUNT(commande.id_commande)', 'nombreCommandes')
+      .where('commande.prete = :prete', {prete : false} )
+      .andWhere(`DATE(SUBSTRING_INDEX(commande.date_commande, ' ', 1)) = :currentDate`, { currentDate: currentDate })
       .groupBy('client.entreprise')
       .addGroupBy('commande.heure_de_livraison')
       .having('COUNT(commande.id_commande) > :id', { id: 0 })
       .orderBy('commande.heure_de_livraison', 'ASC'); // Tri croissant
-      
 
     return queryBuilder.getRawMany();
   }
@@ -128,6 +130,7 @@ export class CommandeService {
   }
 
   async getCommandesInfoPerEntreprise(enterprise: string, time: string): Promise<Commande[]> {
+    const currentDate = new Date().toISOString().split('T')[0];
     return this.commandeRepository
       .createQueryBuilder('commande')
       .leftJoinAndSelect('commande.client', 'client')
@@ -136,7 +139,19 @@ export class CommandeService {
       .leftJoinAndSelect('commande_plat.plat', 'plat')
       .leftJoinAndSelect('commande_supplement.supplement', 'supplement')
       .where('client.entreprise = :entreprise', { entreprise: enterprise })
+      .andWhere('commande.prete = :prete', {prete : false} )
+      .andWhere(`DATE(SUBSTRING_INDEX(commande.date_commande, ' ', 1)) = :currentDate`, { currentDate: currentDate })
       .andWhere('commande.heure_de_livraison = :heure_livraison', { heure_livraison: time })
+      .getMany();
+  }
+
+   async getClientsWithCommandeFaiteToday(): Promise<Client[]> {
+    const currentDate = new Date().toISOString().split('T')[0];
+  
+    return this.clientRepository.createQueryBuilder('client')
+      .leftJoinAndSelect('client.commandes', 'commande')
+      .where('client.commande_faite = :commande_faite', { commande_faite: true })
+      .andWhere(`DATE(SUBSTRING_INDEX(commande.date_commande, ' ', 1)) = :currentDate`, { currentDate: currentDate })
       .getMany();
   }
 

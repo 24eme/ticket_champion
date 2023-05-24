@@ -45,6 +45,15 @@ export class RestaurantController {
     
     }
 
+
+    @Get('/facture')
+    @Render('restaurantFacturePage')
+    async facture() {
+      const factureTotalCost = await this.commandeService.getTotalCostAndTypeGroupedByEntreprise();
+      console.log(factureTotalCost);
+      return { data: factureTotalCost};
+    }
+
     
     @Post('/marquerCommandePrete/:commandeId')
     async markCommandeAsReady(@Param('commandeId') commandeId: string, @Res() res) {

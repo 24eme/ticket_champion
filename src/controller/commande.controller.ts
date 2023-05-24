@@ -148,23 +148,96 @@
   @Render('supplementsPage')
   async supp() {
     const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
-    return {data: data, plats : this.commandeDto.plats, montant : this.commandeDto.montant_Commande};
+    return {data: data, plats : this.commandeDto.plats, supplement : this.commandeDto.supplements, montant : this.commandeDto.montant_Commande};
 
   }
 
   @Post('/supplements')
-  handlePostRequestSupplement(@Body('buttonText') buttonText: string, @Body('prix') prix: string) {
-    
-    if(this.commandeDto.supplements.find(supplement => supplement.nom_supplement === buttonText) == undefined  ){
-      let supplement = new CreateSupplementtDto();
-      supplement.prix = Number(prix);
-      supplement.nom_supplement = buttonText;
-      supplement.quantite = 1;
-      this.commandeDto.supplements.push(supplement);
+  @Redirect('/heureLivraison', 302)
+  async handlePostRequestSupplement(@Req() req: Request) {
+    let listPlat = Object.keys(req.body);
+    let listNombrePlat = Object.values(req.body);
+    let destination = listPlat.pop();
+    listNombrePlat.pop();
+    console.log(listPlat);
+    console.log(listNombrePlat);
+    let e = ""
+    let plats = await this.commandeService.getAllPlat();
+    let listTotalPlats: string[] = [];
 
-    }else {this.commandeDto.supplements.find(suplement => suplement.nom_supplement === buttonText).quantite ++;}
-    this.commandeDto.montant_Commande += Number(prix);
+    let supplemets = await this.commandeService.getAllSupplement();
+    let listTotalSupps: string[] = [];
 
+    for (const plat of plats) {
+      listTotalPlats.push(plat.nom_plat);
+    }
+    for (const supp of supplemets) {
+      listTotalSupps.push(supp.nom_supplement);
+    }
+    let prixObjet = await this.commandeService.getPrixSupplement(listPlat[0]);
+    let prix = prixObjet[0].prix_supplement;
+    //let test = Object.values(await this.commandeService.getPrixSupplement(listPlat[0])[0]);
+    console.log("test prix: ",  prix);
+
+    for ( e in listNombrePlat){
+
+      let nomPlat = listPlat[e];
+      let prix = Number (await this.commandeService.getPrixSupplement(nomPlat));
+      console.log("le prix est: ", prix);
+
+      if (listTotalSupps.find(supp => supp === nomPlat)){
+        if(listNombrePlat[e] <0){
+          let thisSupp = this.commandeDto.supplements.find(lesupp => lesupp.nom_supplement === nomPlat);
+          thisSupp.quantite = Number(thisSupp.quantite) +  Number(listNombrePlat[e]);
+
+          if (thisSupp.quantite == 0){
+            let index: number = this.commandeDto.supplements.indexOf(thisSupp);
+            if (index !== -1) {
+              this.commandeDto.supplements.splice(index, 1);
+            }  
+          }
+        }
+        this.commandeDto.montant_Commande += prix*listNombrePlat[e];
+      }
+      
+      if (listTotalPlats.find(plat => plat === nomPlat)){
+
+        if(listNombrePlat[e] <0){
+
+          let thisPlat = this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat);
+
+          thisPlat.quantite = Number(thisPlat.quantite) +  Number(listNombrePlat[e]);
+
+          if (thisPlat.quantite == 0){
+            let index: number = this.commandeDto.plats.indexOf(thisPlat);
+            if (index !== -1) {
+              this.commandeDto.plats.splice(index, 1);
+            }
+            
+          }
+          this.commandeDto.montant_Commande += prix*listNombrePlat[e];
+        }
+
+      if(listNombrePlat[e]>0){
+        if(this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat) == undefined  ){
+          let plat = new CreatePlatDto();
+          plat.nom_plat = nomPlat;
+          plat.quantite = listNombrePlat[e];
+          plat.prix = prix;
+          this.commandeDto.plats.push(plat);
+  
+        }else {this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat).quantite = Number(this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat).quantite) + Number(listNombrePlat[e]);}
+        
+        this.commandeDto.montant_Commande += prix*listNombrePlat[e];
+      }
+    }
+  }
+
+    if (destination === "next") {
+      return { url: '/heureLivraison' };
+    } else if (destination === "pre") {
+      return { url: '/plats' };
+    }
   }
 
   @Get('confirmation')

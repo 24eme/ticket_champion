@@ -4,6 +4,7 @@
   <h2 class="text-center texte-intro">Un petit supplément ?</h2>
 
   <div class="row">
+    <form action="/supplements" method="POST">
     <div class="row container-card col-md-8">
       {{#each data.data.restaurants.[0].supplements}}
         <div class="col-sm-2 supplement-item">
@@ -12,7 +13,8 @@
             <div class="card-body">
               <h5 class="card-title">{{this.nom}} - {{this.prix}}€</h5>
               <p class="liste-ingredients">{{this.ingredients}}</p>
-              <button type="button" class="btn btn-primary bouton-plats B1"  name="{{this.prix}}" id="{{this.nom}}">Ajouter à la commande</button>
+              <input type="hidden" id="button-hidden{{@index}}" data-nonplat= "{{this.nom}}"  name="{{this.nom}}" value="0"/>
+              <input type="button" class="btn btn-primary bouton-plats" name="{{this.nom}}" value="Ajouter à la commande" onclick="addValue('button-hidden{{@index}}');" />
             </div>
           </div>
         </div>
@@ -25,96 +27,154 @@
       <section id="recap-section"> 
         <h2 class="text-center texte-intro" style="font-size: 1.5rem">Panier</h2>
         <ul id="recap-commande">
-        {{#each plats}}
-        <li> {{this.quantite}} x {{this.nom_plat}} - {{this.prix}}€</li> 
-        {{/each}}
+          {{#each plats}}
+            <li class ="commande-existante" data-name="{{this.nom_plat}}" data-prix ="{{this.prix}}" data-quantite ="{{this.quantite}}" > {{this.quantite}} x {{this.nom_plat}} - {{this.prix}}€</li> 
+          {{/each}}
+          {{#each supplements}}
+            <li class="commande-existante" data-name="{{this.nom_supplement}}" data-quantite="{{this.quantite}}" data-prix="{{this.prix}}"> {{this.quantite}} x {{this.nom_supplement}} - {{this.prix}}€</li> 
+          {{/each}}
+          <li id="total"> Total : {{montant}} </li>    
         </ul>
-        <ul><li>Total : <span id="total-amount" class="montant">{{montant}}</span></li></ul>
+
+          {{#each plats}}
+          <input type="hidden" data-namehidden="{{this.nom_plat}}" name="{{this.nom_plat}}" value="{{this.quantite}}">
+          {{/each}}
       </section>
     </div>
   </div>
 
   <div class="container-prev-next">
     
+    {{!-- <a href='/heureLivraison'>
+      <input type="submit" id="hidden-next" class="btn btn-primary btn-next" value="Suivant"/>
+    </a> --}}
+
+       <button type="submit" class="btn btn-primary btn-next" name="next"> Suivant </button>
+       
+     
+      
+      <button type="submit" class="btn btn-primary btn-previous" name="pre" > Précédent </button>
       
 
-    <form action="/plats" method="GET">
-    <input type="submit" class="btn btn-primary btn-previous" value="Précédent"/>
-    </form>
-    
-    <a href='/heureLivraison'>
-      <input type="submit" id="hidden-next" class="btn btn-primary btn-next" value="Suivant"/>
-    </a>
+      </form>
+
+      
   </div>
 
 </section>
 
 <script>
-  const allButton = document.querySelectorAll('.B1');
-  const recapCommande = document.getElementById('recap-commande');
-  const totalAmount = document.getElementById('total-amount');
-  const hiddenNextButton = document.getElementById('hidden-next');
 
-  let commande = {}; // initialisation de l'objet commande
+function addValue(id) {
 
-  let montant = parseInt(totalAmount.textContent); // Récupère la valeur initiale de Total
+const buttonHidden = document.getElementById(id);
 
-  if (montant.valueOf() > 0) {
-    hiddenNextButton.type = "submit";
-  }
+buttonHidden.value++; 
+}
 
-  allButton.forEach(button => {
-    button.addEventListener('click', (event) => {
-      const buttonText = event.target.id;
-      const prix = event.target.name;
+let commande = {};
 
-      // incrémentation de la quantité
-      if (commande.hasOwnProperty(buttonText)) {
-        commande[buttonText].quantite += 1;
-      } else {
-        commande[buttonText] = {
-          quantite: 1,
-          prix: prix
-        };
-      }
+console.log("c'est la commande : ", commande);
 
-      let total = 0;
+allBoutonplat = document.querySelectorAll(".bouton-plats");
+const recapCommande = document.getElementById('recap-commande');
 
-      // Mise à jour du récapitulatif
-      Object.keys(commande).forEach((supplement) => {
-        const existingItem = recapCommande.querySelector(`li[data-nom-plat="${supplement}"]`);
-        if (existingItem) {
-          const quantite = commande[supplement].quantite;
-          existingItem.textContent = `${quantite} x ${supplement} - ${commande[supplement].prix}€`;
-          total += quantite * commande[supplement].prix;
-        } else {
-          const item = document.createElement('li');
-          const quantite = commande[supplement].quantite;
-          const prixUnitaire = commande[supplement].prix;
-          const prixTotal = quantite * prixUnitaire;
-          item.textContent = `${quantite} x ${supplement} - ${prixTotal}€`;
-          item.setAttribute('data-nom-plat', supplement);
-          recapCommande.appendChild(item);
-          total += prixTotal;
-          if (prixTotal > 0) {
-              hiddenNextButton.type = "submit";
-          }
+allBoutonplat.forEach(boutton => {
+
+  boutton.addEventListener('click', (event) => {
+
+    function updateTotal() {
+  let total = 0;
+
+  Object.keys(commande).forEach((plat) => {
+
+      total += commande[plat].quantite * commande[plat].prix;
+
+    });
+
+  const totalItem = document.querySelector('#recap-commande li:last-child');
+  totalItem.textContent = `Total : ${total}€`;
+}
+
+
+    const commadeExistante = document.querySelectorAll('.commande-existante');
+    let commande = {};
+    commadeExistante.forEach(boutton =>{
+
+      commande[boutton.dataset.name] = {
+        quantite : boutton.dataset.quantite,
+        prix : boutton.dataset.prix
+      };
+    });
+
+    const nomPlat = event.target.name;
+    const prix = event.target.id;
+    //console.log('le nom du plats', nomPlat);
+
+    if (commande.hasOwnProperty(nomPlat)) {
+      commande[nomPlat].quantite ++;
+    } else {
+      commande[nomPlat] = {
+        quantite: 1,
+        prix: prix
+      };
+    }
+
+    //affichage 
+
+    let total = 0;
+
+    recapCommande.innerHTML = '';
+    Object.keys(commande).forEach((plat) => {
+
+      const item = document.createElement('li');
+      const deleteButton = document.createElement('button');
+      deleteButton.innerHTML = 'X';
+      item.setAttribute('data-name', plat);
+      item.setAttribute('class', 'commande-existante');
+      item.setAttribute('data-prix', commande[plat].prix);
+      item.setAttribute('data-quantite', commande[plat].quantite);
+      item.innerHTML += `${commande[plat].quantite} x ${plat} - ${commande[plat].prix}€`;
+      item.appendChild(deleteButton);
+      recapCommande.appendChild(item);
+      total += commande[plat].quantite * commande[plat].prix;
+
+      deleteButton.addEventListener('click', (event) => {
+         event.preventDefault();
+        const buttonHidden = document.querySelector(`[data-nonplat="${plat}"]`);
+
+        if (buttonHidden) {
+          buttonHidden.value = Number(buttonHidden.value) - Number(commande[plat].quantite);
+          recapCommande.removeChild(item);
+          
         }
+
+        const suppDel = document.querySelector(`[data-name="${plat}"]`);
+        if (suppDel !== null) {
+          console.log("hellooo");
+          const buttonHiddenSupp = document.querySelector(`[data-namehidden="${plat}"]`);
+          buttonHiddenSupp.value = Number(commande[plat].quantite)*(-1);
+          suppDel.parentNode.removeChild(suppDel);
+          
+          console.log("this : ", buttonHiddenSupp.value);
+
+        }
+        delete commande[plat];
+        updateTotal();
+        
+        console.log("le contenue apres" ,commande);
       });
 
-      const somme = montant + total; // Calcule la somme de montant et du total
-
-      totalAmount.textContent = `${somme}€`; // Affiche la somme dans l'élément Total
-
-      // envoi de la commande au serveur
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', '/supplements');
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.send(JSON.stringify({ buttonText, prix }));
     });
+    const totalItem = document.createElement('li');
+    totalItem.textContent = `Total : ${total}€`;
+    recapCommande.appendChild(totalItem);
+    
   });
 
+})    
 </script>
+
 
 
 {{> footer}}

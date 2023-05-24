@@ -215,6 +215,22 @@ export class CommandeService {
     .select('supplement.nom_supplement', 'nom_supplement')
     return queryBuilder.getRawMany(); 
   }
+
+  async getPrixSupplement(nom: string){
+    const queryBuilder = this.supplementRepository
+    .createQueryBuilder('supplement')
+    .select('supplement.prix_supplement', 'prix_supplement')
+    .where('supplement.nom_supplement = :nom', { nom : nom })
+    return queryBuilder.getRawMany();
+  }
+   async getPrixPlat(nom: string){
+    const queryBuilder = this.platRepository
+    .createQueryBuilder('plat')
+    .select('plat.prix_plat', 'prix_plat')
+    .where('plat.nom_plat = :nom', { nom : nom })
+    return queryBuilder.getRawMany();
+
+   }
   findAll() {
     return `This action returns all commande`;
   }

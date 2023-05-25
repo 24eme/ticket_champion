@@ -160,7 +160,15 @@ export class CommandeService {
     const  montant_commande = createCommandeDto.montant_Commande;
     let client = new Client();
     client.id_client = createCommandeDto.id_client;
-    client.commande_faite = true;
+    //mise a jour de la colonne commande_faite dans clients
+    const loadedClient = await this.clientRepository.findOne({
+      where: {
+        id_client : client.id_client
+      }
+    });
+    loadedClient.commande_faite = true;
+    await this.clientRepository.save(loadedClient);
+
     const heure_de_livraison = createCommandeDto.date_livraison;
     const newCommand = await this.commandeRepository.save({  montant_commande, heure_de_livraison, client} as unknown as DeepPartial<Commande>);
     let commande = new Commande();

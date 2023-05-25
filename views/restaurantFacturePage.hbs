@@ -5,12 +5,16 @@
                 <div class="col-lg">
                     <ul>
                     <li>Entreprise : {{nomEntreprise}}</li>
-                    {{!-- <li>Nom plat : {{ this.nom_plat }}, Total : {{this.sumCommandesPlats}} </li>
-                    <li>Nom supplément : {{ this.nom_supplement }}, Total : {{ this.sumCommandesSupplements }} </li>
-                    <li>Total commandes : {{this.sumTotalCommandeInvoice}}</li> --}}
+
+                  {{#each data}}
+                    <li>{{ this.nom_plat }} - {{ this.quantite }} plats - {{ this.prixTotale }}€</li>
+                  {{/each}}
+                  {{#each dataSupp}}
+                    <li>{{ this.nom_supplement }} - {{ this.quantite }} - {{ this.prixTotale }}€ </li>
+                  {{/each}}
+                    <li>Total commande : {{ prixTotaleCommande }} </li>
                     </ul>                    
                 </div>
-
 
     </div>
 

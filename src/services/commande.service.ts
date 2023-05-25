@@ -128,23 +128,30 @@ export class CommandeService {
   }
 
 
-  async getTotalCostAndTypeGroupedByEntreprise(): Promise<any> {
+  async getAllPlatsByEntreprise(entrepriseName: string): Promise<any> {
     const queryBuilder = this.commandeRepository
       .createQueryBuilder('commande')
-      .leftJoinAndSelect('commande.commandePlats', 'commande_plat')
-      .leftJoinAndSelect('commande_plat.plat', 'plat')
-      .leftJoinAndSelect('commande.commandeSupplements', 'commande_supplement')
-      .leftJoinAndSelect('commande_supplement.supplement', 'supplement')
+       .leftJoinAndSelect('commande.commandePlats', 'commande_plat')
+       .leftJoinAndSelect('commande_plat.plat', 'plat')
       .leftJoinAndSelect('commande.client', 'client')
-      .select('client.entreprise', 'entreprise')
+      .select('plat.prix_plat', 'prix_plat')
       .addSelect('plat.nom_plat', 'nom_plat')
-      .addSelect('SUM(commande.montant_commande)', 'sumCommandesPlats')
+      .addSelect('commande_plat.quantite', 'quantite')
+      .where('client.entreprise = :nom', { nom : entrepriseName})
+    
+    return queryBuilder.getRawMany();
+  }
+
+  async getAllSupplementsByEntreprise(entrepriseName: string): Promise<any> {
+    const queryBuilder = this.commandeRepository
+      .createQueryBuilder('commande')
+       .leftJoinAndSelect('commande.commandeSupplements', 'commande_supplement')
+       .leftJoinAndSelect('commande_supplement.supplement', 'supplement')
+      .leftJoinAndSelect('commande.client', 'client')
+      .select('supplement. prix_supplement', ' prix_supplement')
       .addSelect('supplement.nom_supplement', 'nom_supplement')
-      .addSelect('SUM(commande.montant_commande)', 'sumCommandesSupplements')
-      .groupBy('client.entreprise')
-      .addGroupBy('plat.nom_plat')
-      .addGroupBy('supplement.nom_supplement')
-      // .addSelect('SUM(sumCommandesSupplements.sumCommandesPlats', 'sumTotalCommandeInvoice')
+      .addSelect('commande_supplement.quantite', 'quantite')
+      .where('client.entreprise = :nom', { nom : entrepriseName})
     
     return queryBuilder.getRawMany();
   }

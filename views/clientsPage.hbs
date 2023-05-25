@@ -15,7 +15,8 @@
                 <ul class="client-ul">
                 {{#if this.commande_faite}}
                     <div>
-                        <input type="checkbox" id="modal-confirmation" name="{{this.id_client}}"/>
+                        <input type="submit" class="btn-clients-fait text-white selection-nom-employee commande_faite" name="{{this.id_client}}" value="{{this.nom}}" style="border-radius: 15px" disabled/>
+                        <!--<input type="checkbox" id="modal-confirmation" name="{{this.id_client}}"/>
                         <label for="modal-confirmation" class="btn-clients-fait text-white selection-nom-employee commande_faite" style="border-radius: 15px">{{this.nom}}</label>
                         <label for="modal-confirmation" class="modal-background"></label>
                         <div class="modal-confirmation" style="height: 65%; width: 30%">
@@ -38,11 +39,11 @@
                             <a>
                                 <input type="submit" class="btn btn-primary btn-lg m-bottom-70" value="Valider" style="border-radius: 15px;"/>
                             </a>
-                        </div>
+                        </div>-->
                     </div>
 
                 {{else}}
-                    <input type="submit" class="btn-clients text-white selection-nom-employee" name="{{this.id_client}}" value="{{this.nom}}"/>
+                    <input type="submit" class="btn-clients text-white selection-nom-employee" name="{{this.id_client}}" value="{{this.nom}}" style="border-radius: 15px"/>
                 </ul>
                 {{/if}}
 

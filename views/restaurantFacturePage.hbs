@@ -1,0 +1,24 @@
+  {{> header}} 
+
+<section style="height: 100vh">
+    <div class="row" style="margin: 0 auto";>
+                <div class="col-lg">
+                    <ul>
+                    <li>Entreprise : {{nomEntreprise}}</li>
+
+                  {{#each data}}
+                    <li>{{ this.nom_plat }} - {{ this.quantite }} plats - {{ this.prixTotale }}€</li>
+                  {{/each}}
+                  {{#each dataSupp}}
+                    <li>{{ this.nom_supplement }} - {{ this.quantite }} - {{ this.prixTotale }}€ </li>
+                  {{/each}}
+                    <li>Total commande : {{ prixTotaleCommande }} </li>
+                    </ul>                    
+                </div>
+
+    </div>
+
+</section>
+
+
+{{> footer}}

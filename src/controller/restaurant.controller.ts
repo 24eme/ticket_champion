@@ -27,7 +27,7 @@ export class RestaurantController {
     this.nonEntreprise = entreprise;
     this.time = heure;
   }
-
+  
   @Get('commandesInfo')
   @Render('commandesInfoPage')
   async  getCommandesInfo() {
@@ -35,18 +35,85 @@ export class RestaurantController {
     const Info = await this.commandeService.getCommandesInfoPerEntreprise(this.nonEntreprise,  this.time);
     return { commandes: Info, entreprise : this.nonEntreprise, time : this.time };
   }
+  
+   @Get('/historique')
+   @Render('restaurantHistoriquePage')
+   async historique() {
+     const totalCost = await this.commandeService.getTotalCostCommandesGroupedByEntreprise();
+     return { data: totalCost };
+   }
+  
+    @Get('/facture/:entrepriseName')
+    @Render('restaurantFacturePage')
+    async factureRestaurant(@Param('entrepriseName') entrepriseName: string) {
+      const infoCommande = await this.commandeService.getAllPlatsByEntreprise(entrepriseName);
+      let listePlat = [];
+      let listeQuantite = [];
+      let listePrixTotale = [];
+      for (let e in infoCommande) {
+        console.log("e est : ", e);
+        if (listePlat.find( plat  => plat === infoCommande[e].nom_plat) == undefined){
+          listePlat.push(infoCommande[e].nom_plat);
+          listeQuantite.push(infoCommande[e].quantite);
+          listePrixTotale.push(infoCommande[e].prix_plat*infoCommande[e].quantite);
+        }
+        else{
+          let index: number = listePlat.indexOf(infoCommande[e].nom_plat);
+              if (index !== -1) {
+                listeQuantite[index] += infoCommande[e].quantite;
+                listePrixTotale[index] += infoCommande[e].prix_plat*infoCommande[e].quantite;
+              }  
+        }
+      }
 
-  @Get('/historique')
-  @Render('restaurantHistoriquePage')
-  async historique() {
-    const totalCost = await this.commandeService.getTotalCostCommandesGroupedByEntreprise();
-    console.log(totalCost);
-    return { data: totalCost };
-
-  }
+      let factureRestaurant = {}
+      for(let e in listePlat){ 
 
 
-  @Post('/marquerCommandePrete/:commandeId')
+        factureRestaurant[listePlat[e]] = {
+          nom_plat : listePlat[e],
+          quantite  : listeQuantite[e],
+          prixTotale :  listePrixTotale[e]
+        };
+      }
+
+      const infoCommandeSupplement = await this.commandeService.getAllSupplementsByEntreprise(entrepriseName);
+      let listeSupp = [];
+      let listeQuantiteSupp = [];
+      let listePrixTotaleSupp = [];
+      for (let e in infoCommandeSupplement) {
+        
+        if (listeSupp.find( supplement  => supplement === infoCommandeSupplement[e].nom_supplement) == undefined){
+          listeSupp.push(infoCommandeSupplement[e].nom_supplement);
+          listeQuantiteSupp.push(infoCommandeSupplement[e].quantite);
+          listePrixTotaleSupp.push(infoCommandeSupplement[e].prix_supplement*infoCommandeSupplement[e].quantite);
+        }
+        else{
+          let index: number = listeSupp.indexOf(infoCommandeSupplement[e].nom_supplement);
+              if (index !== -1) {
+                listeQuantiteSupp[index] += infoCommandeSupplement[e].quantite;
+                listePrixTotaleSupp[index] += infoCommandeSupplement[e].prix_supplement*infoCommandeSupplement[e].quantite;
+              }  
+        }
+      }
+
+      let factureRestaurantSupp = {}
+      for(let e in listeSupp){ 
+
+
+        factureRestaurantSupp[listeSupp[e]] = {
+          nom_supplement : listeSupp[e],
+          quantite  : listeQuantiteSupp[e],
+          prixTotale :  listePrixTotaleSupp[e]
+        };
+      }
+
+      const prixTotaleCommande = listePrixTotale.reduce((a, b) => a + b, 0) + listePrixTotaleSupp.reduce((a, b) => a + b, 0);;
+
+     return {nomEntreprise: entrepriseName, data : factureRestaurant, dataSupp : factureRestaurantSupp, prixTotaleCommande : prixTotaleCommande };
+    }
+
+ @Post('/marquerCommandePrete/:commandeId')
   async markCommandeAsReady(@Param('commandeId') commandeId: string, @Res() res) {
     try {
       // Convertissez l'ID de la commande en nombre entier
@@ -64,11 +131,12 @@ export class RestaurantController {
     }
   }
 
-  @Get('/factures')
+ @Get('/factures')
   @Render('facturePage')
   facturePageFunction() {
     const command = this.commandeService;
 
     return command;
   }
+
 }

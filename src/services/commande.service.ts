@@ -172,42 +172,36 @@ export class CommandeService {
     return queryBuilder.getRawMany();
   }
 
-  async create(
-    createCommandeDto: CreateCommandeDto,
-    createPlatDto: CreatePlatDto[],
-    createSupplementtDto: CreateSupplementtDto[],
-  ) {
-    const montant_commande = createCommandeDto.montant_Commande;
-    const client = new Client();
+
+  async create(createCommandeDto: CreateCommandeDto, createPlatDto : CreatePlatDto[], createSupplementtDto : CreateSupplementtDto[]) {
+    const  montant_commande = createCommandeDto.montant_Commande;
+    let client = new Client();
     client.id_client = createCommandeDto.id_client;
-    client.commande_faite = true;
+    //mise a jour de la colonne commande_faite dans clients
+    const loadedClient = await this.clientRepository.findOne({
+      where: {
+        id_client : client.id_client
+      }
+    });
+    loadedClient.commande_faite = true;
+    await this.clientRepository.save(loadedClient);
+
     const heure_de_livraison = createCommandeDto.date_livraison;
-    const newCommand = await this.commandeRepository.save({
-      montant_commande,
-      heure_de_livraison,
-      client,
-    } as unknown as DeepPartial<Commande>);
-    const commande = new Commande();
+    const newCommand = await this.commandeRepository.save({  montant_commande, heure_de_livraison, client} as unknown as DeepPartial<Commande>);
+    let commande = new Commande();
     commande.id_commande = newCommand.id_commande;
-    for (const ele of createPlatDto) {
-      const plat = new Plat();
+    for (let ele of createPlatDto) {
+
+      let plat = new Plat();
       plat.nom_plat = ele.nom_plat;
-      const quantite = ele.quantite;
-      await this.CommandePlatRepository.save({
-        commande,
-        plat,
-        quantite,
-      } as unknown as DeepPartial<CommandePlat>);
+      let quantite = ele.quantite;
+      await this.CommandePlatRepository.save({commande, plat, quantite} as unknown as DeepPartial<CommandePlat>);
     }
-    for (const supp of createSupplementtDto) {
-      const supplement = new Supplement();
+    for (let supp of createSupplementtDto ){
+      let supplement = new Supplement();
       supplement.nom_supplement = supp.nom_supplement;
-      const quantite = supp.quantite;
-      await this.commandeSupplementRepository.save({
-        commande,
-        supplement,
-        quantite,
-      } as unknown as DeepPartial<CommandeSupplement>);
+      let quantite = supp.quantite;
+      await this.commandeSupplementRepository.save({commande, supplement, quantite} as unknown as DeepPartial<CommandeSupplement>);
     }
   }
 

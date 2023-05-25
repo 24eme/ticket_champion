@@ -1,7 +1,7 @@
 {{> header}} 
 
 <section class="adaptative-div">
-    <div class="container" style="flex: 1;">
+      <div class="container" style="flex: 1;">
           <div class="row">
               <div class="col-lg">
                   <div class="clients-container">
@@ -13,21 +13,19 @@
             <div class="row">
                 {{#each data}}
               <div class="col-lg">
-                    <div class="clients-container">
-
-                <a href="/facture/{{this.entreprise}}">
+                  <div class="clients-container">
                     <button class="btn-historique">
                         <div class="note-wrapper">
                             <div class="note-entreprise">{{this.entreprise}}</div>
+                            <div class="vertical-separator"></div>
                             <div class="note-totale"> {{this.sumCommandes}}€</div>
-                    </div>
+                        </div>
                     </button>
-                </a>
                     {{/each}}
                   </div>
               </div>
           </div>
 
-    </div>
+      </div>
 </section>
 {{> footer}}

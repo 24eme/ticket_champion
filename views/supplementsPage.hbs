@@ -49,9 +49,11 @@
     {{!-- <a href='/heureLivraison'>
       <input type="submit" id="hidden-next" class="btn btn-primary btn-next" value="Suivant"/>
     </a> --}}
-
-       <button type="submit" class="btn btn-primary btn-next" name="next"> Suivant </button>
-       
+    {{#if montant}}
+       <button type="submit" class="btn btn-primary btn-next" name="next" id="suivant-locked"> Suivant </button>
+    {{else}}
+        <button type="submit" class="btn btn-primary btn-next" name="next" id="suivant-locked" disabled> Suivant </button>
+    {{/if}}
      
       
       <button type="submit" class="btn btn-primary btn-previous" name="pre" > Précédent </button>
@@ -66,11 +68,13 @@
 
 <script>
 
+const suivant_locked = document.getElementById("suivant-locked");
+
 function addValue(id) {
 
 const buttonHidden = document.getElementById(id);
 
-buttonHidden.value++; 
+buttonHidden.value++;
 }
 
 let commande = {};
@@ -93,12 +97,18 @@ allBoutonplat.forEach(boutton => {
 
   const totalItem = document.querySelector('#recap-commande li:last-child');
   totalItem.textContent = `Total : ${total}€`;
+        if (total > 0) {
+            suivant_locked.disabled = false;
+        }
+        else {
+            suivant_locked.disabled = true;
+        }
 }
 
 
-    const commadeExistante = document.querySelectorAll('.commande-existante');
+    const commandeExistante = document.querySelectorAll('.commande-existante');
     let commande = {};
-    commadeExistante.forEach(boutton =>{
+    commandeExistante.forEach(boutton =>{
 
       commande[boutton.dataset.name] = {
         quantite : boutton.dataset.quantite,
@@ -162,10 +172,9 @@ allBoutonplat.forEach(boutton => {
     const totalItem = document.createElement('li');
     totalItem.textContent = `Total : ${total}€`;
     recapCommande.appendChild(totalItem);
-    
   });
 
-})    
+})
 </script>
 
 

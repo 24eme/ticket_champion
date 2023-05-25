@@ -14,7 +14,33 @@
               {{#each listEmployee}}
                 <ul class="client-ul">
                 {{#if this.commande_faite}}
-                    <input type="submit" class="btn-clients-fait text-white selection-nom-employee commande_faite" name="{{this.id_client}}" value="{{this.nom}}" disabled/>
+                    <div>
+                        <input type="checkbox" id="modal-confirmation" name="{{this.id_client}}"/>
+                        <label for="modal-confirmation" class="btn-clients-fait text-white selection-nom-employee commande_faite" style="border-radius: 15px">{{this.nom}}</label>
+                        <label for="modal-confirmation" class="modal-background"></label>
+                        <div class="modal-confirmation" style="height: 65%; width: 30%">
+                            <div class="modal-confirmation-header">
+                                <h3>Récapitulatif de la commande</h3>
+                                <label for="modal-confirmation">
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC" width="16" height="16" alt="">
+                                </label>
+                            </div>
+                            <p>{{this.nom_employee}}</p>
+                            <p style="font-weight: bold">A commandé :</p>
+                            {{#each this.plats}}
+                                <p>{{this.quantite}} {{this.nom_plat}}</p>
+                            {{/each}}
+                            <p style="font-weight: bold">Accompagné de :</p>
+                            {{#each this.supplements}}
+                                <p>{{this.quantite}} {{this.nom_supplement}}</p>
+                            {{/each}}
+                            <p style="font-weight: bold">Pour un total de {{this.montant_Commande}}€.</p>
+                            <a>
+                                <input type="submit" class="btn btn-primary btn-lg m-bottom-70" value="Valider" style="border-radius: 15px;"/>
+                            </a>
+                        </div>
+                    </div>
+
                 {{else}}
                     <input type="submit" class="btn-clients text-white selection-nom-employee" name="{{this.id_client}}" value="{{this.nom}}"/>
                 </ul>
@@ -33,12 +59,6 @@
 </section>
 
 <style>
-
-    .commande_faite {
-        background-color: mediumseagreen;
-        border-color: mediumseagreen;
-
-    }
 
 </style>
 

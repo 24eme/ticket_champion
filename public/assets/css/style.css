@@ -1912,4 +1912,10 @@ input[type="checkbox"]:checked ~ .modal-background {
     align-items: center;
     justify-content: flex-end;
   }*/
-  
+
+
+.commande_faite {
+    background-color: mediumseagreen;
+    border-color: mediumseagreen;
+
+}

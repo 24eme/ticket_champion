@@ -13,8 +13,12 @@
             <li class="list-group-item">
               {{#each listEmployee}}
                 <ul class="client-ul">
+                {{#if this.commande_faite}}
+                    <input type="submit" class="btn-clients-fait text-white selection-nom-employee commande_faite" name="{{this.id_client}}" value="{{this.nom}}" disabled/>
+                {{else}}
                     <input type="submit" class="btn-clients text-white selection-nom-employee" name="{{this.id_client}}" value="{{this.nom}}"/>
                 </ul>
+                {{/if}}
 
               {{/each}}
 
@@ -27,5 +31,15 @@
     </div>
   </div>
 </section>
+
+<style>
+
+    .commande_faite {
+        background-color: mediumseagreen;
+        border-color: mediumseagreen;
+
+    }
+
+</style>
 
 {{> footer}}

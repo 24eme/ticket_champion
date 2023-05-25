@@ -94,17 +94,19 @@ export class CommandeService {
   }
 
   async getClientCommandesGroupedByEntreprise(): Promise<any> {
+    const currentDate = new Date().toISOString().split('T')[0];
     const queryBuilder = this.clientRepository
       .createQueryBuilder('client')
       .leftJoinAndSelect('client.commandes', 'commande')
       .select('client.entreprise', 'entreprise')
       .addSelect('commande.heure_de_livraison', 'heure_de_livraison')
       .addSelect('COUNT(commande.id_commande)', 'nombreCommandes')
+      .where('commande.prete = :prete', {prete : false} )
+      .andWhere(`DATE(SUBSTRING_INDEX(commande.date_commande, ' ', 1)) = :currentDate`, { currentDate: currentDate })
       .groupBy('client.entreprise')
       .addGroupBy('commande.heure_de_livraison')
       .having('COUNT(commande.id_commande) > :id', { id: 0 })
       .orderBy('commande.heure_de_livraison', 'ASC'); // Tri croissant
-      
 
     return queryBuilder.getRawMany();
   }
@@ -158,6 +160,7 @@ export class CommandeService {
 
 
   async getCommandesInfoPerEntreprise(enterprise: string, time: string): Promise<Commande[]> {
+    const currentDate = new Date().toISOString().split('T')[0];
     return this.commandeRepository
       .createQueryBuilder('commande')
       .leftJoinAndSelect('commande.client', 'client')
@@ -166,7 +169,19 @@ export class CommandeService {
       .leftJoinAndSelect('commande_plat.plat', 'plat')
       .leftJoinAndSelect('commande_supplement.supplement', 'supplement')
       .where('client.entreprise = :entreprise', { entreprise: enterprise })
+      .andWhere('commande.prete = :prete', {prete : false} )
+      .andWhere(`DATE(SUBSTRING_INDEX(commande.date_commande, ' ', 1)) = :currentDate`, { currentDate: currentDate })
       .andWhere('commande.heure_de_livraison = :heure_livraison', { heure_livraison: time })
+      .getMany();
+  }
+
+   async getClientsWithCommandeFaiteToday(): Promise<Client[]> {
+    const currentDate = new Date().toISOString().split('T')[0];
+  
+    return this.clientRepository.createQueryBuilder('client')
+      .leftJoinAndSelect('client.commandes', 'commande')
+      .where('client.commande_faite = :commande_faite', { commande_faite: true })
+      .andWhere(`DATE(SUBSTRING_INDEX(commande.date_commande, ' ', 1)) = :currentDate`, { currentDate: currentDate })
       .getMany();
   }
 
@@ -175,7 +190,15 @@ export class CommandeService {
     const  montant_commande = createCommandeDto.montant_Commande;
     let client = new Client();
     client.id_client = createCommandeDto.id_client;
-    client.commande_faite = true;
+    //mise a jour de la colonne commande_faite dans clients
+    const loadedClient = await this.clientRepository.findOne({
+      where: {
+        id_client : client.id_client
+      }
+    });
+    loadedClient.commande_faite = true;
+    await this.clientRepository.save(loadedClient);
+
     const heure_de_livraison = createCommandeDto.date_livraison;
     const newCommand = await this.commandeRepository.save({  montant_commande, heure_de_livraison, client} as unknown as DeepPartial<Commande>);
     let commande = new Commande();
@@ -217,6 +240,35 @@ export class CommandeService {
   }
   
 
+  async getAllPlat(){
+    const queryBuilder = this.platRepository
+      .createQueryBuilder('plat')
+      .select('plat.nom_plat', 'nom_plat')
+    return queryBuilder.getRawMany(); 
+  }
+
+  async getAllSupplement(){
+    const queryBuilder = this.supplementRepository
+    .createQueryBuilder('supplement')
+    .select('supplement.nom_supplement', 'nom_supplement')
+    return queryBuilder.getRawMany(); 
+  }
+
+  async getPrixSupplement(nom: string){
+    const queryBuilder = this.supplementRepository
+    .createQueryBuilder('supplement')
+    .select('supplement.prix_supplement', 'prix_supplement')
+    .where('supplement.nom_supplement = :nom', { nom : nom })
+    return queryBuilder.getRawMany();
+  }
+   async getPrixPlat(nom: string){
+    const queryBuilder = this.platRepository
+    .createQueryBuilder('plat')
+    .select('plat.prix_plat', 'prix_plat')
+    .where('plat.nom_plat = :nom', { nom : nom })
+    return queryBuilder.getRawMany();
+
+   }
   findAll() {
     return `This action returns all commande`;
   }

@@ -83,8 +83,6 @@ buttonHidden.value++;
 
 let commande = {};
 
-console.log("c'est la commande : ", commande);
-
 allBoutonplat = document.querySelectorAll(".bouton-plats");
 const recapCommande = document.getElementById('recap-commande');
 
@@ -118,7 +116,6 @@ allBoutonplat.forEach(boutton => {
 
     const nomPlat = event.target.name;
     const prix = event.target.id;
-    //console.log('le nom du plats', nomPlat);
 
     if (commande.hasOwnProperty(nomPlat)) {
       commande[nomPlat].quantite ++;
@@ -160,18 +157,13 @@ allBoutonplat.forEach(boutton => {
 
         const suppDel = document.querySelector(`[data-name="${plat}"]`);
         if (suppDel !== null) {
-          console.log("hellooo");
           const buttonHiddenSupp = document.querySelector(`[data-namehidden="${plat}"]`);
           buttonHiddenSupp.value = Number(commande[plat].quantite)*(-1);
           suppDel.parentNode.removeChild(suppDel);
-          
-          console.log("this : ", buttonHiddenSupp.value);
 
         }
         delete commande[plat];
         updateTotal();
-        
-        console.log("le contenue apres" ,commande);
       });
 
     });

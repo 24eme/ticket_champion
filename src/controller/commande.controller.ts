@@ -85,6 +85,7 @@
 
         if (listTotalSupps.find(supp => supp === nomPlat)){
           if(listNombrePlat[e] <0){
+            this.commandeDto.montant_Commande += prix*listNombrePlat[e];
             let thisSupp = this.commandeDto.supplements.find(lesupp => lesupp.nom_supplement === nomPlat);
             thisSupp.quantite = Number(thisSupp.quantite) +  Number(listNombrePlat[e]);
 
@@ -95,7 +96,6 @@
               }  
             }
           }
-          this.commandeDto.montant_Commande += prix*listNombrePlat[e];
         }
         
         if (listTotalPlats.find(plat => plat === nomPlat)){
@@ -148,7 +148,7 @@
   @Render('supplementsPage')
   async supp() {
     const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
-    return {data: data, plats : this.commandeDto.plats, supplement : this.commandeDto.supplements, montant : this.commandeDto.montant_Commande};
+    return {data: data, plats : this.commandeDto.plats, supplements : this.commandeDto.supplements, montant : this.commandeDto.montant_Commande};
 
   }
 
@@ -159,8 +159,6 @@
     let listNombrePlat = Object.values(req.body);
     let destination = listPlat.pop();
     listNombrePlat.pop();
-    console.log(listPlat);
-    console.log(listNombrePlat);
     let e = ""
     let plats = await this.commandeService.getAllPlat();
     let listTotalPlats: string[] = [];
@@ -174,44 +172,42 @@
     for (const supp of supplemets) {
       listTotalSupps.push(supp.nom_supplement);
     }
-    let prixObjet = await this.commandeService.getPrixSupplement(listPlat[0]);
-    let prix = prixObjet[0].prix_supplement;
-    //let test = Object.values(await this.commandeService.getPrixSupplement(listPlat[0])[0]);
-    console.log("test prix: ",  prix);
 
     for ( e in listNombrePlat){
 
       let nomPlat = listPlat[e];
-      let prix = Number (await this.commandeService.getPrixSupplement(nomPlat));
-      console.log("le prix est: ", prix);
 
-      if (listTotalSupps.find(supp => supp === nomPlat)){
-        if(listNombrePlat[e] <0){
-          let thisSupp = this.commandeDto.supplements.find(lesupp => lesupp.nom_supplement === nomPlat);
-          thisSupp.quantite = Number(thisSupp.quantite) +  Number(listNombrePlat[e]);
-
-          if (thisSupp.quantite == 0){
-            let index: number = this.commandeDto.supplements.indexOf(thisSupp);
-            if (index !== -1) {
-              this.commandeDto.supplements.splice(index, 1);
-            }  
-          }
-        }
-        this.commandeDto.montant_Commande += prix*listNombrePlat[e];
-      }
-      
       if (listTotalPlats.find(plat => plat === nomPlat)){
-
+        let prixObjet = await this.commandeService.getPrixPlat(nomPlat);
+        let prix = prixObjet[0].prix_plat;
         if(listNombrePlat[e] <0){
-
+          this.commandeDto.montant_Commande += prix*listNombrePlat[e];
           let thisPlat = this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat);
-
           thisPlat.quantite = Number(thisPlat.quantite) +  Number(listNombrePlat[e]);
 
           if (thisPlat.quantite == 0){
             let index: number = this.commandeDto.plats.indexOf(thisPlat);
             if (index !== -1) {
               this.commandeDto.plats.splice(index, 1);
+            }  
+          } 
+        }   
+      }
+      
+      if (listTotalSupps.find(supp => supp === nomPlat)){
+        let prixObjet = await this.commandeService.getPrixSupplement(nomPlat);
+        let prix = prixObjet[0].prix_supplement;
+
+        if(listNombrePlat[e] <0){
+
+          let thisSupp = this.commandeDto.supplements.find(lesupp => lesupp.nom_supplement === nomPlat);
+
+          thisSupp.quantite = Number(thisSupp.quantite) +  Number(listNombrePlat[e]);
+
+          if (thisSupp.quantite == 0){
+            let index: number = this.commandeDto.supplements.indexOf(thisSupp);
+            if (index !== -1) {
+              this.commandeDto.supplements.splice(index, 1);
             }
             
           }
@@ -219,14 +215,14 @@
         }
 
       if(listNombrePlat[e]>0){
-        if(this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat) == undefined  ){
-          let plat = new CreatePlatDto();
-          plat.nom_plat = nomPlat;
-          plat.quantite = listNombrePlat[e];
-          plat.prix = prix;
-          this.commandeDto.plats.push(plat);
+        if(this.commandeDto.supplements.find(lesupp => lesupp.nom_supplement === nomPlat) == undefined  ){
+          let supplement = new CreateSupplementtDto();
+          supplement.nom_supplement = nomPlat;
+          supplement.quantite = listNombrePlat[e];
+          supplement.prix = prix;
+          this.commandeDto.supplements.push(supplement);
   
-        }else {this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat).quantite = Number(this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat).quantite) + Number(listNombrePlat[e]);}
+        }else {this.commandeDto.supplements.find(lesupp => lesupp.nom_supplement === nomPlat).quantite = Number(this.commandeDto.supplements.find(leplat => leplat.nom_supplement === nomPlat).quantite) + Number(listNombrePlat[e]);}
         
         this.commandeDto.montant_Commande += prix*listNombrePlat[e];
       }

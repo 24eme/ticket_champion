@@ -120,11 +120,13 @@ export class CommandeService {
   }  
   
   async getTotalCostCommandesGroupedByEntreprise(): Promise<any> {
+    const currentDate = new Date().toISOString().split('T')[0].split('-')[1];
     const queryBuilder = this.commandeRepository
       .createQueryBuilder('commande')
       .leftJoinAndSelect('commande.client', 'client')
       .select('client.entreprise', 'entreprise')
-      .addSelect('SUM(commande.montant_commande)', 'sumCommandes')    
+      .addSelect('SUM(commande.montant_commande)', 'sumCommandes') 
+      .where(`MONTH( commande.date_commande ) = :currentDate`, { currentDate: currentDate })   
       .groupBy('client.entreprise');
     return queryBuilder.getRawMany();
   }
@@ -256,6 +258,7 @@ export class CommandeService {
   }
 
   async getAllPlatsByEntreprise(entrepriseName: string): Promise<any> {
+    const currentDate = new Date().toISOString().split('T')[0].split('-')[1];
     const queryBuilder = this.commandeRepository
       .createQueryBuilder('commande')
        .leftJoinAndSelect('commande.commandePlats', 'commande_plat')
@@ -265,11 +268,12 @@ export class CommandeService {
       .addSelect('plat.nom_plat', 'nom_plat')
       .addSelect('commande_plat.quantite', 'quantite')
       .where('client.entreprise = :nom', { nom : entrepriseName})
-    
+      .andWhere(`MONTH( commande.date_commande ) = :currentDate`, { currentDate: currentDate })
     return queryBuilder.getRawMany();
   }
 
   async getAllSupplementsByEntreprise(entrepriseName: string): Promise<any> {
+    const currentDate = new Date().toISOString().split('T')[0].split('-')[1];
     const queryBuilder = this.commandeRepository
       .createQueryBuilder('commande')
        .leftJoinAndSelect('commande.commandeSupplements', 'commande_supplement')
@@ -279,7 +283,7 @@ export class CommandeService {
       .addSelect('supplement.nom_supplement', 'nom_supplement')
       .addSelect('commande_supplement.quantite', 'quantite')
       .where('client.entreprise = :nom', { nom : entrepriseName})
-    
+      .andWhere(`MONTH( commande.date_commande ) = :currentDate`, { currentDate: currentDate })
     return queryBuilder.getRawMany();
   }
 

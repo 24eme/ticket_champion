@@ -40,7 +40,9 @@ export class RestaurantController {
   @Render('restaurantHistoriquePage')
   async historique() {
     const totalCost = await this.commandeService.getTotalCostCommandesGroupedByEntreprise();
-    return { data: totalCost };
+    const data = new Date();
+    const month = data.toLocaleString('default', { month: 'long' });
+    return { data: totalCost, month : month };
 
   }
 
@@ -108,9 +110,11 @@ export class RestaurantController {
         };
       }
 
-      const prixTotaleCommande = listePrixTotale.reduce((a, b) => a + b, 0) + listePrixTotaleSupp.reduce((a, b) => a + b, 0);;
+      const prixTotaleCommande = listePrixTotale.reduce((a, b) => a + b, 0) + listePrixTotaleSupp.reduce((a, b) => a + b, 0);
+      const data = new Date();
+      const month = data.toLocaleString('default', { month: 'long' });
 
-     return {nomEntreprise: entrepriseName, data : factureRestaurant, dataSupp : factureRestaurantSupp, prixTotaleCommande : prixTotaleCommande };
+     return {nomEntreprise: entrepriseName, data : factureRestaurant, dataSupp : factureRestaurantSupp, prixTotaleCommande : prixTotaleCommande, month : month};
     }
 
 

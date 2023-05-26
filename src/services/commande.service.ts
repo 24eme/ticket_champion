@@ -149,7 +149,6 @@ export class CommandeService {
 
    async getClientsWithCommandeFaiteToday(): Promise<Client[]> {
     const currentDate = new Date().toISOString().split('T')[0];
-  
     return this.clientRepository.createQueryBuilder('client')
       .leftJoinAndSelect('client.commandes', 'commande')
       .where('client.commande_faite = :commande_faite', { commande_faite: true })
@@ -287,5 +286,26 @@ export class CommandeService {
     return queryBuilder.getRawMany();
   }
 
+
+  async getDateCommandPerName(employeeName : string): Promise<any> {
+    const queryBuilder = this.commandeRepository
+        .createQueryBuilder('commande')
+        .leftJoinAndSelect('commande.client', 'client')
+        .where('client.nom = :employeeName', {employeeName : employeeName})
+
+    return queryBuilder.getRawMany();
+  }
+
+  async modifyCommandeFaite(employeeName: string): Promise<any> {
+    const findClient = await this.clientRepository.findOne({
+      where: {
+        nom: employeeName
+      }
+    })
+    if (findClient) {
+      findClient.commande_faite = false;
+      await this.clientRepository.save(findClient);
+    }
+  }
 
 }

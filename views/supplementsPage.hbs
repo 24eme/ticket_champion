@@ -171,6 +171,12 @@ allBoutonplat.forEach(boutton => {
     });
     const totalItem = document.createElement('li');
     totalItem.textContent = `Total : ${total}€`;
+      if (total > 0) {
+          suivant_locked.disabled = false;
+      }
+      else {
+          suivant_locked.disabled = true;
+      }
     recapCommande.appendChild(totalItem);
   });
 

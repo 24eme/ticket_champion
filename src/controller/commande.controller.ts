@@ -36,6 +36,19 @@
     @Render('clientsPage')
     async employes() {
       const listEmployee = await this.commandeService.getClientByEntreprise(this.commandeDto.entreprise);
+      var currentDate = new Date();
+      var todayDate = currentDate.toISOString().split('T')[0];
+      let e = '';
+      for ( e in listEmployee)
+      {
+        let CommandeClient = await this.commandeService.getDateCommandPerName(listEmployee[e].nom);
+        if (CommandeClient.length > 0) {
+          let dateCommandeClient = CommandeClient[CommandeClient.length - 1].commande_date_commande.toISOString().split('T')[0];
+          if (listEmployee[e].commande_faite == 1 && dateCommandeClient.localeCompare(todayDate) != 0) {
+            listEmployee[e].commande_faite = await this.commandeService.modifyCommandeFaite(listEmployee[e].nom);
+          }
+        }
+      }
       return {listEmployee : listEmployee, entreprise : this.commandeDto.entreprise};
     }
 

@@ -14,6 +14,7 @@
                 {{#each data}}
               <div class="col-lg">
                   <div class="clients-container">
+                <a href="/facture/{{this.entreprise}}">
                     <button class="btn-historique">
                         <div class="note-wrapper">
                             <div class="note-entreprise">{{this.entreprise}}</div>
@@ -21,6 +22,7 @@
                             <div class="note-totale"> {{this.sumCommandes}}€</div>
                         </div>
                     </button>
+                </a>
                     {{/each}}
                   </div>
               </div>

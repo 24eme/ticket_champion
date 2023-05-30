@@ -170,9 +170,26 @@
   async handlePostRequestSupplement(@Req() req: Request) {
     let listPlat = Object.keys(req.body);
     let listNombrePlat = Object.values(req.body);
-    let destination = listPlat.pop();
-    listNombrePlat.pop();
-    let e = ""
+    let destination = '';
+    let x = '';
+    for (x in listPlat) {
+      if (listPlat[x] === 'pre') {
+        destination = listPlat[x];
+      }
+      else if (listPlat[x]  === 'next') {
+        destination = listPlat[x];
+      }
+    }
+    if (
+      listPlat[listPlat.length - 1] === 'pre' || listPlat[listPlat.length - 1] === 'next') {
+      listPlat.pop();
+      listNombrePlat.pop();
+    } else if (listPlat[0] === 'pre' || listPlat[0] === 'next')
+    {
+      listPlat.shift();
+      listNombrePlat.shift();
+    }
+    let e = "";
     let plats = await this.commandeService.getAllPlat();
     let listTotalPlats: string[] = [];
 

@@ -2,10 +2,22 @@
 
 <style>
   .time-item.disabled {
-    background-color: grey;
+    background-color: mediumseagreen;
+      border-color : mediumseagreen;
     cursor: not-allowed;
   }
 </style>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="/selectionClientPage">Sélection entreprise</a></li>
+        <li class="breadcrumb-item"><a href="/clients">Sélection employé.e</a></li>
+        <li class="breadcrumb-item"><a href="/plats">Choix du plat</a></li>
+        <li class="breadcrumb-item"><a href="/supplements">Choix du supplément</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Choix de l'horaire de livraison</li>
+    </ol>
+</nav>
 
 <section style="align-items: center;">
   <h2 class="text-center texte-intro">A quelle heure souhaites-tu récupérer ta commande ? ⏰</h2>
@@ -36,21 +48,30 @@
           <label for="modal-confirmation" class="modal-background"></label>
           <div class="modal-confirmation" style="height: 65%; width: 30%">
             <div class="modal-confirmation-header">
-              <h3>Récapitulatif de la commande</h3>
+              <h3 class="recap-commande">Récapitulatif de la commande</h3>
               <label for="modal-confirmation">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC" width="16" height="16" alt="">
               </label>
             </div>
-            <p>{{command.nom_employee}}, pour</p>
-            <p id="heurePlaceHolder"></p>
-            <p style="font-weight: bold">Tu as choisis :</p>
+            <p><b>{{command.nom_employee}}</b>, pour</p>
+            <p id="heurePlaceHolder" class="recap-heure"></p>
+            {{#if command.plats}}
+              <p>Tu as choisis :</p>
             {{#each command.plats}}
-              <p>{{this.quantite}} {{this.nom_plat}}</p>
+              <p class="quantite-plat">{{this.quantite}} {{this.nom_plat}}</p>
             {{/each}}
-            <p style="font-weight: bold">Accompagné de :</p>
+            {{/if}}
+
+              {{#if command.supplements}}
+                  {{#if command.plats}}
+              <p>Accompagné de :</p>
+                  {{else}}
+                      <p>Tu as choisis :</p>
+                  {{/if}}
             {{#each command.supplements}}
-              <p>{{this.quantite}} {{this.nom_supplement}}</p>
+              <p class="quantite-supplement">{{this.quantite}} {{this.nom_supplement}}</p>
             {{/each}}
+              {{/if}}
             <p style="font-weight: bold">Pour un total de {{command.montant_Commande}}€.</p>
             <a href='/confirmation'>
               <input type="submit" class="btn btn-primary btn-lg m-bottom-70" value="Valider" style="border-radius: 15px;"/>

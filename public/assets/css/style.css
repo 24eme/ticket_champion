@@ -10,6 +10,7 @@ body {
     font-weight: 400;
     width:100%;
     font-family: 'Raleway', sans-serif;
+    height: 100%;
 }
 
 
@@ -1287,16 +1288,16 @@ FAQ Page
 /*
 Video Section style
 ======================*/
-.video{
+/* .video{
     background: url(../images/background/video.jpg) no-repeat center center;
     background-size: cover;
     position: relative;
 }
 .main_video{
-    display: block;
+    display: block; */
     /*z-index: 2;*/
     /*position: relative;*/
-}
+/* }
 .main_video i,
 .main_video span.fa,
 .main_video span.icon{
@@ -1308,7 +1309,7 @@ Video Section style
     line-height: 80px;
     border-radius: 50%;
     position: relative;
-}
+} */
 
 
 
@@ -1391,7 +1392,6 @@ Footer Section style
     bottom: 0;
     left: 0;
     width: 100%;
-    height:100px;
 }
 
 .main_footer{
@@ -1603,9 +1603,14 @@ Footer Section style
     cursor: pointer;
 }
 
+.section-client {
+    margin: 10% auto;
+}
 .image-container-client {
     display: flex;
-    height: 100vh;
+    height: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .image-container-client .left-image-client,
@@ -1632,6 +1637,7 @@ Footer Section style
     object-fit: contain;
     filter: grayscale(100%);
 }
+
 
 .selection-nom-employee {
     margin-bottom: 5px;
@@ -1919,7 +1925,6 @@ input[type="checkbox"]:checked ~ .modal-background {
     font-size: 16px;
 
 }
-
 .command_faite:hover {
     background-color: darkgreen;
   }
@@ -1991,3 +1996,20 @@ input[type="checkbox"]:checked ~ .modal-background {
     padding: 2px;
     text-align: center;
   }
+
+/* RECAP COMMANDE */
+
+.recap-commande {
+    font-weight: bold;
+}
+
+.recap-heure, .quantite-plat, .quantite-supplement {
+    font-weight: bold;
+    color :#d46864;
+}
+
+.button_ariane {
+    all: unset;
+    cursor : pointer;
+    color: #337ab7;
+}

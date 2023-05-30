@@ -23,7 +23,7 @@
     @Redirect('/clients')
     async handlePostRequest(@Req() req: Request) {
       const key = Object.keys(req.body);
-      const entreprise = key[0].slice(0, -2); 
+      const entreprise = key[0].slice(0, -2);
       this.commandeDto.entreprise = entreprise;
       this.commandeDto.nom_employee = "";
       this.commandeDto.plats = [];
@@ -106,11 +106,11 @@
               let index: number = this.commandeDto.supplements.indexOf(thisSupp);
               if (index !== -1) {
                 this.commandeDto.supplements.splice(index, 1);
-              }  
+              }
             }
           }
         }
-        
+
         if (listTotalPlats.find(plat => plat === nomPlat)){
 
           if(listNombrePlat[e] <0){
@@ -124,7 +124,7 @@
               if (index !== -1) {
                 this.commandeDto.plats.splice(index, 1);
               }
-              
+
             }
             this.commandeDto.montant_Commande += prix*listNombrePlat[e];
           }
@@ -136,9 +136,9 @@
             plat.quantite = listNombrePlat[e];
             plat.prix = prix;
             this.commandeDto.plats.push(plat);
-    
+
           }else {this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat).quantite = Number(this.commandeDto.plats.find(leplat => leplat.nom_plat === nomPlat).quantite) + Number(listNombrePlat[e]);}
-          
+
           this.commandeDto.montant_Commande += prix*listNombrePlat[e];
         }
       }
@@ -170,11 +170,26 @@
   async handlePostRequestSupplement(@Req() req: Request) {
     let listPlat = Object.keys(req.body);
     let listNombrePlat = Object.values(req.body);
-    let destination = listPlat.pop();
-    console.log(listNombrePlat);
-    listNombrePlat.pop();
-    console.log(listNombrePlat)
-    let e = ""
+    let destination = '';
+    let x = '';
+    for (x in listPlat) {
+      if (listPlat[x] === 'pre') {
+        destination = listPlat[x];
+      }
+      else if (listPlat[x]  === 'next') {
+        destination = listPlat[x];
+      }
+    }
+    if (
+      listPlat[listPlat.length - 1] === 'pre' || listPlat[listPlat.length - 1] === 'next') {
+      listPlat.pop();
+      listNombrePlat.pop();
+    } else if (listPlat[0] === 'pre' || listPlat[0] === 'next')
+    {
+      listPlat.shift();
+      listNombrePlat.shift();
+    }
+    let e = "";
     let plats = await this.commandeService.getAllPlat();
     let listTotalPlats: string[] = [];
 
@@ -204,11 +219,11 @@
             let index: number = this.commandeDto.plats.indexOf(thisPlat);
             if (index !== -1) {
               this.commandeDto.plats.splice(index, 1);
-            }  
-          } 
-        }   
+            }
+          }
+        }
       }
-      
+
       if (listTotalSupps.find(supp => supp === nomPlat)){
         let prixObjet = await this.commandeService.getPrixSupplement(nomPlat);
         let prix = prixObjet[0].prix_supplement;
@@ -224,7 +239,7 @@
             if (index !== -1) {
               this.commandeDto.supplements.splice(index, 1);
             }
-            
+
           }
           this.commandeDto.montant_Commande += prix*listNombrePlat[e];
         }
@@ -236,9 +251,9 @@
           supplement.quantite = listNombrePlat[e];
           supplement.prix = prix;
           this.commandeDto.supplements.push(supplement);
-  
+
         }else {this.commandeDto.supplements.find(lesupp => lesupp.nom_supplement === nomPlat).quantite = Number(this.commandeDto.supplements.find(leplat => leplat.nom_supplement === nomPlat).quantite) + Number(listNombrePlat[e]);}
-        
+
         this.commandeDto.montant_Commande += prix*listNombrePlat[e];
       }
     }

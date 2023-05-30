@@ -1941,3 +1941,8 @@ input[type="checkbox"]:checked ~ .modal-background {
     color :#d46864;
 }
 
+.button_ariane {
+    all: unset;
+    cursor : pointer;
+    color: #337ab7;
+}

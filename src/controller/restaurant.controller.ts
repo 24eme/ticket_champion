@@ -14,7 +14,12 @@ export class RestaurantController {
   @Render('restaurantPage')
   async restaurant() {
     const result = await this.commandeService.getClientCommandesGroupedByEntreprise();
-    return { data: result };
+    const commande = await this.commandeService.getTousLesTickets();
+    //for (let e in commande){
+      console.log("  : ", commande[0]);
+   // }
+    //console.log("les tickets : ", await this.commandeService.getTousLesTickets());
+    return { commandes: commande };
   }
 
   @Post('restaurant')

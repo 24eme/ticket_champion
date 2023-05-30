@@ -13,12 +13,13 @@
         <div class="separator_restaurant m-bottom-20"></div>
         
         <h2 class="h2-clients m-top-80">&#129369; Aujourd'hui, vous devez préparer les commandes suivantes :</h2>
-        <h4>Cliquez sur les boutons pour consulter les détails de commandes par heure de livraison &#128513;</h4>
+        <h4>Voici tous les tickets ordonnées par heure, cliquez sur le bouton fait pour indiquer que la commande est faite &#128513;</h4>
       </div>
     </div>
   </div>
-
 </section>
+
+{{!-- </section>
 <section class="adaptative-div-restaurant">
 <div class="container">
   <div class="info">
@@ -31,7 +32,7 @@
           <h3 class="h1-restaurant">A {{this.heure_de_livraison}}, vous avez :</h3>
             <input type="submit" class="btn btn-primary btn-lg commande" name="{{this.heure_de_livraison}}" value="{{this.nombreCommandes}} commande(s) pour {{this.entreprise}}" style="border-radius: 15px;" />
         </li>
-        
+
         {{/each}}
         </ul> 
         </div>     
@@ -49,6 +50,136 @@
     {{/if}}
   </div>
 </div>
+</section> --}}
+<section class="adaptative-div">
+<div class="container bootstrap snippets bootdey">
+ 
+  <div class="row">
+    {{#if commandes}}
+      {{#each commandes}}
+		    <div class="col-md-4">
+          <div class="widget red-bg p-xl">
+            <h3 class="commandes-title">❥ {{this.client.nom}}, {{this.client.entreprise}} à {{this.heure_de_livraison}}</h3>
+              <ul class="list-unstyled m-t-md">
+                    <li>
+                        <span class="fa m-r-xs"></span>
+                        {{#each this.commandePlats}}
+                        <label>❥ {{this.quantite}} x {{this.plat.nom_plat}}</label>
+                        {{/each}}
+                    </li>
+
+                    {{#if this.commandeSupplements}}
+                     
+                    <li>
+                        <span class="fa m-r-xs"></span>
+                        {{#each this.commandeSupplements}}
+                        <label>❥ {{this.quantite}} x {{this.supplement.nom_supplement}} </label>
+                        {{/each}}
+                    </li>
+                    {{/if}}
+
+                    <li>
+                      <div class="div_fait">
+                      <button class="command_faite btn btn-rounded" id="fait-{{this.id_commande}}">Fait</button>
+                      </div>
+                    </li>
+               </ul>           
+          </div>
+        </div>      
+      {{/each}} 
+    {{else}}
+      <center>
+        <h3 class="h1-restaurant m-top-30">Pas de commande aujourd'hui.</h3>
+      </center>
+      <div  class="kid-cook-container">
+          <img class="" src="/assets/images/kid-cook.jpg" style="border-radius: 15px; width: 400px; height: auto;">
+      </div>
+    {{/if}} 
+  </div>          
+</div>
+  
+
+
+
 </section>
+
+
+		{{!-- <div class="col-md-4">
+            <div class="widget red-bg p-xl">
+                <h2>Deyson Bejarano</h2>
+                <ul class="list-unstyled m-t-md">
+                    <li>
+                        <span class="fa fa-envelope m-r-xs"></span>
+                        <label>Email:</label>
+                        deyson@mail.com
+                    </li>
+                    <li>
+                        <span class="fa fa-home m-r-xs"></span>
+                        <label>Address:</label>
+                        Street 200, Avenue 10
+                    </li>
+                    <li>
+                        <span class="fa fa-phone m-r-xs"></span>
+                        <label>Contact:</label>
+                        (+121) 678 3462
+                    </li>
+                </ul>
+            </div>   
+		</div>
+		<div class="col-md-4">
+            <div class="widget navy-bg p-xl">
+                <h2>Briant Mckenly</h2>
+                <ul class="list-unstyled m-t-md">
+                    <li>
+                        <span class="fa fa-envelope m-r-xs"></span>
+                        <label>Email:</label>
+                        bmkenly@mail.com
+                    </li>
+                    <li>
+                        <span class="fa fa-home m-r-xs"></span>
+                        <label>Address:</label>
+                        Street 200, Avenue 10
+                    </li>
+                    <li>
+                        <span class="fa fa-phone m-r-xs"></span>
+                        <label>Contact:</label>
+                        (+121) 678 3462
+                    </li>
+                </ul>
+            </div>   
+		</div>
+	</div>
+    <div class="row">
+    	<div class="col-md-4">
+            <div class="widget yellow-bg p-xl">
+                <h2>Carlos simptho</h2>
+                <ul class="list-unstyled m-t-md">
+                    <li>
+                        <span class="fa fa-envelope m-r-xs"></span>
+                        <label>Email:</label>
+                        clossimp@mail.com
+                    </li>
+                    <li>
+                        <span class="fa fa-home m-r-xs"></span>
+                        <label>Address:</label>
+                        Street 200, Avenue 10
+                    </li>
+                    <li>
+                        <span class="fa fa-phone m-r-xs"></span>
+                        <label>Contact:</label>
+                        (+121) 678 3462
+                    </li>
+                </ul>
+            </div>   
+		</div>
+	</div>
+</div> --}}
+
+<script>
+  Handlebars.registerHelper('inc', function(value, options) {
+  return parseInt(value) + 1;
+});
+
+</script>
 
 {{> footer}}

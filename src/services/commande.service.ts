@@ -131,6 +131,21 @@ export class CommandeService {
     return queryBuilder.getRawMany();
   }
 
+  async getTousLesTickets(): Promise<Commande[]> {
+    const currentDate = new Date().toISOString().split('T')[0];
+    return this.commandeRepository
+      .createQueryBuilder('commande')
+      .leftJoinAndSelect('commande.client', 'client')
+      .leftJoinAndSelect('commande.commandePlats', 'commande_plat')
+      .leftJoinAndSelect('commande.commandeSupplements', 'commande_supplement')
+      .leftJoinAndSelect('commande_plat.plat', 'plat')
+      .leftJoinAndSelect('commande_supplement.supplement', 'supplement')
+      //.where('commande.prete = :prete', {prete : false} )
+      .where(`DATE(SUBSTRING_INDEX(commande.date_commande, ' ', 1)) = :currentDate`, { currentDate: currentDate })
+      .orderBy('commande.heure_de_livraison', 'ASC') // Tri croissant
+      .getMany();
+  }
+
   async getCommandesInfoPerEntreprise(enterprise: string, time: string): Promise<Commande[]> {
     const currentDate = new Date().toISOString().split('T')[0];
     return this.commandeRepository

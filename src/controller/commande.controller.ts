@@ -171,7 +171,9 @@
     let listPlat = Object.keys(req.body);
     let listNombrePlat = Object.values(req.body);
     let destination = listPlat.pop();
+    console.log(listNombrePlat);
     listNombrePlat.pop();
+    console.log(listNombrePlat)
     let e = ""
     let plats = await this.commandeService.getAllPlat();
     let listTotalPlats: string[] = [];

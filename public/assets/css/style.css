@@ -1923,3 +1923,15 @@ input[type="checkbox"]:checked ~ .modal-background {
     border-color: mediumseagreen;
 
 }
+
+/* RECAP COMMANDE */
+
+.recap-commande {
+    font-weight: bold;
+}
+
+.recap-heure, .quantite-plat, .quantite-supplement {
+    font-weight: bold;
+    color :#d46864;
+}
+

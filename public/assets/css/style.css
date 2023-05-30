@@ -1287,16 +1287,16 @@ FAQ Page
 /*
 Video Section style
 ======================*/
-.video{
+/* .video{
     background: url(../images/background/video.jpg) no-repeat center center;
     background-size: cover;
     position: relative;
 }
 .main_video{
-    display: block;
+    display: block; */
     /*z-index: 2;*/
     /*position: relative;*/
-}
+/* }
 .main_video i,
 .main_video span.fa,
 .main_video span.icon{
@@ -1308,7 +1308,7 @@ Video Section style
     line-height: 80px;
     border-radius: 50%;
     position: relative;
-}
+} */
 
 
 
@@ -1606,6 +1606,8 @@ Footer Section style
 .image-container-client {
     display: flex;
     height: 100vh;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .image-container-client .left-image-client,

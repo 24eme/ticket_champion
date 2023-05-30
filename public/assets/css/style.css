@@ -1759,7 +1759,7 @@ body {
 /* CommanesInfo page CSS */
 
 .commandes-title {
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 20px;
 }
 
@@ -1898,14 +1898,7 @@ input[type="checkbox"]:checked ~ .modal-background {
     background-color: lightgrey;
 }
 
-.div_fait {
-    
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    
-}
+
 
 /*.delete-button{
     margin-left: 30px;
@@ -1921,8 +1914,16 @@ input[type="checkbox"]:checked ~ .modal-background {
 .commande_faite {
     background-color: mediumseagreen;
     border-color: mediumseagreen;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
 
 }
+
+.command_faite:hover {
+    background-color: darkgreen;
+  }
+  
 
 .p-xl {
   padding: 40px;
@@ -1935,7 +1936,7 @@ input[type="checkbox"]:checked ~ .modal-background {
 
 .red-bg {
   background-color: #d46864;
-  color: #ffffff;
+  color: #000000;
 }
 
 .navy-bg {
@@ -1949,6 +1950,7 @@ input[type="checkbox"]:checked ~ .modal-background {
 }
 
 .widget {
+  position: relative;
   border-radius: 5px;
   padding: 15px 20px;
   margin-bottom: 10px;
@@ -1959,9 +1961,33 @@ input[type="checkbox"]:checked ~ .modal-background {
 .widget h2, .widget h3 {
   margin-top: 5px;
   margin-bottom: 0;
-  border-bottom:1px dotted white;
+  border-bottom:1px dotted rgb(0, 0, 0);
 }
 
 .m-t-md {
   margin-top: 20px;
 }
+
+.snippend-container {
+    width: 70%; 
+  }
+
+  .column {
+    width: 16%;
+    float: left;
+    margin-left: 1%;
+  }
+
+  .adaptative-div-card{
+        display: flex;
+        justify-content: center;
+  }
+
+  .div_fait {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2px;
+    text-align: center;
+  }

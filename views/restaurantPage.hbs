@@ -19,71 +19,46 @@
   </div>
 </section>
 
-{{!-- </section>
-<section class="adaptative-div-restaurant">
-<div class="container">
-  <div class="info">
-    <form action="/restaurant" method="POST">
-      <div>
-      {{#if data}}
-        <ul class="row">
-        {{#each data}}
-        <li class="col-sm-6">
-          <h3 class="h1-restaurant">A {{this.heure_de_livraison}}, vous avez :</h3>
-            <input type="submit" class="btn btn-primary btn-lg commande" name="{{this.heure_de_livraison}}" value="{{this.nombreCommandes}} commande(s) pour {{this.entreprise}}" style="border-radius: 15px;" />
-        </li>
-
-        {{/each}}
-        </ul> 
-        </div>     
-    </form>
-
-
-    {{else}}
-      <center>
-      <h3 class="h1-restaurant m-top-30">Pas de commande aujourd'hui.</h3>
-      </center>
-      <div  class="kid-cook-container">
-        <img class="" src="/assets/images/kid-cook.jpg" style="border-radius: 15px; width: 400px; height: auto;">
-      </div>
-      
-    {{/if}}
-  </div>
-</div>
-</section> --}}
-<section class="adaptative-div">
-<div class="container bootstrap snippets bootdey">
+<section class="adaptative-div-card">
+<div class="bootstrap snippets bootdey snippend-container">
  
   <div class="row">
     {{#if commandes}}
       {{#each commandes}}
-		    <div class="col-md-4">
+		    <div class="column">
+          
           <div class="widget red-bg p-xl">
             <h3 class="commandes-title">❥ {{this.client.nom}}, {{this.client.entreprise}} à {{this.heure_de_livraison}}</h3>
               <ul class="list-unstyled m-t-md">
+                    {{#each this.commandePlats}}
                     <li>
                         <span class="fa m-r-xs"></span>
-                        {{#each this.commandePlats}}
                         <label>❥ {{this.quantite}} x {{this.plat.nom_plat}}</label>
-                        {{/each}}
                     </li>
+                    {{/each}}
 
                     {{#if this.commandeSupplements}}
+                    {{#each this.commandeSupplements}}
                      
                     <li>
                         <span class="fa m-r-xs"></span>
-                        {{#each this.commandeSupplements}}
                         <label>❥ {{this.quantite}} x {{this.supplement.nom_supplement}} </label>
-                        {{/each}}
                     </li>
+                    {{/each}}
                     {{/if}}
 
                     <li>
+                      <span class="fa m-r-xs"></span>
                       <div class="div_fait">
                       <button class="command_faite btn btn-rounded" id="fait-{{this.id_commande}}">Fait</button>
                       </div>
-                    </li>
-               </ul>           
+                    </li> 
+                    
+                   
+               </ul>  
+               
+                     
+                            
           </div>
         </div>      
       {{/each}} 
@@ -97,89 +72,29 @@
     {{/if}} 
   </div>          
 </div>
-  
-
-
-
 </section>
 
 
-		{{!-- <div class="col-md-4">
-            <div class="widget red-bg p-xl">
-                <h2>Deyson Bejarano</h2>
-                <ul class="list-unstyled m-t-md">
-                    <li>
-                        <span class="fa fa-envelope m-r-xs"></span>
-                        <label>Email:</label>
-                        deyson@mail.com
-                    </li>
-                    <li>
-                        <span class="fa fa-home m-r-xs"></span>
-                        <label>Address:</label>
-                        Street 200, Avenue 10
-                    </li>
-                    <li>
-                        <span class="fa fa-phone m-r-xs"></span>
-                        <label>Contact:</label>
-                        (+121) 678 3462
-                    </li>
-                </ul>
-            </div>   
-		</div>
-		<div class="col-md-4">
-            <div class="widget navy-bg p-xl">
-                <h2>Briant Mckenly</h2>
-                <ul class="list-unstyled m-t-md">
-                    <li>
-                        <span class="fa fa-envelope m-r-xs"></span>
-                        <label>Email:</label>
-                        bmkenly@mail.com
-                    </li>
-                    <li>
-                        <span class="fa fa-home m-r-xs"></span>
-                        <label>Address:</label>
-                        Street 200, Avenue 10
-                    </li>
-                    <li>
-                        <span class="fa fa-phone m-r-xs"></span>
-                        <label>Contact:</label>
-                        (+121) 678 3462
-                    </li>
-                </ul>
-            </div>   
-		</div>
-	</div>
-    <div class="row">
-    	<div class="col-md-4">
-            <div class="widget yellow-bg p-xl">
-                <h2>Carlos simptho</h2>
-                <ul class="list-unstyled m-t-md">
-                    <li>
-                        <span class="fa fa-envelope m-r-xs"></span>
-                        <label>Email:</label>
-                        clossimp@mail.com
-                    </li>
-                    <li>
-                        <span class="fa fa-home m-r-xs"></span>
-                        <label>Address:</label>
-                        Street 200, Avenue 10
-                    </li>
-                    <li>
-                        <span class="fa fa-phone m-r-xs"></span>
-                        <label>Contact:</label>
-                        (+121) 678 3462
-                    </li>
-                </ul>
-            </div>   
-		</div>
-	</div>
-</div> --}}
-
 <script>
-  Handlebars.registerHelper('inc', function(value, options) {
-  return parseInt(value) + 1;
-});
+  // Obtenez tous les éléments de snipped
+  const snippedElements = document.querySelectorAll('.widget');
 
+  // Initialisez une variable pour stocker la taille maximale
+  let maxSize = 0;
+
+  // Parcourez tous les éléments de snipped pour trouver la taille maximale
+  snippedElements.forEach(element => {
+    const snippedHeight = element.offsetHeight;
+    if (snippedHeight > maxSize) {
+      maxSize = snippedHeight;
+    }
+  });
+
+  // Appliquez la taille maximale à tous les éléments de snipped
+  snippedElements.forEach(element => {
+    element.style.height = maxSize + 'px';
+  });
 </script>
+
 
 {{> footer}}

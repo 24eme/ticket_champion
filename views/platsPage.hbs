@@ -185,13 +185,12 @@ allBoutonplat.forEach(boutton => {
 });
 
 function updateTotal() {
-
   Object.keys(commande).forEach((plat) => {
-total += commande[plat].quantite * commande[plat].prix;
+  total += commande[plat].quantite * commande[plat].prix;
 
-      });}
-      const reacapTotal = document.getElementById("total");
-      let totalaff = Number(reacapTotal.dataset.montant );
+});}
+  const reacapTotal = document.getElementById("total");
+  let totalaff = Number(reacapTotal.dataset.montant );
 
   const deletebu = document.querySelectorAll(".delete");
   deletebu.forEach(button => {

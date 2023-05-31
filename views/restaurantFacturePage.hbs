@@ -14,7 +14,7 @@
     <div class="row">
       <div class="restaurant-cont">
         <h1 class="h1-restaurant h1-facture">Récapitulatif du mois de {{month}} pour {{nomEntreprise}}</h1>
-          <!--<a href="/facture/"><button class="btn-historique">Mois précédent</button></a>-->
+          <a href="/facture/{{nomEntreprise}}/{{prevMonth}}"><button class="btn-historique">{{prevMonth}} {{currYear}}</button></a>
         <div class="commandes-container row">
           <div class="col-md-4 commandes-box" style="margin: 0 auto;">
             <div class="row">
@@ -28,6 +28,7 @@
                       <th scope="col">Prix</th>
                     </tr>
                   </thead>
+
                   <tbody>
                     {{#each data}}
                     <tr>

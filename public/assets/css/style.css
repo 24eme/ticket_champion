@@ -1697,6 +1697,13 @@ Footer Section style
     margin-left: 38%;
 }
 
+.btn-previous-heure {
+    float: left;
+    width: 15%;
+    background-color: grey;
+    margin-left: 38%;
+}
+
 .btn-next {
     float: right;
     width: 10%;

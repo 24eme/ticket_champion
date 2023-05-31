@@ -94,10 +94,29 @@ export class RestaurantController {
 
       const prixTotaleCommande = listePrixTotale.reduce((a, b) => a + b, 0) + listePrixTotaleSupp.reduce((a, b) => a + b, 0);
       const data = new Date();
+    const prevdate = new Date();
+    const previousMonth = new Date(prevdate.getTime());
+    previousMonth.setDate(0);
+    const prevMonth = previousMonth.toLocaleString('default', { month: 'long' });
+    const currYear = prevdate.getFullYear().toString();
       const month = data.toLocaleString('default', { month: 'long' });
 
-     return {nomEntreprise: entrepriseName, data : factureRestaurant, dataSupp : factureRestaurantSupp, prixTotaleCommande : prixTotaleCommande, month : month};
+     return {nomEntreprise: entrepriseName, data : factureRestaurant, dataSupp : factureRestaurantSupp, prixTotaleCommande : prixTotaleCommande, month : month, prevMonth: prevMonth, currYear: currYear};
     }
+
+  @Get('/facture/:entrepriseName/:month')
+    @Render('restaurantFacturePagePrecedent')
+  async previousMonthFacture(@Param('entrepriseName') entrepriseName: string, @Param('month') month: string) {
+    const data = new Date();
+    const prevdate = new Date();
+    const previousMonth = new Date(prevdate.getTime());
+    previousMonth.setDate(0);
+    const prevMonth = previousMonth.toLocaleString('default', { month: 'long' });
+    const currYear = prevdate.getFullYear().toString();
+    const actualMonth = data.toLocaleString('default', { month: 'long' });
+
+    return {actualMonth: actualMonth, prevMonth: prevMonth, currYear: currYear}
+  }
 
 
   @Post('/marquerCommandePrete/:commandeId')

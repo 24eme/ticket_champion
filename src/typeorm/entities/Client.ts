@@ -18,6 +18,9 @@ export class Client {
   @Column({default : false})
   commande_faite : boolean;
 
+  @Column({default : 0})
+  nb_tickets : number;
+
   @OneToMany(() => Commande, (commande) => commande.client)
   commandes: Commande[];
 }

@@ -14,7 +14,7 @@
     <div class="row">
       <div class="restaurant-cont">
         <h1 class="h1-restaurant h1-facture">Récapitulatif du mois de {{month}} pour {{nomEntreprise}}</h1>
-          <a href="/facture/{{nomEntreprise}}/{{prevMonth}}"><button class="btn-historique">{{prevMonth}} {{currYear}}</button></a>
+          <a href="/facture/{{nomEntreprise}}/{{prevMonthNum}}"><button class="btn-historique">{{prevMonthTxt}} {{currYear}}</button></a>
         <div class="commandes-container row">
           <div class="col-md-4 commandes-box" style="margin: 0 auto;">
             <div class="row">
@@ -31,11 +31,13 @@
 
                   <tbody>
                     {{#each data}}
+                    {{#if this.prixTotale}}
                     <tr>
                       <td>{{this.nom_plat}}</td>
                       <td>{{this.quantite}}</td>
                       <td>{{this.prixTotale}}€</td>
                     </tr>
+                    {{/if}}
                     {{/each}}
                   </tbody>
                 </table>
@@ -56,11 +58,13 @@
                   </thead>
                   <tbody>
                     {{#each dataSupp}}
+                        {{#if this.prixTotale}}
                     <tr>
                       <td>{{ this.nom_supplement }}</td>
                       <td>{{this.quantite}}</td>
                       <td>{{this.prixTotale}}€</td>
                     </tr>
+                        {{/if}}
                     {{/each}}
                   </tbody>
                 </table>

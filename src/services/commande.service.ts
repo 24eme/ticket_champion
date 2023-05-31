@@ -287,8 +287,7 @@ export class CommandeService {
     return `This action removes a #${id} commande`;
   }
 
-  async getAllPlatsByEntreprise(entrepriseName: string): Promise<any> {
-    const currentDate = new Date().toISOString().split('T')[0].split('-')[1];
+  async getAllPlatsByEntreprise(entrepriseName: string, currentDate: string): Promise<any> {
     const queryBuilder = this.commandeRepository
       .createQueryBuilder('commande')
        .leftJoinAndSelect('commande.commandePlats', 'commande_plat')
@@ -302,8 +301,7 @@ export class CommandeService {
     return queryBuilder.getRawMany();
   }
 
-  async getAllSupplementsByEntreprise(entrepriseName: string): Promise<any> {
-    const currentDate = new Date().toISOString().split('T')[0].split('-')[1];
+  async getAllSupplementsByEntreprise(entrepriseName: string, currentDate: string): Promise<any> {
     const queryBuilder = this.commandeRepository
       .createQueryBuilder('commande')
        .leftJoinAndSelect('commande.commandeSupplements', 'commande_supplement')

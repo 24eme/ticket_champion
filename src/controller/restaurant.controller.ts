@@ -31,7 +31,8 @@ export class RestaurantController {
   @Get('/facture/:entrepriseName/current_month')
     @Render('restaurantFacturePage')
     async factureRestaurant(@Param('entrepriseName') entrepriseName: string) {
-      const infoCommande = await this.commandeService.getAllPlatsByEntreprise(entrepriseName);
+    const currentDate = new Date().toISOString().split('T')[0].split('-')[1];
+      const infoCommande = await this.commandeService.getAllPlatsByEntreprise(entrepriseName, currentDate);
       let listePlat = [];
       let listeQuantite = [];
       let listePrixTotale = [];
@@ -46,12 +47,12 @@ export class RestaurantController {
               if (index !== -1) {
                 listeQuantite[index] += infoCommande[e].quantite;
                 listePrixTotale[index] += infoCommande[e].prix_plat*infoCommande[e].quantite;
-              }  
+              }
         }
       }
 
       let factureRestaurant = {}
-      for(let e in listePlat){ 
+      for(let e in listePlat){
 
 
         factureRestaurant[listePlat[e]] = {
@@ -61,12 +62,12 @@ export class RestaurantController {
         };
       }
 
-      const infoCommandeSupplement = await this.commandeService.getAllSupplementsByEntreprise(entrepriseName);
+      const infoCommandeSupplement = await this.commandeService.getAllSupplementsByEntreprise(entrepriseName, currentDate);
       let listeSupp = [];
       let listeQuantiteSupp = [];
       let listePrixTotaleSupp = [];
       for (let e in infoCommandeSupplement) {
-        
+
         if (listeSupp.find( supplement  => supplement === infoCommandeSupplement[e].nom_supplement) == undefined){
           listeSupp.push(infoCommandeSupplement[e].nom_supplement);
           listeQuantiteSupp.push(infoCommandeSupplement[e].quantite);
@@ -77,12 +78,12 @@ export class RestaurantController {
               if (index !== -1) {
                 listeQuantiteSupp[index] += infoCommandeSupplement[e].quantite;
                 listePrixTotaleSupp[index] += infoCommandeSupplement[e].prix_supplement*infoCommandeSupplement[e].quantite;
-              }  
+              }
         }
       }
 
       let factureRestaurantSupp = {}
-      for(let e in listeSupp){ 
+      for(let e in listeSupp){
 
 
         factureRestaurantSupp[listeSupp[e]] = {
@@ -97,25 +98,102 @@ export class RestaurantController {
     const prevdate = new Date();
     const previousMonth = new Date(prevdate.getTime());
     previousMonth.setDate(0);
-    const prevMonth = previousMonth.toLocaleString('default', { month: 'long' });
+    const prevMonthNum = previousMonth.getMonth().toString() + previousMonth.getFullYear().toString();
+    const prevMonthTxt = previousMonth.toLocaleString('default', { month: 'long' });
     const currYear = prevdate.getFullYear().toString();
       const month = data.toLocaleString('default', { month: 'long' });
 
-     return {nomEntreprise: entrepriseName, data : factureRestaurant, dataSupp : factureRestaurantSupp, prixTotaleCommande : prixTotaleCommande, month : month, prevMonth: prevMonth, currYear: currYear};
+     return {nomEntreprise: entrepriseName, data : factureRestaurant, dataSupp : factureRestaurantSupp, prixTotaleCommande : prixTotaleCommande, month : month, prevMonthTxt: prevMonthTxt, prevMonthNum: prevMonthNum, currYear: currYear};
     }
 
   @Get('/facture/:entrepriseName/:month')
     @Render('restaurantFacturePagePrecedent')
   async previousMonthFacture(@Param('entrepriseName') entrepriseName: string, @Param('month') month: string) {
-    const data = new Date();
-    const prevdate = new Date();
-    const previousMonth = new Date(prevdate.getTime());
-    previousMonth.setDate(0);
-    const prevMonth = previousMonth.toLocaleString('default', { month: 'long' });
-    const currYear = prevdate.getFullYear().toString();
-    const actualMonth = data.toLocaleString('default', { month: 'long' });
 
-    return {actualMonth: actualMonth, prevMonth: prevMonth, currYear: currYear}
+    const prevdate = new Date();
+
+    const currentDate = new Date().toISOString().split('T')[0].split('-')[1];
+    const previousMonth = new Date(prevdate.getTime());
+    const nextMonth = previousMonth.toLocaleString('default', { month: 'long'});
+    previousMonth.setDate(0);
+    const prevMonthTxt = previousMonth.toLocaleString('default', { month: 'long' });
+
+    const currYear = prevdate.getFullYear().toString();
+    const numCurrentDate = Number(currentDate) - 1;
+    const strCurrentDate = numCurrentDate.toString();
+    const infoCommande = await this.commandeService.getAllPlatsByEntreprise(entrepriseName, strCurrentDate);
+    let listePlat = [];
+    let listeQuantite = [];
+    let listePrixTotale = [];
+    for (let e in infoCommande) {
+      if (listePlat.find( plat  => plat === infoCommande[e].nom_plat) == undefined){
+        listePlat.push(infoCommande[e].nom_plat);
+        listeQuantite.push(infoCommande[e].quantite);
+        listePrixTotale.push(infoCommande[e].prix_plat*infoCommande[e].quantite);
+      }
+      else{
+        let index: number = listePlat.indexOf(infoCommande[e].nom_plat);
+        if (index !== -1) {
+          listeQuantite[index] += infoCommande[e].quantite;
+          listePrixTotale[index] += infoCommande[e].prix_plat*infoCommande[e].quantite;
+        }
+      }
+    }
+
+    let factureRestaurant = {}
+    for(let e in listePlat){
+
+
+      factureRestaurant[listePlat[e]] = {
+        nom_plat : listePlat[e],
+        quantite  : listeQuantite[e],
+        prixTotale :  listePrixTotale[e]
+      };
+    }
+
+    const infoCommandeSupplement = await this.commandeService.getAllSupplementsByEntreprise(entrepriseName, strCurrentDate);
+    let listeSupp = [];
+    let listeQuantiteSupp = [];
+    let listePrixTotaleSupp = [];
+    for (let e in infoCommandeSupplement) {
+
+      if (listeSupp.find( supplement  => supplement === infoCommandeSupplement[e].nom_supplement) == undefined){
+        listeSupp.push(infoCommandeSupplement[e].nom_supplement);
+        listeQuantiteSupp.push(infoCommandeSupplement[e].quantite);
+        listePrixTotaleSupp.push(infoCommandeSupplement[e].prix_supplement*infoCommandeSupplement[e].quantite);
+      }
+      else{
+        let index: number = listeSupp.indexOf(infoCommandeSupplement[e].nom_supplement);
+        if (index !== -1) {
+          listeQuantiteSupp[index] += infoCommandeSupplement[e].quantite;
+          listePrixTotaleSupp[index] += infoCommandeSupplement[e].prix_supplement*infoCommandeSupplement[e].quantite;
+        }
+      }
+    }
+
+    let factureRestaurantSupp = {}
+    for(let e in listeSupp){
+
+
+      factureRestaurantSupp[listeSupp[e]] = {
+        nom_supplement : listeSupp[e],
+        quantite  : listeQuantiteSupp[e],
+        prixTotale :  listePrixTotaleSupp[e]
+      };
+    }
+
+    const prixTotaleCommande = listePrixTotale.reduce((a, b) => a + b, 0) + listePrixTotaleSupp.reduce((a, b) => a + b, 0);
+
+
+    return {
+      nomEntreprise: entrepriseName,
+      data: factureRestaurant,
+      dataSupp: factureRestaurantSupp,
+      prixTotaleCommande: prixTotaleCommande,
+      month: prevMonthTxt,
+      nextMonth: nextMonth,
+      currYear: currYear,
+    };
   }
 
 

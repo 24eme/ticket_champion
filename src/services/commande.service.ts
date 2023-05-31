@@ -198,6 +198,7 @@ export class CommandeService {
       }
     });
     loadedClient.commande_faite = true;
+    loadedClient.nb_tickets += 1;
     await this.clientRepository.save(loadedClient);
 
     const heure_de_livraison = createCommandeDto.date_livraison;
@@ -336,6 +337,15 @@ export class CommandeService {
       findClient.commande_faite = false;
       await this.clientRepository.save(findClient);
     }
+  }
+
+  async getNumberTicketPerClient(){
+    const queryBuilder = this.clientRepository
+    .createQueryBuilder('clients')
+    .select('clients.nom', 'nom')
+    .addSelect('clients.nb_tickets', 'nb_tickets')
+
+    return queryBuilder.getRawMany();
   }
 
 }

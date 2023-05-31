@@ -42,14 +42,14 @@
         <h2 class="text-center texte-intro" style="font-size: 1.5rem">Panier</h2>
         <ul id="recap-commande">
           {{#each plats}}
-          <li class ="commande-existante" data-name="{{this.nom_plat}}" data-prix ="{{this.prix}}" data-quantite ="{{this.quantite}}" > {{this.quantite}} x {{this.nom_plat}} - {{this.prix}}€</li> 
+          <li class ="commande-existante" data-name="{{this.nom_plat}}" data-prix ="{{this.prix}}" data-quantite ="{{this.quantite}}" > {{this.quantite}} x {{this.nom_plat}} - {{this.prix}}€ <button class="delete" data-name="{{this.nom_plat}}" >X</button></li> 
           {{/each}}
 
           
         {{#each supplements}}
-          <li class="commande-existante" data-name="{{this.nom_supplement}}" data-quantite="{{this.quantite}}" data-prix="{{this.prix}}"> {{this.quantite}} x {{this.nom_supplement}} - {{this.prix}}€</li> 
+          <li class="commande-existante" data-name="{{this.nom_supplement}}" data-quantite="{{this.quantite}}" data-prix="{{this.prix}}"> {{this.quantite}} x {{this.nom_supplement}} - {{this.prix}}€ <button class="delete" data-name="{{this.nom_supplement}}" >X</button></li> 
         {{/each}}
-          <li id="total"> Total : {{montant}} </li>
+          <li id="total" data-montant="{{montant}}"> Total : {{montant}} </li>
           
           
         </ul>
@@ -182,13 +182,64 @@ allBoutonplat.forEach(boutton => {
     
   });
 
-})
+});
+
+function updateTotal() {
+
+  Object.keys(commande).forEach((plat) => {
+total += commande[plat].quantite * commande[plat].prix;
+
+      });}
+      const reacapTotal = document.getElementById("total");
+      let totalaff = Number(reacapTotal.dataset.montant );
+
+  const deletebu = document.querySelectorAll(".delete");
+  deletebu.forEach(button => {
+    button.addEventListener('click', (event) =>{
+      event.preventDefault();
+      nom = event.target.dataset.name;
+      console.log("le plat: ", nom);
+
+         const commadeExistante = document.querySelectorAll('.commande-existante');
+        let commande = {};
+        commadeExistante.forEach(boutton =>{
 
 
+            commande[boutton.dataset.name] = {
+              quantite : boutton.dataset.quantite,
+              prix : boutton.dataset.prix
+            };
+          });
 
-   
-   
-     
+      const buttonHidden = document.querySelector(`[data-nonplat="${nom}"]`);
+      const recapCommande = document.getElementById('recap-commande');
+
+        if (buttonHidden) {
+          buttonHidden.value = Number(buttonHidden.value) - Number(commande[nom].quantite);
+          const platDel = document.querySelector(`[data-name="${nom}"]`);
+          platDel.parentNode.removeChild(platDel);
+          totalaff = totalaff - Number(commande[nom].quantite)*Number(commande[nom].prix);
+          
+        }
+
+        const suppDel = document.querySelector(`[data-name="${nom}"]`);
+        if (suppDel !== null) {
+          const buttonHiddenSupp = document.querySelector(`[data-namehidden="${nom}"]`);
+          buttonHiddenSupp.value = Number(commande[nom].quantite)*(-1);
+          suppDel.parentNode.removeChild(suppDel);
+          totalaff = totalaff -  Number(commande[nom].quantite)*Number(commande[nom].prix);
+
+        }
+        delete commande[nom];
+        updateTotal();
+        
+        //totalItem.textContent = `Total : `;
+        reacapTotal.innerHTML = `Total : ${totalaff}€`;
+
+    });
+
+  });
+  
 </script>
 
 {{> footer}}

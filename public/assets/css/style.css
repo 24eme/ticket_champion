@@ -1686,21 +1686,21 @@ Footer Section style
 
 
 .container-prev-next {
-    margin-bottom: 4em;
+    margin-bottom: 10%;
 
 }
 
 .btn-previous {
     float: left;
-    width: 140px;
+    width: 10%;
     background-color: grey;
-    margin-left: 650px;
+    margin-left: 38%;
 }
 
 .btn-next {
     float: right;
-    width: 140px;
-    margin-right: 650px;
+    width: 10%;
+    margin-right: 38%;
 }
 
 #recap-commande {

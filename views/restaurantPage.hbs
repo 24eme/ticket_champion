@@ -70,12 +70,14 @@
         </div>      
       {{/each}} 
     {{else}}
+    {{#unless commandePrete}}
       <center>
         <h3 class="h1-restaurant m-top-30">Pas de commande aujourd'hui.</h3>
       </center>
       <div  class="kid-cook-container">
           <img class="" src="/assets/images/kid-cook.jpg" style="border-radius: 15px; width: 400px; height: auto;">
       </div>
+      {{/unless}}
     {{/if}} 
   </div>          
 </div>

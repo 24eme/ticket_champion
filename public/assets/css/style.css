@@ -2017,3 +2017,25 @@ input[type="checkbox"]:checked ~ .modal-background {
 
     text-align: center;
 }
+
+.col-size {
+    width: 10%;
+    padding: 1% !important;
+    background: #532193;
+  }
+
+  .flex-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .inline{
+    display: inline;
+  }
+
+  .flex-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  

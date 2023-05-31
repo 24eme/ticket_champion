@@ -28,7 +28,7 @@ export class RestaurantController {
 
   }
 
-  @Get('/facture/:entrepriseName')
+  @Get('/facture/:entrepriseName/current_month')
     @Render('restaurantFacturePage')
     async factureRestaurant(@Param('entrepriseName') entrepriseName: string) {
       const infoCommande = await this.commandeService.getAllPlatsByEntreprise(entrepriseName);

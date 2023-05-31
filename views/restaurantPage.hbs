@@ -27,7 +27,7 @@
 </section>
 
 <section class="adaptative-div-card">
-<div class="bootstrap snippets bootdey snippend-container">
+<div class="bootstrap snippets bootdey snippend-container ">
  
   <div class="row">
     {{#if commandes}}
@@ -35,7 +35,7 @@
 		    <div class="column">
           
           <div class="widget red-bg p-xl">
-            <h3 class="commandes-title">❥ {{this.client.nom}}, {{this.client.entreprise}} à {{this.heure_de_livraison}}</h3>
+            <h3 class="commandes-title">❥ {{this.client.nom}}, {{this.client.entreprise}} à <B>{{this.heure_de_livraison}}</B></h3>
               <ul class="list-unstyled m-t-md">
                     {{#each this.commandePlats}}
                     <li>
@@ -81,6 +81,47 @@
 </div>
 </section>
 
+{{#if commandePrete}}
+<section class="adaptative-div-card">
+
+<div class="bootstrap snippets bootdey snippend-container ">
+  <div class="text-center">
+  <h2 class="h2-clients ">&#129369; Commandes pretes : </h2>
+</div>
+ 
+  <div class="row">
+    {{#each commandePrete}}
+		    <div class="column">
+          <div class="widget navy-bg p-xl">
+            <h3 class="commandes-title">❥ {{this.client.nom}}, {{this.client.entreprise}} à <B>{{this.heure_de_livraison}}</B></h3>
+              <ul class="list-unstyled m-t-md">
+                    {{#each this.commandePlats}}
+                    <li>
+                        <span class="fa m-r-xs"></span>
+                        <label>❥ {{this.quantite}} x {{this.plat.nom_plat}}</label>
+                    </li>
+                    {{/each}}
+
+                    {{#if this.commandeSupplements}}
+                    {{#each this.commandeSupplements}}
+                     
+                    <li>
+                        <span class="fa m-r-xs"></span>
+                        <label>❥ {{this.quantite}} x {{this.supplement.nom_supplement}} </label>
+                    </li>
+                    {{/each}}
+                    {{/if}}
+                    </ul>
+          </div>
+        </div>
+        {{/each}}
+  </div>
+</div>
+{{/if}}
+</section>
+
+
+
 
 <script>
   // Obtenez tous les éléments de snipped
@@ -101,6 +142,32 @@
   snippedElements.forEach(element => {
     element.style.height = maxSize + 'px';
   });
+</script>
+
+<script>
+
+  const faitButtons = document.querySelectorAll('.command_faite');
+
+  // Ajoutez un écouteur d'événements à chaque bouton "Fait"
+  faitButtons.forEach((button) => {
+    button.addEventListener('click', async (event) => {
+      
+      const commandeId = event.target.id.split('-')[1];
+      console.log("commande id : ", commandeId);
+
+      try {
+        // Appelez votre API backend pour marquer la commande comme prête
+        await fetch(`/marquerCommandePrete/${commandeId}`, { method: 'POST' });
+
+        const commandeCard = event.target.closest('.widget');
+        commandeCard.style.backgroundColor = 'mediumseagreen';
+      } catch (error) {
+        
+        console.error(error);
+      }
+    });
+  });
+
 </script>
 
 

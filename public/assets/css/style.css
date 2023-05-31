@@ -1946,7 +1946,6 @@ input[type="checkbox"]:checked ~ .modal-background {
 
 .navy-bg {
   background-color: #1ab394;
-  color: #ffffff;
 }
 
 .yellow-bg {
@@ -2012,4 +2011,9 @@ input[type="checkbox"]:checked ~ .modal-background {
     all: unset;
     cursor : pointer;
     color: #337ab7;
+}
+
+.text-center {
+
+    text-align: center;
 }

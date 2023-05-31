@@ -1,0 +1,85 @@
+{{> header}}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="/restaurant">Commandes du jour</a></li>
+        <li class="breadcrumb-item"><a href="/historique">Historique</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Factures</li>
+    </ol>
+</nav>
+
+<section class="adaptative-div">
+    <div class="container" style="flex: 1;">
+        <div class="row">
+            <div class="restaurant-cont">
+                <h1 class="h1-restaurant h1-facture">Récapitulatif du mois de {{month}} pour {{nomEntreprise}}</h1>
+                <a href="/facture/{{nomEntreprise}}/current_month"><button class="btn-historique">{{nextMonth}} {{currYear}}</button></a>
+                <div class="commandes-container row">
+                    <div class="col-md-4 commandes-box" style="margin: 0 auto;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="commandes-subtitle">❥ Plats :</h4>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Nom</th>
+                                        <th scope="col">Quantité</th>
+                                        <th scope="col">Prix</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {{#each data}}
+                                        {{#if this.prixTotale}}
+                                            <tr>
+                                                <td>{{this.nom_plat}}</td>
+                                                <td>{{this.quantite}}</td>
+                                                <td>{{this.prixTotale}}€</td>
+                                            </tr>
+                                        {{/if}}
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {{#if dataSupp}}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="commandes-subtitle">❥ Suppléments :</h4>
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Nom</th>
+                                            <th scope="col">Quantité</th>
+                                            <th scope="col">Prix</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {{#each dataSupp}}
+                                            {{#if this.prixTotale}}
+                                                <tr>
+                                                    <td>{{ this.nom_supplement }}</td>
+                                                    <td>{{this.quantite}}</td>
+                                                    <td>{{this.prixTotale}}€</td>
+                                                </tr>
+                                            {{/if}}
+                                        {{/each}}
+                                        </tbody>
+                                    </table>
+                                    <h3 class="commandes-title">❥ Total : {{prixTotaleCommande}}€</h3>
+
+                                </div>
+                            </div>
+                        {{/if}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{{> footer}}

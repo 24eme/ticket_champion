@@ -200,13 +200,11 @@ function updateTotal() {
 });}
  const reacapTotal = document.getElementById("total");
   let totalaff = Number(reacapTotal.dataset.montant );
-  console.log(totalaff);
 const deletebu = document.querySelectorAll(".delete");
   deletebu.forEach(button => {
     button.addEventListener('click', (event) =>{
       event.preventDefault();
       nom = event.target.dataset.name;
-      console.log("le plat: ", nom);
 
          const commadeExistante = document.querySelectorAll('.commande-existante');
         let commande = {};
@@ -227,7 +225,6 @@ const deletebu = document.querySelectorAll(".delete");
           const platDel = document.querySelector(`[data-name="${nom}"]`);
           platDel.parentNode.removeChild(platDel);
           totalaff = totalaff - Number(commande[nom].quantite)*Number(commande[nom].prix);
-          console.log(totalaff);
         }
 
         const suppDel = document.querySelector(`[data-name="${nom}"]`);
@@ -236,13 +233,19 @@ const deletebu = document.querySelectorAll(".delete");
           buttonHiddenSupp.value = Number(commande[nom].quantite)*(-1);
           suppDel.parentNode.removeChild(suppDel);
           totalaff = totalaff -  Number(commande[nom].quantite)*Number(commande[nom].prix);
-          console.log(totalaff);
         }
         delete commande[nom];
         updateTotal();
         
         //totalItem.textContent = `Total : `;
         reacapTotal.innerHTML = `Total : ${totalaff}€`;
+        if (total > 0) {
+            suivant_locked.disabled = false;
+        }
+        else {
+            suivant_locked.disabled = true;
+        }
+
 
     });
 

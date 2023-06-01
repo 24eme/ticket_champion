@@ -22,10 +22,11 @@ export class RestaurantController {
   @Render('restaurantHistoriquePage')
   async historique() {
     const totalCost = await this.commandeService.getTotalCostCommandesGroupedByEntreprise();
+    const dataEntreprise = await this.commandeService.getClientsFromJson();
+    console.log();
     const data = new Date();
     const month = data.toLocaleString('default', { month: 'long' });
-    return { data: totalCost, month : month };
-
+    return { data: totalCost, dataEntreprise: dataEntreprise, month : month , nomEntreprise: this.nonEntreprise};
   }
 
   @Get('/facture/:entrepriseName/current_month')

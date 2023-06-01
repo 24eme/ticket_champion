@@ -1911,19 +1911,6 @@ input[type="checkbox"]:checked ~ .modal-background {
     background-color: lightgrey;
 }
 
-
-
-/*.delete-button{
-    margin-left: 30px;
-}
-
-.delete-button-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }*/
-
-
 .commande_faite {
     background-color: mediumseagreen;
     border-color: mediumseagreen;
@@ -2044,5 +2031,12 @@ input[type="checkbox"]:checked ~ .modal-background {
     display: flex;
     align-items: center;
   }
-  
+  .commande-existante {
+    display: flex;
+    align-items: center;
+  }
+
+  .commande-existante button.delete {
+    margin-left: auto;
+  }
   

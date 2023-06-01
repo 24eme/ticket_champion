@@ -149,6 +149,7 @@ allBoutonplat.forEach(boutton => {
       const item = document.createElement('li');
       const deleteButton = document.createElement('button');
       deleteButton.innerHTML = 'X';
+      deleteButton.setAttribute('class', 'delete')
       item.setAttribute('data-name', plat);
       item.setAttribute('class', 'commande-existante');
       item.setAttribute('data-prix', commande[plat].prix);

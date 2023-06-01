@@ -1,0 +1,46 @@
+{{> header}}
+
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="/selectionClientPage">Selection entreprise</a></li>
+        <li class="breadcrumb-item"><a href="/clients">Choix employé.e</a></li>
+        <li class="breadcrumb-item active" aria-current="page"> Tickets</li>
+    </ol>
+</nav>
+
+
+<section class="adaptative-div">
+  <div class="container" style="flex: 1">
+    <div class="row">
+      <div class="col-lg">
+        <div class="clients-container">
+          <h1 class="h1-clients">Bienvenue {{entreprise}} ! </h1>
+          <div class="separator_center"></div>
+  
+          <h2 class="h2-clients"> &#127835;  Le nombre de tickets consommées par personne &#127790; </h2>
+         
+          <div class="list-group border-clients">
+            <li class="list-group-item">
+              {{#each listEmployee}}
+                <ul class="client-ul">             
+                    <h4> <B>{{this.nom}}</B> : <B>{{this.nb_tickets}}</B> tickets </h4>
+                </ul>
+               
+              {{/each}}
+
+            </li>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+
+</style>
+
+{{> footer}}

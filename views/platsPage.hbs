@@ -47,7 +47,7 @@
 
           
         {{#each supplements}}
-          <li class="commande-existante" data-name="{{this.nom_supplement}}" data-quantite="{{this.quantite}}" data-prix="{{this.prix}}"> {{this.quantite}} x {{this.nom_supplement}} - {{this.prix}}€ <button class="delete" data-name="{{this.nom_supplement}}" >X</button></li> 
+          <li class="commande-existante text-element" data-name="{{this.nom_supplement}}" data-quantite="{{this.quantite}}" data-prix="{{this.prix}}"> {{this.quantite}} x {{this.nom_supplement}} - {{this.prix}}€ <button class="delete" data-name="{{this.nom_supplement}}" >X</button></li> 
         {{/each}}
           <li id="total" data-montant="{{montant}}"> Total : {{montant}} </li>
           
@@ -148,6 +148,7 @@ allBoutonplat.forEach(boutton => {
       deleteButton.setAttribute('class', 'delete')
       item.setAttribute('data-name', plat);
       item.setAttribute('class', 'commande-existante');
+      item.classList.add('text-element');
       item.setAttribute('data-prix', commande[plat].prix);
       item.setAttribute('data-quantite', commande[plat].quantite);
       item.innerHTML += `${commande[plat].quantite} x ${plat} - ${commande[plat].prix}€`;

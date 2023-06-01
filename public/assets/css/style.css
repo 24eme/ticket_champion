@@ -2040,3 +2040,12 @@ input[type="checkbox"]:checked ~ .modal-background {
     margin-left: auto;
   }
   
+  .delete {
+    background-color: #d46864;
+    color: white;
+    border: none;
+  }
+
+  .delete:hover{
+    background-color:#d88e8b;
+  }

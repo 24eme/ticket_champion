@@ -11,20 +11,23 @@
 
 
 <section class="adaptative-div">
+  <div><a href="/tickets">
+          <button class="btn  btn-ticket"> Tickets consommées </button> </a></div>
   <div class="container" style="flex: 1">
     <div class="row">
       <div class="col-lg">
         <div class="clients-container">
           <h1 class="h1-clients">Bienvenue {{entreprise}} ! </h1>
           <div class="separator_center"></div>
+  
           <h2 class="h2-clients"> &#127835; Aujourd'hui, je veux commander pour &#127790; </h2>
           <form action="/clients" method="POST">
           <div class="list-group border-clients">
             <li class="list-group-item">
               {{#each listEmployee}}
                 <ul class="client-ul">
-                {{#if this.commande_faite}}
-                    <input type="submit" class="btn-clients-fait text-white selection-nom-employee commande_faite" name="{{this.id_client}}" value="{{this.nom}}" style="border-radius: 15px" disabled/>
+                {{#if this.commande_faite}}               
+                  <input type="submit" class="btn-clients-fait text-white selection-nom-employee commande_faite" name="{{this.id_client}}" value="{{this.nom}}" style="border-radius: 15px" disabled/>        
                     <!--<div>
                         <input type="checkbox" id="modal-confirmation" name="{{this.id_client}}"/>
                         <label for="modal-confirmation" class="btn-clients-fait text-white selection-nom-employee commande_faite" style="border-radius: 15px">{{this.nom}}</label>

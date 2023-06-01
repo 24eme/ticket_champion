@@ -51,6 +51,24 @@ body {
     right: 20px;
 }
 
+.btn-ticket {
+    margin-left: 80%;
+    color: #fff;
+    background-color: #d46864;
+    border:1px solid;
+    border-color: #d46864;
+    padding: 1rem 2rem;
+}
+
+.btn-histo {
+    margin-left: 100%;
+    color: #fff;
+    background-color: #d46864;
+    border:1px solid;
+    border-color: #d46864;
+    padding: 1rem 2rem;
+}
+
 
 .clients-container {
     text-align: center;

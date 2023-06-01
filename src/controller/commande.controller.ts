@@ -49,8 +49,15 @@
           }
         }
       }
-      console.log(listEmployee);
       return {listEmployee : listEmployee, entreprise : this.commandeDto.entreprise};
+    }
+
+    @Get('/tickets')
+    @Render('ticketsClient')
+    async handlerTickets(){
+      const listEmployee = await this.commandeService.getClientByEntreprise(this.commandeDto.entreprise);
+      return {listEmployee : listEmployee}
+
     }
 
     @Post('/clients')

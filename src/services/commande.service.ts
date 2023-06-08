@@ -17,12 +17,12 @@ import * as fs from 'fs';
 @Injectable()
 export class CommandeService {
   constructor(
-    @InjectRepository(Commande) private commandeRepository: Repository<Commande>,
-    @InjectRepository(Client) private clientRepository: Repository<Client>,
-    @InjectRepository(Plat) private platRepository: Repository<Plat>,
-    @InjectRepository(Supplement) private supplementRepository : Repository<Supplement>,
-    @InjectRepository(CommandePlat) private CommandePlatRepository: Repository<CommandePlat>,
-    @InjectRepository(CommandeSupplement) private commandeSupplementRepository : Repository<CommandeSupplement>,
+    @InjectRepository(Commande) private commandeRepository?: Repository<Commande>,
+    @InjectRepository(Client) private clientRepository?: Repository<Client>,
+    @InjectRepository(Plat) private platRepository?: Repository<Plat>,
+    @InjectRepository(Supplement) private supplementRepository? : Repository<Supplement>,
+    @InjectRepository(CommandePlat) private CommandePlatRepository?: Repository<CommandePlat>,
+    @InjectRepository(CommandeSupplement) private commandeSupplementRepository? : Repository<CommandeSupplement>,
   ){}
   
   async getDataFromjson(cheminFichier : string) {
@@ -33,6 +33,11 @@ export class CommandeService {
   async getClientsFromJson() {
     const data = JSON.parse(fs.readFileSync('config/clientsconfig.json', 'utf8'));
     return {data};
+  }
+
+  async getPrefixFromjson(cheminFichier : string) {
+    const data = JSON.parse(fs.readFileSync(cheminFichier, 'utf8')); 
+    return { data };
   }
 
   async fillClientsTable() {

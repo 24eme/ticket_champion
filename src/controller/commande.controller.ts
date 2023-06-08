@@ -8,17 +8,22 @@
   export class CommandeController {
 
     private commandeDto = new CreateCommandeDto();
+    private prefix : string;
 
     constructor(private readonly commandeService: CommandeService) {
       this.commandeDto.plats = [];
       this.commandeDto.supplements = [];
+      this.prefix = "";
 
     }
 
     @Get('selectionClientPage')
     @Render('selectionClientPage')
-    async selectionClientPage() {}
-
+    async selectionClientPage() {
+      const prefix =  (await this.commandeService.getDataFromjson('config/config.json')).data.globalPrefix; 
+   console.log("le prefix est : ", prefix);
+      return {prefix : 'prefix'}
+  }
     @Post('/selectionClientPage')
     @Redirect('/clients')
     async handlePostRequest(@Req() req: Request) {

@@ -20,6 +20,7 @@ async function bootstrap() {
  app.setViewEngine('hbs');
  app.useGlobalFilters(new NotFoundExceptionFilter());
 
+//app.setGlobalPrefix('/champion');
 
  await app.listen(3000);
 }

@@ -5,6 +5,7 @@ import { CommandeService } from 'src/services/commande.service';
 @Controller('/')
 export class RestaurantController {
 
+  private pathGlobal = process.env.GLOBAL_PREFIX || '';
   private nonEntreprise : string;
   private time : string;
 
@@ -15,7 +16,7 @@ export class RestaurantController {
   async restaurant() {
     const commande = await this.commandeService.getTousLesTicketsNonPrete();
     const commandePrete = await this.commandeService.getTousLesTicketsPrete();
-    return { commandes: commande, commandePrete : commandePrete };
+    return { commandes: commande, commandePrete : commandePrete, pathGlobal: this.pathGlobal };
   }
 
   @Get('/historique')
@@ -26,7 +27,7 @@ export class RestaurantController {
     console.log();
     const data = new Date();
     const month = data.toLocaleString('default', { month: 'long' });
-    return { data: totalCost, dataEntreprise: dataEntreprise, month : month , nomEntreprise: this.nonEntreprise};
+    return { data: totalCost, dataEntreprise: dataEntreprise, month : month , nomEntreprise: this.nonEntreprise, pathGlobal: this.pathGlobal };
   }
 
   @Get('/facture/:entrepriseName/current_month')
@@ -104,7 +105,7 @@ export class RestaurantController {
     const currYear = prevdate.getFullYear().toString();
       const month = data.toLocaleString('default', { month: 'long' });
 
-     return {nomEntreprise: entrepriseName, data : factureRestaurant, dataSupp : factureRestaurantSupp, prixTotaleCommande : prixTotaleCommande, month : month, prevMonthTxt: prevMonthTxt, prevMonthNum: prevMonthNum, currYear: currYear};
+     return {nomEntreprise: entrepriseName, data : factureRestaurant, dataSupp : factureRestaurantSupp, prixTotaleCommande : prixTotaleCommande, month : month, prevMonthTxt: prevMonthTxt, prevMonthNum: prevMonthNum, currYear: currYear, pathGlobal: this.pathGlobal };
     }
 
   @Get('/facture/:entrepriseName/:month')
@@ -194,6 +195,7 @@ export class RestaurantController {
       month: prevMonthTxt,
       nextMonth: nextMonth,
       currYear: currYear,
+      pathGlobal: this.pathGlobal,
     };
   }
 
@@ -218,6 +220,6 @@ export class RestaurantController {
   facturePageFunction() {
     const command = this.commandeService;
 
-    return command;
+    return {command: command, pathGlobal: this.pathGlobal };
   }
 }

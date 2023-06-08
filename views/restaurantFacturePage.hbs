@@ -2,9 +2,9 @@
 
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-          <li class="breadcrumb-item"><a href="/restaurant">Commandes du jour</a></li>
-          <li class="breadcrumb-item"><a href="/historique">Historique</a></li>
+          <li class="breadcrumb-item"><a href="/champion">Accueil</a></li>
+          <li class="breadcrumb-item"><a href="/champion/restaurant">Commandes du jour</a></li>
+          <li class="breadcrumb-item"><a href="/champion/historique">Historique</a></li>
           <li class="breadcrumb-item active" aria-current="page">Factures</li>
       </ol>
   </nav>
@@ -14,7 +14,7 @@
     <div class="row">
       <div class="restaurant-cont">
         <h1 class="h1-restaurant h1-facture">Récapitulatif du mois de {{month}} pour {{nomEntreprise}}</h1>
-          <a href="/facture/{{nomEntreprise}}/{{prevMonthNum}}"><button class="btn-historique">{{prevMonthTxt}} {{currYear}}</button></a>
+          <a href="/champion/facture/{{nomEntreprise}}/{{prevMonthNum}}"><button class="btn-historique">{{prevMonthTxt}} {{currYear}}</button></a>
         <div class="commandes-container row">
           <div class="col-md-4 commandes-box" style="margin: 0 auto;">
             <div class="row">

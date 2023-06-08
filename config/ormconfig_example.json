@@ -2,10 +2,9 @@
     "type": "mysql",
     "host": "localhost",
     "port": 3306,
-    "username": "your username",
-    "password": "your password",
-    "database": "name of your database",
+    "username": "champion",
+    "password": "Championez",
+    "database": "champion",
     "entities": ["dist/**/*{.ts,.js}"],
     "synchronize": true
-}
-  
+} 

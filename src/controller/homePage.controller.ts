@@ -4,7 +4,10 @@ import { CommandeService } from 'src/services/commande.service';
 
 @Controller('/')
 export class HomePageController {
-   constructor(private readonly commandeService: CommandeService) {}
+   private pathGlobal = process.env.GLOBAL_PREFIX || '';
+
+   constructor(private readonly commandeService: CommandeService) {
+   }
 
   @Get()
   @Render('homePage')
@@ -13,5 +16,6 @@ root() {
    this.commandeService.fillClientsTable();
    this.commandeService.fillPlatsTable();
    this.commandeService.fillSupplementsTable();
+   return {pathGlobal: this.pathGlobal };
   }
 }

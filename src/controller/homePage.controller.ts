@@ -4,7 +4,10 @@ import { CommandeService } from 'src/services/commande.service';
 
 @Controller('/')
 export class HomePageController {
-   constructor(private readonly commandeService: CommandeService) {}
+   private pathGlobal = process.env.GLOBAL_PREFIX || '';
+
+   constructor(private readonly commandeService: CommandeService) {
+   }
 
   @Get()
   @Render('homePage')
@@ -14,6 +17,6 @@ async root() {
    this.commandeService.fillPlatsTable();
    this.commandeService.fillSupplementsTable();
    const prefix =  (await this.commandeService.getDataFromjson('config/config.json')).data.globalPrefix; 
-   return {prefix : prefix}
-  }
+   return {prefix : prefix} }
+
 }

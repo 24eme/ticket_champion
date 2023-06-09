@@ -27,6 +27,7 @@ async function bootstrap() {
  await app.listen(3000);
  
 
+//app.setGlobalPrefix('/champion');
 
 }
 bootstrap();

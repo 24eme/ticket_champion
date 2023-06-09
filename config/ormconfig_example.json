@@ -4,8 +4,7 @@
     "port": 3306,
     "username": "your username",
     "password": "your password",
-    "database": "name of your database",
+    "database": "your database name",
     "entities": ["dist/**/*{.ts,.js}"],
     "synchronize": true
-}
-  
+} 

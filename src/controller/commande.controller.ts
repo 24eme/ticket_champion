@@ -20,9 +20,9 @@
     @Get('selectionClientPage')
     @Render('selectionClientPage')
     async selectionClientPage() {
-      const prefix =  (await this.commandeService.getDataFromjson('config/config.json')).data.globalPrefix; 
-   console.log("le prefix est : ", prefix);
-      return {prefix : 'prefix'}
+      this.prefix =  (await this.commandeService.getDataFromjson('config/config.json')).data.globalPrefix; 
+   console.log("le prefix est : ", this.prefix);
+      return {prefix : this.prefix}
   }
     @Post('/selectionClientPage')
     @Redirect('/clients')

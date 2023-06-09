@@ -9,9 +9,11 @@ export class HomePageController {
   @Get()
   @Render('homePage')
   //the clients, plats, supplements tables are filled here
-root() {
+async root() {
    this.commandeService.fillClientsTable();
    this.commandeService.fillPlatsTable();
    this.commandeService.fillSupplementsTable();
+   const prefix =  (await this.commandeService.getDataFromjson('config/config.json')).data.globalPrefix; 
+   return {prefix : prefix}
   }
 }

@@ -17,6 +17,6 @@ async root() {
    this.commandeService.fillPlatsTable();
    this.commandeService.fillSupplementsTable();
    const prefix =  (await this.commandeService.getDataFromjson('config/config.json')).data.globalPrefix; 
-   return {prefix : prefix}
+   return {prefix : prefix} }
 
 }

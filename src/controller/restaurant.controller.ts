@@ -7,6 +7,7 @@ export class RestaurantController {
 
   private nonEntreprise : string;
   private time : string;
+  private prefix : string;
 
   constructor(private readonly commandeService: CommandeService) {}
 
@@ -15,7 +16,8 @@ export class RestaurantController {
   async restaurant() {
     const commande = await this.commandeService.getTousLesTicketsNonPrete();
     const commandePrete = await this.commandeService.getTousLesTicketsPrete();
-    return { commandes: commande, commandePrete : commandePrete };
+    this.prefix =  (await this.commandeService.getDataFromjson('config/config.json')).data.globalPrefix; 
+    return { commandes: commande, commandePrete : commandePrete, prefix : this.prefix };
   }
 
   @Get('/historique')
@@ -26,7 +28,7 @@ export class RestaurantController {
     console.log();
     const data = new Date();
     const month = data.toLocaleString('default', { month: 'long' });
-    return { data: totalCost, dataEntreprise: dataEntreprise, month : month , nomEntreprise: this.nonEntreprise};
+    return {prefix : this.prefix, data: totalCost, dataEntreprise: dataEntreprise, month : month , nomEntreprise: this.nonEntreprise};
   }
 
   @Get('/facture/:entrepriseName/current_month')
@@ -104,7 +106,7 @@ export class RestaurantController {
     const currYear = prevdate.getFullYear().toString();
       const month = data.toLocaleString('default', { month: 'long' });
 
-     return {nomEntreprise: entrepriseName, data : factureRestaurant, dataSupp : factureRestaurantSupp, prixTotaleCommande : prixTotaleCommande, month : month, prevMonthTxt: prevMonthTxt, prevMonthNum: prevMonthNum, currYear: currYear};
+     return {prefix : this.prefix, nomEntreprise: entrepriseName, data : factureRestaurant, dataSupp : factureRestaurantSupp, prixTotaleCommande : prixTotaleCommande, month : month, prevMonthTxt: prevMonthTxt, prevMonthNum: prevMonthNum, currYear: currYear};
     }
 
   @Get('/facture/:entrepriseName/:month')
@@ -186,7 +188,7 @@ export class RestaurantController {
     const prixTotaleCommande = listePrixTotale.reduce((a, b) => a + b, 0) + listePrixTotaleSupp.reduce((a, b) => a + b, 0);
 
 
-    return {
+    return { prefix : this.prefix,
       nomEntreprise: entrepriseName,
       data: factureRestaurant,
       dataSupp: factureRestaurantSupp,
@@ -218,6 +220,6 @@ export class RestaurantController {
   facturePageFunction() {
     const command = this.commandeService;
 
-    return command;
+    return {command: command, prefix : this.prefix};
   }
 }

@@ -3,15 +3,15 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-        <li class="breadcrumb-item"><a href="/selectionClientPage">Selection entreprise</a></li>
+        <li class="breadcrumb-item"><a href="{{prefix}}">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{prefix}}/selectionClientPage">Selection entreprise</a></li>
         <li class="breadcrumb-item active" aria-current="page">Choix employé.e</li>
     </ol>
 </nav>
 
 
 <section class="adaptative-div">
-  <div><a href="/tickets">
+  <div><a href="{{prefix}}/tickets">
           <button class="btn  btn-ticket"> Tickets consommées </button> </a></div>
   <div class="container" style="flex: 1">
     <div class="row">
@@ -21,7 +21,7 @@
           <div class="separator_center"></div>
   
           <h2 class="h2-clients"> &#127835; Aujourd'hui, je veux commander pour &#127790; </h2>
-          <form action="/clients" method="POST">
+          <form action="{{prefix}}/clients" method="POST">
           <div class="list-group border-clients">
             <li class="list-group-item">
               {{#each listEmployee}}

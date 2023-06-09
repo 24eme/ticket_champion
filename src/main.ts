@@ -6,6 +6,7 @@ import * as hbs from 'hbs';
 import * as express from 'express';
 import { HttpException } from '@nestjs/common';
 import { NotFoundExceptionFilter } from './http-exception/http-exception.filter';
+import { CommandeService } from './services/commande.service';
 
 
 
@@ -19,10 +20,15 @@ async function bootstrap() {
  //partialsDir: join(__dirname, '..', 'views/partials')
  app.setViewEngine('hbs');
  app.useGlobalFilters(new NotFoundExceptionFilter());
+  const commandeService = new CommandeService();
+ const prefix = commandeService.getDataFromjson('config/config.json');
+ 
+ app.setGlobalPrefix((await prefix).data.globalPrefix);
+ await app.listen(3000);
+ 
 
 //app.setGlobalPrefix('/champion');
 
- await app.listen(3000);
 }
 bootstrap();
 

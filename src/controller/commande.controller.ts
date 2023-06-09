@@ -11,19 +11,24 @@
     private pathGlobal = process.env.GLOBAL_PREFIX || '';
 
     private commandeDto = new CreateCommandeDto();
+    private prefix : string;
 
     constructor(private readonly commandeService: CommandeService) {
       console.log(this.pathGlobal);
 	    this.commandeDto.plats = [];
       this.commandeDto.supplements = [];
+      this.prefix = "";
 
     }
 
     @Get('selectionClientPage')
     @Render('selectionClientPage')
     async selectionClientPage() {
-    	return {pathGlobal: this.pathGlobal};
-    }
+
+      this.prefix =  (await this.commandeService.getDataFromjson('config/config.json')).data.globalPrefix; 
+   console.log("le prefix est : ", this.prefix);
+      return {prefix : this.prefix}
+  }
 
     @Post('/selectionClientPage')
     @Redirect('/champion/clients')

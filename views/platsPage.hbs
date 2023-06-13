@@ -2,9 +2,15 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-        <li class="breadcrumb-item"><a href="/selectionClientPage">Sélection entreprise</a></li>
-        <li class="breadcrumb-item"><a href="/clients">Sélection employé.e</a></li>
+
+        {{#if prefix}}
+            <li class="breadcrumb-item"><a href="{{prefix}}">Accueil</a></li>
+        {{else}}
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        {{/if}}
+        <li class="breadcrumb-item"><a href="{{prefix}}/selectionClientPage">Sélection entreprise</a></li>
+        <li class="breadcrumb-item"><a href="{{prefix}}/clients">Sélection employé.e</a></li>
+
         <li class="breadcrumb-item active" aria-current="page">Choix du plat</li>
     </ol>
 </nav>
@@ -13,12 +19,14 @@
 
   <h2 class="text-center texte-intro">Bonjour {{employee}}, que veux-tu manger ?</h2>
   <div class="row">
-    <form action="/plats" method="POST">
+
+    <form action="{{prefix}}/plats" method="POST">
+
     <div class="row container-card col-md-8">
       {{#each data.data.restaurants.[0].plats}}
         <div class="col-sm-2 card-plats">
           <div class="card">
-            <img class="card-img-top" src={{this.img}} alt="image du plat" style="border-radius: 15px;">
+            <img class="card-img-top" id='myUrl{{@index}}' name="{{this.img}}" src="{{this.img}}" alt="image du plat" style="border-radius: 15px;">
             <div class="card-body">
               <h5 class="card-title">{{this.nom}} - {{this.prix}}€</h5>
               <p class="liste-ingredients">{{this.ingredients}}</p>
@@ -69,7 +77,7 @@
   
     <input type="submit" class="btn btn-primary btn-next" name="next" value="Suivant"/>
      </form>
-      <a href='/clients'>
+      <a href='{{prefix}}/clients'>
     <button class="btn btn-primary btn-previous" name="pre"> Précédent </button>
     </a>
     
@@ -82,7 +90,16 @@
 </section>
 
 <script>
+  const prefixValue = '{{prefix}}'; // Récupérez la valeur de la variable prefix depuis votre contexte de rendu
 
+  const urls = document.querySelectorAll('[id^="myUrl"]');
+  urls.forEach(url => {
+    url.src = prefixValue + url.name;
+
+  });
+</script>
+
+<script>
 function addValue(id) {
 
 const buttonHidden = document.getElementById(id);

@@ -10,11 +10,17 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
+
+        {{#if prefix}}
+        <li class="breadcrumb-item"><a href="{{prefix}}">Accueil</a></li>
+        {{else}}
         <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-        <li class="breadcrumb-item"><a href="/selectionClientPage">Sélection entreprise</a></li>
-        <li class="breadcrumb-item"><a href="/clients">Sélection employé.e</a></li>
-        <li class="breadcrumb-item"><a href="/plats">Choix du plat</a></li>
-        <li class="breadcrumb-item"><a href="/supplements">Choix du supplément</a></li>
+        {{/if}}
+        <li class="breadcrumb-item"><a href="{{prefix}}/selectionClientPage">Sélection entreprise</a></li>
+        <li class="breadcrumb-item"><a href="{{prefix}}/clients">Sélection employé.e</a></li>
+        <li class="breadcrumb-item"><a href="{{prefix}}/plats">Choix du plat</a></li>
+        <li class="breadcrumb-item"><a href="{{prefix}}/supplements">Choix du supplément</a></li>
+
         <li class="breadcrumb-item active" aria-current="page">Choix de l'horaire de livraison</li>
     </ol>
 </nav>
@@ -33,11 +39,11 @@
     </div>
 
     <div class="gif-container">
-      <img class="cook-gif" src="/assets/images/cook.gif" style="border-radius: 15px;">
+      <img class="cook-gif" src="{{prefix}}/assets/images/cook.gif" style="border-radius: 15px;">
     </div>
 
     <div class="container-prev-next">
-      <a href='/supplements'>
+      <a href='{{prefix}}/supplements'>
         <input type="submit" class="btn btn-primary btn-previous-heure" value="Précédent"/>
       </a>
 
@@ -73,7 +79,9 @@
             {{/each}}
               {{/if}}
             <p style="font-weight: bold">Pour un total de {{command.montant_Commande}}€.</p>
-            <a href='/confirmation'>
+
+            <a href='{{prefix}}/confirmation'>
+
               <input type="submit" class="btn btn-primary btn-lg m-bottom-70" value="Valider" style="border-radius: 15px;"/>
             </a>
           </div>

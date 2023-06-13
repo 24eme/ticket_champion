@@ -1,61 +1,61 @@
 {
   "restaurants": [
-      {
-          "nomRestaurant" : "Champion",
-          "employes" : ["Katia", "Yann"],
-          "adresse" : "55 Rue Championnet, 75018 Paris" ,
-          "Horaires" : [
-              {
-                  "Lundi" : "10:00–15:00",
-                  "Mardi": "10:00–15:00",
-                  "Mercredi" : "10:00–15:00",
-                  "Jeudi" : "10:00–15:00",
-                  "Vendredi" : "10:00–15:00",
-                  "Samedi" : "10:00–16:00",
-                  "Dimanche" : "fermée"
-              }
+    {
+      "nomRestaurant" : "Champion",
+      "employes" : ["Katia", "Yann"],
+      "adresse" : "55 Rue Championnet, 75018 Paris" ,
+      "Horaires" : [
+        {
+          "Lundi" : "10:00–15:00",
+          "Mardi": "10:00–15:00",
+          "Mercredi" : "10:00–15:00",
+          "Jeudi" : "10:00–15:00",
+          "Vendredi" : "10:00–15:00",
+          "Samedi" : "10:00–16:00",
+          "Dimanche" : "fermée"
+        }
 
-          ],
-          "plats" : [
-              {
-                  "id" : 1,
-                  "nom" : "plat²",
-                  "prix" : 10,
-                  "img" : "/assets/images/plat1.png",
-                  "ingredients" : "oignon, tomate, crème fraîche, curry, piment, poivre, sel, huile d'olive, espadon, pomme"
-                },
-                {
-                  "id" : 2,
-                  "nom" : "plat carné",
-                  "prix" : 9,
-                  "img" : "/assets/images/plat2.png",
-                  "ingredients" : "oignon, tomate, crème fraîche, curry, piment, poivre, sel, huile d'olive, espadon, pomme"
-                },
-                {
-                  "id" : 3,
-                  "nom" : "plat végé",
-                  "prix" : 8,
-                  "img" : "/assets/images/plat3.png",
-                  "ingredients" : "oignon, tomate, crème fraîche, curry, piment, poivre, sel, huile d'olive, espadon, pomme"
-                }
-          ],
-          "supplements" : [
-              {
-                "id" : 1,
-                "nom" : "Cookies",
-                "prix" : 3,
-                "img" : "/assets/images/supp1.png",
-                "ingredients" : "oignon, huile d'olive, eau, échalote, ail, herbes de Provence, saucisse fumée, pommes de terre"
-              },
-              {
-                "id" : 2,
-                "nom" : "Cannelés",
-                "prix" : 4,
-                "img" : "/assets/images/supp2.png",
-                "ingredients" : "oignon, huile d'olive, eau, échalote, ail, herbes de Provence, saucisse fumée, pommes de terre"
-              }
-              ]
-   
-      }
+      ],
+      "plats" : [
+        {
+          "id" : 1,
+          "nom" : "plat²",
+          "prix" : 10,
+          "img" : "/assets/images/plat1.png",
+          "ingredients" : "oignon, tomate, crème fraîche, curry, piment, poivre, sel, huile d'olive, espadon, pomme"
+        },
+        {
+          "id" : 2,
+          "nom" : "plat carné",
+          "prix" : 9,
+          "img" : "/assets/images/plat2.png",
+          "ingredients" : "oignon, tomate, crème fraîche, curry, piment, poivre, sel, huile d'olive, espadon, pomme"
+        },
+        {
+          "id" : 3,
+          "nom" : "plat végé",
+          "prix" : 8,
+          "img" : "/assets/images/plat3.png",
+          "ingredients" : "oignon, tomate, crème fraîche, curry, piment, poivre, sel, huile d'olive, espadon, pomme"
+        }
+      ],
+      "supplements" : [
+        {
+          "id" : 1,
+          "nom" : "Cookies",
+          "prix" : 3,
+          "img" : "/assets/images/supp1.png",
+          "ingredients" : "oignon, huile d'olive, eau, échalote, ail, herbes de Provence, saucisse fumée, pommes de terre"
+        },
+        {
+          "id" : 2,
+          "nom" : "Cannelés",
+          "prix" : 4,
+          "img" : "/assets/images/supp2.png",
+          "ingredients" : "oignon, huile d'olive, eau, échalote, ail, herbes de Provence, saucisse fumée, pommes de terre"
+        }
+      ]
+  
+    }
   ]
 }

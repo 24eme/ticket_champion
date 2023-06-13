@@ -3,9 +3,15 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-        <li class="breadcrumb-item"><a href="/selectionClientPage">Selection entreprise</a></li>
-        <li class="breadcrumb-item"><a href="/clients">Choix employé.e</a></li>
+
+        {{#if prefix}}
+            <li class="breadcrumb-item"><a href="{{prefix}}">Accueil</a></li>
+        {{else}}
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        {{/if}}
+        <li class="breadcrumb-item"><a href="{{prefix}}/selectionClientPage">Selection entreprise</a></li>
+        <li class="breadcrumb-item"><a href="{{prefix}}/clients">Choix employé.e</a></li>
+
         <li class="breadcrumb-item active" aria-current="page"> Tickets</li>
     </ol>
 </nav>
@@ -19,7 +25,7 @@
           <h1 class="h1-clients">Bienvenue {{entreprise}} ! </h1>
           <div class="separator_center"></div>
   
-          <h2 class="h2-clients"> &#127835;  Le nombre de tickets consommées par personne &#127790; </h2>
+          <h2 class="h2-clients"> &#127835;  Le nombre de tickets consommés par personne &#127790; </h2>
          
           <div class="list-group border-clients">
             <li class="list-group-item">

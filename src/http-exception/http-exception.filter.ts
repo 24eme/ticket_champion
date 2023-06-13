@@ -8,7 +8,7 @@ export class NotFoundExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse();
     var path = require('path')
     //let lePath = join( __dirname, '..', 'views', '404-page.hbs') ;
-    response.sendFile(join(process.cwd(),'views', '404-page.html'))
+    response.status(404).sendFile(join(process.cwd(),'views', '404-page.html'))
     //console.log(lePath);
     //response.sendFile(lePath);   
   }

@@ -4,24 +4,32 @@
   import { CreatePlatDto } from 'src/commande/dto/create-plat-dto';
   import { CreateSupplementtDto } from 'src/commande/dto/create-supplement-dto';
 
+
   @Controller('/')
   export class CommandeController {
 
+
     private commandeDto = new CreateCommandeDto();
+    private prefix : string;
 
     constructor(private readonly commandeService: CommandeService) {
-      this.commandeDto.plats = [];
+	    this.commandeDto.plats = [];
       this.commandeDto.supplements = [];
+      this.prefix = "";
 
     }
 
     @Get('selectionClientPage')
     @Render('selectionClientPage')
-    async selectionClientPage() {}
+    async selectionClientPage() {
+
+      this.prefix =  (await this.commandeService.getDataFromjson('config/config.json')).data.globalPrefix; 
+      console.log("le prefix est : ", this.prefix);
+      return {prefix : this.prefix}
+  }
 
     @Post('/selectionClientPage')
-    @Redirect('/clients')
-    async handlePostRequest(@Req() req: Request) {
+    async redirect(@Res() res, @Req() req: Request) {
       const key = Object.keys(req.body);
       const entreprise = key[0].slice(0, -2);
       this.commandeDto.entreprise = entreprise;
@@ -29,7 +37,8 @@
       this.commandeDto.plats = [];
       this.commandeDto.supplements = [];
       this.commandeDto.montant_Commande = 0;
-
+      const prefix = (await this.commandeService.getDataFromjson('config/config.json')).data.globalPrefix; 
+      return {resp : res.redirect(`${prefix}/clients`), prefix : prefix};
     }
 
     @Get('clients')
@@ -49,25 +58,27 @@
           }
         }
       }
-      return {listEmployee : listEmployee, entreprise : this.commandeDto.entreprise};
+
+      return {prefix : this.prefix, listEmployee : listEmployee, entreprise : this.commandeDto.entreprise};
     }
 
     @Get('/tickets')
     @Render('ticketsClient')
     async handlerTickets(){
       const listEmployee = await this.commandeService.getClientByEntreprise(this.commandeDto.entreprise);
-      return {listEmployee : listEmployee}
+      return {prefix : this.prefix, listEmployee : listEmployee}
 
     }
 
     @Post('/clients')
-    @Redirect('/plats')
-    async handlePostRequestClient(@Req() req: Request) {
+    async handlePostRequestClient(@Res() res, @Req() req: Request) {
       this.commandeDto.nom_employee = Object.values(req.body)[0];
       this.commandeDto.id_client = Number(Object.keys(req.body)[0]);
       this.commandeDto.plats = [];
       this.commandeDto.supplements = [];
       this.commandeDto.montant_Commande = 0;
+      const prefix = (await this.commandeService.getDataFromjson('config/config.json')).data.globalPrefix; 
+      return {resp : res.redirect(`${prefix}/plats`), prefix : prefix};
     }
 
     @Get('plats')
@@ -75,12 +86,13 @@
     async plat() {
       const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
       const employee = this.commandeDto.nom_employee;
-      return { data : data, employee, plats : this.commandeDto.plats, supplements : this.commandeDto.supplements, montant : this.commandeDto.montant_Commande };
+
+      return {prefix : this.prefix, data : data, employee, plats : this.commandeDto.plats, supplements : this.commandeDto.supplements, montant : this.commandeDto.montant_Commande };
+
     }
 
     @Post('/plats')
-    @Redirect('/supplements')
-    async handlePostRequestPlat(@Req() req: Request) {
+    async handlePostRequestPlat(@Res() res, @Req() req: Request) {
       let listPlat = Object.keys(req.body);
       let listNombrePlat = Object.values(req.body);
       listPlat.pop();
@@ -151,30 +163,20 @@
         }
       }
     }
+    return res.redirect(`${this.prefix}/supplements`);
  	}
-
-  //pour supprimer un plat
-  @Delete('/plats/:plat')
-  handleDeleteRequestPlat(@Param('plat') plat: string) {
-    const platIndex = this.commandeDto.plats.findIndex((p) => p.nom_plat === plat);
-    if (platIndex !== -1) {
-      const plat = this.commandeDto.plats[platIndex];
-      const prixTotal = plat.prix * plat.quantite;
-      this.commandeDto.plats.splice(platIndex, 1);
-      this.commandeDto.montant_Commande -= prixTotal;
-    }
-  }
 
   @Get('supplements')
   @Render('supplementsPage')
   async supp() {
     const data = await this.commandeService.getDataFromjson('config/restaurantsconfig.json');
-    return {data: data, plats : this.commandeDto.plats, supplements : this.commandeDto.supplements, montant : this.commandeDto.montant_Commande};
+    return {prefix : this.prefix, data: data, plats : this.commandeDto.plats, supplements : this.commandeDto.supplements, montant : this.commandeDto.montant_Commande};
+
 
   }
 
   @Post('/supplements')
-  @Redirect('/heureLivraison', 302)
+  @Redirect()
   async handlePostRequestSupplement(@Req() req: Request) {
     let listPlat = Object.keys(req.body);
     let listNombrePlat = Object.values(req.body);
@@ -268,9 +270,10 @@
   }
 
     if (destination === "next") {
-      return { url: '/heureLivraison' };
+
+      return { url: `${this.prefix}/heureLivraison` };
     } else if (destination === "pre") {
-      return { url: '/plats' };
+      return { url: `${this.prefix}/plats`};
     }
   }
 
@@ -278,12 +281,17 @@
   @Render('confirmationPage')
   createCommande() {
     this.commandeService.create(this.commandeDto, this.commandeDto.plats, this.commandeDto.supplements)
+
+    return{prefix : this.prefix}
+
   }
 
   @Get('heureLivraison')
   @Render('heureLivraisonClient')
   async heureLivraison() {
-    return { command: this.commandeDto };
+
+    return {prefix : this.prefix, command: this.commandeDto };
+
   }
 
   @Post('/heureLivraison')

@@ -3,9 +3,15 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-        <li class="breadcrumb-item"><a href="/selectionClientPage">Sélection entreprise</a></li>
-        <li class="breadcrumb-item"><a href="/clients">Sélection employé.e</a></li>
+
+        {{#if prefix}}
+            <li class="breadcrumb-item"><a href="{{prefix}}">Accueil</a></li>
+        {{else}}
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        {{/if}}
+        <li class="breadcrumb-item"><a href="{{prefix}}/selectionClientPage">Sélection entreprise</a></li>
+        <li class="breadcrumb-item"><a href="{{prefix}}/clients">Sélection employé.e</a></li>
+
         <li class="breadcrumb-item"><button type="submit" class="button_ariane" form="form_supp" name="pre">Choix du plat</button></li>
         <li class="breadcrumb-item active" aria-current="page">Choix du supplément</li>
     </ol>
@@ -15,12 +21,14 @@
   <h2 class="text-center texte-intro">Un petit supplément ?</h2>
 
   <div class="row">
-    <form id="form_supp" action="/supplements" method="POST">
+
+    <form id="form_supp" action="{{prefix}}/supplements" method="POST">
+
     <div class="row container-card col-md-8">
       {{#each data.data.restaurants.[0].supplements}}
         <div class="col-sm-2 supplement-item">
           <div class="card">
-            <img class="card-img-top" src={{this.img}} alt="image du supplement" style="border-radius: 15px;">
+            <img class="card-img-top" id='myUrl{{@index}}' name="{{this.img}}" src={{this.img}} alt="image du supplement" style="border-radius: 15px;">
             <div class="card-body">
               <h5 class="card-title">{{this.nom}} - {{this.prix}}€</h5>
               <p class="liste-ingredients">{{this.ingredients}}</p>
@@ -57,9 +65,6 @@
 
   <div class="container-prev-next">
     
-    {{!-- <a href='/heureLivraison'>
-      <input type="submit" id="hidden-next" class="btn btn-primary btn-next" value="Suivant"/>
-    </a> --}}
     {{#if montant}}
        <button type="submit" class="btn btn-primary btn-next" name="next" id="suivant-locked"> Suivant </button>
     {{else}}
@@ -78,7 +83,16 @@
 </section>
 
 <script>
+  const prefixValue = '{{prefix}}'; // Récupérez la valeur de la variable prefix depuis votre contexte de rendu
 
+  const urls = document.querySelectorAll('[id^="myUrl"]');
+  urls.forEach(url => {
+    url.src = prefixValue + url.name;
+
+  });
+</script>
+
+<script>
 const suivant_locked = document.getElementById("suivant-locked");
 
 function addValue(id) {
